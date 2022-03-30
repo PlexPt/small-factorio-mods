@@ -1,0 +1,14 @@
+{
+  "name": "DNF-music",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "DNF Music",
+  "author": "plexpt",
+  "contact": "plexpt",
+  "homepage": "https://github.com/PlexPt",
+  "dependencies": [
+    "base"
+  ],
+  "description": "DNF Music Pack. "
+}
+
