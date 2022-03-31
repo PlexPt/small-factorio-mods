@@ -22,6 +22,8 @@ local mod_list = {
     ["RitnCharacters"] = "0.0.4",
 }
 
+GEAR_GIRL_keep_default_character = GEAR_GIRL_keep_default_character or {}
+
 GG.dwrite("mod_list: " .. serpent.block(mod_list))
 -- Add any mod that may have registered itself to list.
 for mod, version in pairs(GEAR_GIRL_keep_default_character) do
