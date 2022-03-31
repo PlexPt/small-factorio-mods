@@ -1,9 +1,9 @@
-local animations_live = {}
-local animations_dead = {}
-local IMG_PATH = "__miku-bikini-swimsuit__/images/"
+local common = require("lib.common")
+
+local IMG_PATH = common.IMG_PATH
 local util = require("util")
 require("lib.animation_util")
-local char_name = "miku-bikini-swimsuit-skin"
+local char_name = common.char_name
 
 local function getHr(s)
     return getAnimationWithHr(s)
@@ -204,7 +204,7 @@ data:extend(
                 type = "character",
                 name = char_name,
                 -- character_corpse will be replaced in data-final-fixes.lua, if necessary!
-                character_corpse = char_name .. "-corpse",
+                character_corpse = "character-corpse",
                 icon = IMG_PATH .. "idle/80.png",
                 icon_size = 400,
                 flags = { "placeable-off-grid", "breaths-air", "not-repairable", "not-on-map", "not-flammable" },

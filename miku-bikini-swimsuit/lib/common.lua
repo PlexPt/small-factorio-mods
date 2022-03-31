@@ -5,6 +5,7 @@ local debug_to_log = mods["_debug"]
 -- well as "SkIn_char" etc. This is important as "minime" will use this pattern
 -- when looking for characters!
 common.char_name = "miku-bikini-swimsuit-skin"
+common.IMG_PATH = "__miku-bikini-swimsuit__/images/"
 
 common.dwrite = function(msg)
     if debug_to_log and msg then

@@ -6,7 +6,7 @@ local GG = require('lib.common')
 -- In this file, the base character will be overwritten with the newly created one
 -- unless another mod that allows to use both characters is active.
 ------------------------------------------------------------------------------------
-local CHAR_NAME = "miku-bikini-swimsuit-skin"
+local CHAR_NAME = GG.char_name
 
 ------------------------------------------------------------------------------------
 -- List of mods that support multiple characters in a game and the number of the

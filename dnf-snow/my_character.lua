@@ -207,7 +207,7 @@ data:extend(
                 type = "character",
                 name = char_name,
                 -- character_corpse will be replaced in data-final-fixes.lua, if necessary!
-                character_corpse = char_name .. "-corpse",
+                character_corpse = "character-corpse",
                 icon = char_icon,
                 icon_size = 400,
                 flags = { "placeable-off-grid", "breaths-air", "not-repairable", "not-on-map", "not-flammable" },
