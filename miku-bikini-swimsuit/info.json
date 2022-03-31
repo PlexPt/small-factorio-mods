@@ -6,5 +6,8 @@
   "author": "plexpt",
   "contact": "1125094786",
   "homepage": "",
+  "dependencies": [
+    "? minime"
+  ],
   "description": "Replaces the Character with miku bikini swimsuit。\n比基尼泳装初音未来"
 }
