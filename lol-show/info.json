@@ -1,0 +1,14 @@
+{
+  "name": "lol-show",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "LOL Mastery Emote",
+  "author": "plexpt",
+  "contact": "plexpt",
+  "homepage": "https://github.com/PlexPt",
+  "dependencies": [
+    "base"
+  ],
+  "description": "Ctrl + H, show your Mastery Emote. \n\nCtrl + H 亮狗牌。"
+}
+
