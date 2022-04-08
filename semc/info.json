@@ -1,0 +1,12 @@
+{
+  "name": "semc",
+  "version": "1.0.4",
+  "title": "Space Exploration Magic Simplified",
+  "author": "plexpt",
+  "factorio_version": "1.1",
+  "dependencies": [
+    "space-exploration >= 0.5.84",
+    "space-exploration-postprocess >= 0.5"
+  ],
+  "description": "Space Exploration Magic Simplified, Improve your quality of life. Similar to  Space Exploration Simplified but more change. Change rocket fuel stack size, space-pipe length, burner-turbine max power output 1GW. Change rocket-fuel-with-ammonia just 10 oxygen and ammonia. delivery-cannon-capsule just need 0.1 heat-shielding. And  !!! Armstrong cyclotron jet turbine generator !!! \n太空探索简化，减少套娃，加速通关，主流程影响较小，放心食用。"
+}

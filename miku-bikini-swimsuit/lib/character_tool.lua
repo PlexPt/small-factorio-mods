@@ -1,12 +1,15 @@
 require("util")
 
-local GG = require('lib.common')
+--~ -- "GG" (the initials of "Gear Girl") doesn't really make sense for your mod. How
+--~ -- about something more telling, like "MIKU" or "MBS"? Anyway, it's a local var,
+--~ -- it can't break anything, so I won't change that now.
+--~ local GG = require('lib.common')
 
 ------------------------------------------------------------------------------------
 -- In this file, the base character will be overwritten with the newly created one
 -- unless another mod that allows to use both characters is active.
 ------------------------------------------------------------------------------------
-local CHAR_NAME = GG.char_name
+local CHAR_NAME = MIKU.char_name
 
 ------------------------------------------------------------------------------------
 -- List of mods that support multiple characters in a game and the number of the
@@ -22,26 +25,26 @@ local mod_list = {
     ["RitnCharacters"] = "0.0.4",
 }
 
-GEAR_GIRL_keep_default_character = GEAR_GIRL_keep_default_character or {}
+--~ GEAR_GIRL_keep_default_character = GEAR_GIRL_keep_default_character or {}
 
-GG.dwrite("mod_list: " .. serpent.block(mod_list))
--- Add any mod that may have registered itself to list.
-for mod, version in pairs(GEAR_GIRL_keep_default_character) do
-    -- Sanity check: modname must be a string!
-    if type(mod) ~= "string" then
-        log(string.format("%s is not a valid mod -- ignoring mod \"%s\"!", version, mod))
+MIKU.dwrite("mod_list: " .. serpent.block(mod_list))
+-- Add any mod that may have registered itself to mod_list.
+for mod_name, version in pairs(GEAR_GIRL_keep_default_character or {}) do
+    -- Sanity check: mod_namename must be a string!
+    if type(mod_name) ~= "string" then
+        log(string.format("%s is not a valid mod_name -- ignoring mod_name \"%s\"!", version, mod_name))
 
         -- Sanity check: version must be a string and have the correct format!
     elseif type(version) ~= "string" or not string.match(version, "^%d+%.%d+%.%d+$") then
-        log(string.format("%s is not a valid version number -- ignoring mod \"%s\"!", version, mod))
+        log(string.format("%s is not a valid version number -- ignoring mod_name \"%s\"!", version, mod_name))
 
         -- Everything seems to be OK, add this to the list!
     else
-        log(string.format("Adding \"%s\" (%s) to mod list!", mod, version))
-        mod_list[mod] = version
+        log(string.format("Adding \"%s\" (%s) to mod_name list!", mod_name, version))
+        mod_name_list[mod_name] = version
     end
 end
-GG.dwrite("new mod_list: " .. serpent.block(mod_list))
+MIKU.dwrite("new mod_list: " .. serpent.block(mod_list))
 
 ------------------------------------------------------------------------------------
 -- Check that mod exists in a version that supports using multiple characters
@@ -49,65 +52,36 @@ GG.dwrite("new mod_list: " .. serpent.block(mod_list))
 -- name: Name of the mod to check for
 -- needed: We need this or a later version of the mod!
 -- Return: boolean
-local function check_version(name, needed)
-    if not (name and type(name) == "string") then
-        error(tostring(name) .. " is not a valid mod name!")
-    elseif not (needed and type(needed) == "string") then
-        error(tostring(needed) .. " is not a valid version number (string value required)!")
-    end
+------------------------------------------------------------------------------------
+--                                Mod-version check                               --
+------------------------------------------------------------------------------------
+local function check_version(mod_name, need_version)
+    local version = mods[mod_name]
 
-    local found = mods[name]
-    local ret
+    local function parse_version(vstr)
+        -- string "Major.Minor.Patch"
+        local r = type(vstr) == "string" and { vstr:match('^(%d+)%.(%d+)%.(%d+)$') }
 
-    -- Mod is active
-    if found then
-        GG.dwrite(string.format("Checking mod \"%s\": Found version %s, require version %s",
-                name, found, needed))
-
-        local version = util.split(found, '.')
-        needed = util.split(needed, '.')
+        if #r ~= 3 then
+            error(string.format("%s is not a valid version number!", serpent.line(vstr)))
+        end
 
         for i = 1, 3 do
-            version[i] = tonumber(version[i])
-            needed[i] = tonumber(needed[i])
+            r[i] = tonumber(r[i])
         end
 
-
-        -- Version number: {major, minor, subversion}
-        -- Major number may not be smaller than needed
-        if version[1] < needed[1] then
-            GG.dwrite(string.format("Major number is too small: %g < %g", version[1], needed[1]))
-            ret = false
-
-            -- Major number is greater: Hit!
-        elseif version[1] > needed[1] then
-            GG.dwrite(string.format("Major number is greater: %g > %g", version[1], needed[1]))
-            ret = true
-
-            -- Major number is same, minor number is greater: Hit!
-        elseif version[2] > needed[2] then
-            GG.dwrite(string.format("Minor number is greater: %g > %g", version[2], needed[2]))
-            ret = true
-
-            -- Major number is same, minor number is same, subversion number is same or greater: Hit!
-        elseif version[2] == needed[2] and version[3] >= needed[3] then
-            GG.dwrite(string.format("Least number is greater or equal: %g >= %g", version[3], needed[3]))
-            ret = true
-
-            -- Version is smaller than required
-        else
-            GG.dwrite(string.format("Least number is too small: %g < %g", version[3], needed[3]))
-            ret = false
-        end
-
-        -- Mod isn't active
-    else
-        GG.dwrite(string.format("Mod \"%s\" is not active!", name))
-        ret = false
+        return r
     end
 
-    return ret
+    version = version and parse_version(version)
+    local need = need_version and parse_version(need_version)
+
+    local a, b, c = unpack(version)
+    local x, y, z = unpack(need)
+
+    return (a > x) or (a == x and b > y) or (a == x and b == y and c >= z)
 end
+
 
 ------------------------------------------------------------------------------------
 -- If any mod is found that supports multiple characters in a game,
@@ -116,56 +90,68 @@ end
 local replace_base_char = true
 
 ------------------------------------------------------------------------------------
--- Check each mod in mod_list if it exists and has the required version.
+-- At least one mod in mod_list must exist and have the required version.
 ------------------------------------------------------------------------------------
 for name, version in pairs(mod_list) do
-    if check_version(name, version) then
-        GG.dwrite(string.format("\"%s\" is active! Won't overwrite vanilla character and corpse.",
-                name))
+    if mods[name] and check_version(name, version) then
+        MIKU.dwrite(string.format("\"%s\" (%s) is active! Won't overwrite vanilla character and corpse.",
+                name, mods[name]))
         replace_base_char = false
         break
     end
 end
 
--- This game doesn't support multiple characters -- overwrite the base character!
-local char = data.raw["character"]
-local corpse = data.raw["character-corpse"]
-local base_name, name, c
+-- 确保没有其他模组做了愚蠢的事情并删除了默认角色！ --
+-- Make sure no other mod did something stupid and deleted the default character! --
+local chars = data.raw.character
+if chars["character"] then
+    local src, dst
 
-for e, entities in ipairs({ char, corpse }) do
-    if entities == char then
-        base_name = "character"
-        name = CHAR_NAME
-        c = true
-    else
-        base_name = "character-corpse"
-        name = CHAR_NAME .. "-corpse"
-        c = false
-    end
-
-    -- Overwrite base character/corpse
-    -- ("character-corpse" is already set as new character_corpse, so there's nothing to do!)
+    -- This game doesn't support multiple characters
     if replace_base_char then
-        GG.dwrite(string.format("Stand-alone mode: Overwriting vanilla \"%s\" with \"%s\"",
-                entities[name].type, name))
-        entities[base_name] = entities[name]
-        entities[base_name].name = base_name
-        entities[name] = nil
+        src = MIKU.character
+        dst = chars["character"]
 
-        -- Keep base character/corpse
+        -- Modify default character
+        log("Overwriting properties of default character!")
+        for p_name, property in pairs(src) do
+            if p_name ~= "name" then
+                dst[p_name] = table.deepcopy(property)
+                --~ log(string.format("Set property \"%s\" of character \"%s\": %s", p_name, dst.name, type(property) == "table" and "table" or property))
+            end
+        end
+
+        -- 移除我们创建的额外角色。 现在已经过时了！
+        -- Remove the additional character we've created. It's obsolete now!
+        chars[src.name] = nil
+        log(string.format("Removed character \"%s\".", src.name))
+
+
+        -- Game supports multiple characters
     else
-        GG.dwrite(string.format("Keeping both vanilla \"%s\" and \"%s\"!", entities[name].type, name))
+        log(string.format("Will keep new character \"%s\"!", MIKU.character.name))
 
-        -- Localise new character/corpse
-        entities[name].localised_name = { "entity-name." .. name }
-        entities[name].localised_description = { "entity-description." .. name }
-        GG.dwrite(string.format("Added localization for \"%s\"!", name))
+        src = chars["character"]
+        dst = chars[MIKU.character.name]
 
-        -- Make sure the Gear Girl won't have the default character's corpse!
-        if c then
-            entities[name].character_corpse = name .. "-corpse"
-            GG.dwrite(string.format("Activated new corpse for \"%s\": \"%s\"!",
-                    name, entities[name].character_corpse))
+        -- Copy all properties that are NOT stored in our table from the default character
+        -- to the new one, just in case other mods changed stuff.
+        log("Adding properties from default character to new character!")
+        for p_name, property in pairs(src) do
+            if MIKU.character[p_name] == nil then
+                dst[p_name] = table.deepcopy(property)
+                --~ log(string.format("Set property \"%s\" of character \"%s\": %s", p_name, dst.name, type(property) == "table" and "table" or property))
+            end
         end
     end
+
+    -- Default character has been deleted. If there is no character selector, restore
+    -- the default character by moving ours there.
+elseif replace_base_char then
+    chars["character"] = table.deepcopy(chars[MIKU.character.name])
+    chars["character"].name = "character"
+    log("Re-created default character!")
+
+    chars[MIKU.character.name] = nil
+    log(string.format("Removed character \"%s\"!", MIKU.character.name))
 end

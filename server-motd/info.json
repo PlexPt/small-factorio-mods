@@ -1,0 +1,11 @@
+{
+  "name": "server-motd",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "server motd",
+  "author": "plexpt",
+  "description": "This mod is called the MOTD (Message of the Day) and this text normally provides a bit of information related to the server.Make a custom MOTD for your Factorio server now. support multicolor. eg message: Welcome to my server",
+  "dependencies": [
+    "base"
+  ]
+}

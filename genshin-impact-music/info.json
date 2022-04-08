@@ -1,0 +1,11 @@
+{
+  "name": "genshin-impact-music",
+  "version": "1.0.0",
+  "title": "Genshin Impact Music Pack",
+  "author": "plexpt",
+  "contact": "1",
+  "homepage": "1",
+  "factorio_version": "1.1",
+  "description": "Genshin Impact Music Pack. \n\n原神音效包",
+  "dependencies": []
+}

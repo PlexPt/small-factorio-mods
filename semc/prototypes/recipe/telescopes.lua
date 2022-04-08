@@ -1,0 +1,1 @@
+data.raw["assembling-machine"]["se-space-telescope-xray"].crafting_categories = {"space-observation-gammaray", "space-observation-xray", "space-observation-uv", "space-observation-visible", "space-observation-infrared", "space-observation-microwave", "space-observation-radio", "space-astrometrics"}
