@@ -1,6 +1,6 @@
 {
   "name": "genshin-impact-skin",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "factorio_version": "1.1",
   "title": "Genshin Impact Skin 原神皮肤",
   "author": "plexpt",
@@ -8,7 +8,8 @@
   "homepage": "",
   "dependencies": [
     "~ minime",
-    "~ genshin-impact-music"
+    "~ genshin-impact-music",
+    "CharacterModHelper"
   ],
   "description": "So Many Genshin Impact Character Skin. \n\n原神皮肤全家桶。\n\n包含皮肤\n蒙德 Mondstadt\n璃月 Liyue\n安柏 Amber\n凯亚 Kaeya\n丽莎 Lisa\n主角（旅行者） Traveler\n芭芭拉 Barbara\n北斗 Beidou\n班尼特 Bennett\n重云 Chongyun\n迪卢克 Diluc\n菲谢尔 Fischl\n琴 Jean\n刻晴 Keqing\n可莉 Klee\n莫娜 Mona\n凝光 Ningguang\n诺伊尔 Noelle\n七七 Qiqi\n雷泽 Razor\n砂糖 Sucrose\n温迪 Venti\n香菱 Xiangling\n魈 Xiao\n行秋 Xingqiu"
 }

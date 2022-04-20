@@ -1,10 +1,11 @@
 -- Make this a global variable so you have to load the file just once. Also,
 -- make the name unique (e.g. "MIKU" or the initials of your mod, "MBS") so
 -- other mods won't touch it.
-MIKU = require("lib.common")
+MIKU = require("__CharacterModHelper__.common")("miku-bikini-swimsuit")
 
-local IMG_PATH = "__miku-bikini-swimsuit__/images/"
+MIKU.IMG_PATH = MIKU.modRoot.."/images/"
 local character_creator = require("character_creator")
+
 
 ------------------------------------------------------------------------------------
 --                  Initialize properties of character and corpse                 --
@@ -12,21 +13,16 @@ local character_creator = require("character_creator")
 --  and keep track of what properties to skip when we copy properties from the    --
 --  default character to the new character to retain changes made by other mods.  --
 ------------------------------------------------------------------------------------
-MIKU.character = {}
-MIKU.corpse = {}
+MIKU.new_characters = {}
 
---~ MIKU.character.name = MIKU.char_name
---~ MIKU.corpse.name = MIKU.char_name .. "-corpse"
+local name = "miku-bikini-swimsuit-skin"
+MIKU.new_characters[name] = require("my_character")(name)
 
-
--- Create character and character corpse
-require("my_character")
+name = "miku-bikini-miku-fox-skin"
+MIKU.new_characters[name] = character_creator.create(MIKU.IMG_PATH.."miku-fox/", name)
 
 
--- Char selector mods can register if we shouldn't overwrite the default character.
--- (It really makes sense to use the same table for all character mods, so that
--- character selector mods need only register once. It should have a more neutral
--- name, but "GEAR_GIRL_" will work for now.)
-GEAR_GIRL_keep_default_character = GEAR_GIRL_keep_default_character or {}
-
-character_creator.create(IMG_PATH .. "miku-fox/", "miku-bikini-miku-fox-skin")
+-- Create prototypes
+for name, prototypes in pairs(MIKU.new_characters) do
+  CharModHelper.create_prototypes(prototypes)
+end

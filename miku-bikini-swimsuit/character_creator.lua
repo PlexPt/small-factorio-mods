@@ -215,13 +215,13 @@ my_character.create = function(imgPath, name)
         ["power-armor-mk2"] = get_mapping(3)
     }
 
-    -- Apply changed values to the copy
-    for p_name, property in pairs(corpse) do
-        corpse[p_name] = property
-    end
+    --~ -- Apply changed values to the copy
+    --~ for p_name, property in pairs(corpse) do
+        --~ corpse[p_name] = property
+    --~ end
 
-    -- Create the corpse
-    data:extend({ corpse })
+    --~ -- Create the corpse
+    --~ data:extend({ corpse })
 
 
 
@@ -303,16 +303,17 @@ my_character.create = function(imgPath, name)
     }
 
 
-    -- Copy the default character
-    local char = table.deepcopy(data.raw.character.character)
+    --~ -- Copy the default character
+    --~ local char = table.deepcopy(data.raw.character.character)
 
-    -- Apply changed values to the copy
-    for p_name, property in pairs(character) do
-        char[p_name] = property
-    end
+    --~ -- Apply changed values to the copy
+    --~ for p_name, property in pairs(character) do
+        --~ char[p_name] = property
+    --~ end
 
-    -- Create the character
-    data:extend({ char })
+    --~ -- Create the character
+    --~ data:extend({ char })
+  return {character = character, corpse = corpse}
 
 end
 

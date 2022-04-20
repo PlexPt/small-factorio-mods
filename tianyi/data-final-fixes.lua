@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------
--- LEAVE THE FINAL CHANGES TO THIS MOD! (data-final-fixes.lua)
+--                 Leave the final changes to CharacterModHelper!                 --
 ------------------------------------------------------------------------------------
 -- Other mods may have modified the default character and corpse. You should respect
 -- such changes unless they conflict with the properties you've stored in the global
@@ -11,9 +11,8 @@
 -- been copied. If another mod has assigned the new corpse to other characters (for
 -- example, "Jetpack" will use it in the flying version of the new character), the
 -- corpse will be changed there as well.
+--
 ------------------------------------------------------------------------------------
 
 -- Keep or overwrite the default prototypes?                   --
-for name, prototypes in pairs(MIKU.new_characters) do
-  CharModHelper.check_my_prototypes(prototypes)
-end
+CharModHelper.check_my_prototypes(TIANYI)

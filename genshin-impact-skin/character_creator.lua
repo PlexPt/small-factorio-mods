@@ -1,4 +1,4 @@
-local IMG_PATH = "__genshin-impact-skin__/images/"
+local IMG_PATH = GENSHIN.modRoot .. "/images/"
 local util = require("util")
 require("lib.animation_util")
 --~ local char_name = "miku-bikini-swimsuit-skin"
@@ -195,7 +195,8 @@ my_character.create = function(imgPath, name)
     ------------------------------------------------------------------------------------
     -- We only store properties with values different from the defaults
     -- Copy the corpse
-    local corpse = table.deepcopy(data.raw["character-corpse"]["character-corpse"])
+    --~ local corpse = table.deepcopy(data.raw["character-corpse"]["character-corpse"])
+    local corpse = {}
     corpse.name = name .. "-corpse"
     corpse.localised_name = { "", "entity-name." .. corpse.name, "genshin-impact-skin.corpse" }
     corpse.localised_description = { "entity-name." .. corpse.name }
@@ -215,13 +216,13 @@ my_character.create = function(imgPath, name)
         ["power-armor-mk2"] = get_mapping(3)
     }
 
-    -- Apply changed values to the copy
-    for p_name, property in pairs(corpse) do
-        corpse[p_name] = property
-    end
+    --~ -- Apply changed values to the copy
+    --~ for p_name, property in pairs(corpse) do
+    --~ corpse[p_name] = property
+    --~ end
 
-    -- Create the corpse
-    data:extend({ corpse })
+    --~ -- Create the corpse
+    --~ data:extend({ corpse })
 
 
 
@@ -303,16 +304,21 @@ my_character.create = function(imgPath, name)
     }
 
 
-    -- Copy the default character
-    local char = table.deepcopy(data.raw.character.character)
+    --~ -- Copy the default character
+    --~ local char = table.deepcopy(data.raw.character.character)
 
-    -- Apply changed values to the copy
-    for p_name, property in pairs(character) do
-        char[p_name] = property
-    end
+    --~ -- Apply changed values to the copy
+    --~ for p_name, property in pairs(character) do
+    --~ char[p_name] = property
+    --~ end
 
-    -- Create the character
-    data:extend({ char })
+    --~ -- Create the character
+    --~ data:extend({ char })
+
+    return {
+        character = character,
+        corpse = corpse
+    }
 
 end
 
