@@ -10,7 +10,7 @@ local function getHr(s)
 end
 
 local function getIdlePics(max)
-    local s = getSeqPics("idle/", max)
+    local s = getSeqPics(IMG_PATH .. "idle/", max)
     return s
 end
 

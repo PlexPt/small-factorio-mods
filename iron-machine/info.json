@@ -1,0 +1,12 @@
+{
+  "name": "iron-machine",
+  "version": "1.0.2",
+  "factorio_version": "1.1",
+  "title": "Iron Machine",
+  "author": "plexpt",
+  "description": "Most machines and furnaces only require 100 iron plates to craft. OHHHHHHHHHHH! move to zzz-handcraft-shop",
+  "dependencies": [
+    "base",
+    "zzz-handcraft-shop"
+  ]
+}

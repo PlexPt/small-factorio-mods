@@ -1,0 +1,52 @@
+--data:extend(
+--        {
+--            {
+--                type = "item",
+--                name = "miku",
+--                localised_name = { "item-name.miku" },
+--                icon = "__miku__/graphics/icons/miku.png",
+--                icon_size = 240,
+--                subgroup = "smelting-machine",
+--                order = "a[stone-furnace]",
+--                place_result = "miku-1",
+--                stack_size = 1
+--            },
+--
+--            {
+--                type = "item",
+--                name = "miku-2",
+--                localised_name = { "item-name.miku" },
+--                icon = "__miku__/graphics/icons/miku.png",
+--                icon_size = 240,
+--                subgroup = "smelting-machine",
+--                order = "a[stone-furnace]",
+--                place_result = "miku-2",
+--                stack_size = 1
+--            },
+--
+--            {
+--                type = "item",
+--                name = "miku-3",
+--                localised_name = { "item-name.miku" },
+--                icon = "__miku__/graphics/icons/miku.png",
+--                icon_size = 240,
+--                subgroup = "smelting-machine",
+--                order = "a[stone-furnace]",
+--                place_result = "miku-3",
+--                stack_size = 1
+--            },
+--
+--            {
+--                type = "item",
+--                name = "miku-4",
+--                localised_name = { "item-name.miku" },
+--                icon = "__miku__/graphics/icons/miku.png",
+--                icon_size = 240,
+--                subgroup = "smelting-machine",
+--                order = "a[stone-furnace]",
+--                place_result = "miku-4",
+--                stack_size = 1
+--            },
+--
+--
+--        })

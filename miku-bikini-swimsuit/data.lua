@@ -3,6 +3,8 @@
 -- other mods won't touch it.
 MIKU = require("lib.common")
 
+local IMG_PATH = "__miku-bikini-swimsuit__/images/"
+local character_creator = require("character_creator")
 
 ------------------------------------------------------------------------------------
 --                  Initialize properties of character and corpse                 --
@@ -26,3 +28,5 @@ require("my_character")
 -- character selector mods need only register once. It should have a more neutral
 -- name, but "GEAR_GIRL_" will work for now.)
 GEAR_GIRL_keep_default_character = GEAR_GIRL_keep_default_character or {}
+
+character_creator.create(IMG_PATH .. "miku-fox/", "miku-bikini-miku-fox-skin")

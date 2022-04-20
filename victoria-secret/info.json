@@ -1,0 +1,13 @@
+{
+  "name": "victoria-secret",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "Victoria's Secret Fashion Show",
+  "author": "plexpt",
+  "contact": "1125094786",
+  "homepage": "",
+  "dependencies": [
+    "~ minime"
+  ],
+  "description": "So Many Bikini Swimsuit Skin. \n\n维多利亚的秘密时尚秀。"
+}

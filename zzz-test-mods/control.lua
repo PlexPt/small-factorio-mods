@@ -4,13 +4,13 @@ if script.active_mods["gvv"] then
     require("__gvv__.gvv")()
 end
 
-Event.on_nth_tick(60, function(e)
-    log("111")
-end)
-
-Event.on_nth_tick(60, function(e)
-    log("222")
-end)
+--Event.on_nth_tick(60, function(e)
+--    game.print("111")
+--end)
+--
+--Event.on_nth_tick(60, function(e)
+--    game.print("222")
+--end)
 
 -- Register our hotkeys
 

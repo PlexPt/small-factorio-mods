@@ -184,7 +184,8 @@ my_character.create = function(imgPath, name)
     --                                Character corpse                                --
     ------------------------------------------------------------------------------------
     -- We only store properties with values different from the defaults
-    local corpse = {}
+    -- Copy the corpse
+    local corpse = table.deepcopy(data.raw["character-corpse"]["character-corpse"])
     corpse.name = name .. "-corpse"
     corpse.localised_name = {"", "entity-name." .. corpse.name ,"genshin-impact-skin.corpse"}
     corpse.localised_description = { "entity-name." .. corpse.name }
@@ -205,8 +206,6 @@ my_character.create = function(imgPath, name)
     }
 
 
-    -- Copy the corpse
-    local corpse = table.deepcopy(data.raw["character-corpse"]["character-corpse"])
 
     -- Apply changed values to the copy
     for p_name, property in pairs(corpse) do
