@@ -1,0 +1,12 @@
+{
+  "name": "pikachu",
+  "factorio_version": "1.1",
+  "version": "1.1.0",
+  "title": "pikachu skin",
+  "author": "plexpt",
+  "description": "Now you're a full-fledged Pikachu, it's time to learn to grow your own hair",
+  "dependencies": [
+    "base",
+    "CharacterModHelper"
+  ]
+}

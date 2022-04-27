@@ -128,9 +128,10 @@ local function on_entity_removed(event)
 end
 
 local local_on_post_entity_died = function(event)
+    local entity = event.ghost
 
     if event.ghost then
-        local fstr = start_with(entity.prototype.name, "miku-")
+        local fstr = start_with(entity.ghost_prototype.name, "miku-")
         if fstr then
             local base_entity = "miku-1"
             local force = event.ghost.force

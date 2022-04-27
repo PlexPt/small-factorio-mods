@@ -2,6 +2,7 @@ local animation_creator = require("animation_creator")
 local sounds = require("__base__.prototypes.entity.sounds")
 --local ab_enemy_autoplace = require("armoured-autoplace")
 local IMG_PATH = "__beaver__/graphics/beaver/"
+local IMG_DEAD = "__beaver__/graphics/dead.png"
 
 local beaver = table.deepcopy(data.raw["unit"]["behemoth-biter"])
 
@@ -25,8 +26,8 @@ data:extend({
     {
         type = "item",
         name = "beaver-biter-loot",
-        icon = IMG_PATH .. "235.png",
-        icon_size = 400,
+        icon = IMG_DEAD,
+        icon_size = 100,
         subgroup = "other",
         stack_size = 1,
     },
@@ -41,6 +42,6 @@ for _, unitSpawner in pairs(data.raw["unit-spawner"]) do
             unitSpawner.flags = {}
         end
         table.insert(unitSpawner.result_units, { unit = beaver.name,
-                                                 spawn_points = { { 0.0, 0.3 }, { 0.99, 0.8 } } })
+            spawn_points = { { 0.3, 0.3 }, { 0.99, 0.8 } } })
     end
 end
