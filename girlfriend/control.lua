@@ -1,5 +1,12 @@
+if script.active_mods["gvv"] then
+    require("__gvv__.gvv")()
+end
+
 local debugtool = require("debugtool")
 require("config")
+require("script/gutil")
+
+require("script/gui")
 
 
 
@@ -26,7 +33,8 @@ local function follow_player_safely(girl, player)
                 distraction = defines.distraction.none
             })
         else
-            destroyDialog(player, girl)
+            --跟不上了，毁灭吧
+            girl.destroy()
         end
     end
 end
@@ -64,9 +72,9 @@ function drawDialog(player, girlfriend, text)
 
         -- /c game.player.surface.create_entity({name="compi-speech-bubble",source = game.player, position=game.player.position, text="Hello, world!"})
         local dialog = girlfriend.surface.create_entity({ name = "compi-speech-bubble",
-                                                      position = position,
-                                                      source = girlfriend,
-                                                      text = text })
+                                                          position = position,
+                                                          source = girlfriend,
+                                                          text = text })
         girlfriendsDialog[player.name] = dialog
 
     end
@@ -140,7 +148,7 @@ script.on_nth_tick(60, function(event)
             local girl = girlfriends[player.name]
 
             local distance = getDistance(girl.position, player.position)
-            if distance > 5 then
+            if distance > follow_player_distance then
                 follow_player_safely(girl, player)
             end
 
@@ -231,38 +239,47 @@ local function on_player_died (event)
 end
 
 local function on_entity_died(event)
-    log("===================================== on_entity_died ==============================================")
+    getAllGirl()
 
-    if event.entity.name == girl_entity then
-        log("===================================== 女朋友亡语 ==============================================")
+    --@see getAllGirl()
+    if global.girl_list then
+        for k, girl in pairs(global.girl_list) do
+            if girl.entity == event.entity.name then
+                log("===================================== 女朋友亡语 ==============================================")
+                local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
 
-        debugtool.infoless((event.entity))
-        --debugtool.infoless((event.loot.index))
-        --debugtool.infoless((event.loot.entity_owner))
-        --debugtool.infoless((event.loot.player_owner))
+                local text_obj = rendering.draw_text {
+                    text = GetRandomMsg("msg.die-", 30),
+                    surface = event.entity.surface,
+                    target = event.entity.position,
+                    target_offset = { 0, -4 },
+                    color = pink2,
+                    scale = 1,
+                    time_to_live = 60 * 60,
+                    alignment = "center"
+                    -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
+                    --font = "compi",
+                }
 
-        debugtool.infoless(event.entity.position)
-
-        local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
-
-        local text_obj = rendering.draw_text {
-            text = GetRandomMsg("msg.die-", 30),
-            surface = event.entity.surface,
-            target = event.entity.position,
-            target_offset = { 0, -4 },
-            color = pink2,
-            scale = 1,
-            time_to_live = 60 * 60,
-            alignment = "center"
-            -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
-            --font = "compi",
-        }
-
-        --local dialog = event.entity.surface.create_entity({ name = "compi-speech-bubble",
-        --                                                    position = event.entity.position,
-        --                                                    source = text_obj,
-        --                                                    text = GetRandomMsg("msg.die-", 10) })
+            end
+        end
     end
+
+    --if event.entity.name == girl_entity then
+    --
+    --    debugtool.infoless((event.entity))
+    --    --debugtool.infoless((event.loot.index))
+    --    --debugtool.infoless((event.loot.entity_owner))
+    --    --debugtool.infoless((event.loot.player_owner))
+    --
+    --    debugtool.infoless(event.entity.position)
+    --
+    --
+    --    --local dialog = event.entity.surface.create_entity({ name = "compi-speech-bubble",
+    --    --                                                    position = event.entity.position,
+    --    --                                                    source = text_obj,
+    --    --                                                    text = GetRandomMsg("msg.die-", 10) })
+    --end
 
 end
 
@@ -326,8 +343,13 @@ function create_girl(player)
     position = surface.find_non_colliding_position("character", position, 100, 0.5, false)
 
     if position then
+        local girl_name = global.girl_entity[player.name]
+        if not girl_name then
+            global.girl_entity[player.name] = girl_entity
+            girl_name = girl_entity
+        end
 
-        local girl = player.surface.create_entity({ name = girl_entity, position = position, force = player.force })
+        local girl = player.surface.create_entity({ name = girl_name, position = position, force = player.force })
         drawName(player, girl)
         return girl
     else
@@ -338,3 +360,14 @@ function create_girl(player)
     return nil
 
 end
+
+script.on_init(function()
+
+
+    for _, player in pairs(game.players) do
+        if player and player.valid then
+            show_gui(player)
+        end
+    end
+end)
+
