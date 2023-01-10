@@ -1,13 +1,10 @@
-
-
-
 local is_sprite = function(array)
     return array.width and array.height and (array.filename or array.stripes or array.filenames)
 end
 
-
-function hack_tint(array, tint,check_runtime)
-    for k, v in pairs (array) do
+-- 修改精灵数组的色调
+function hack_tint(array, tint, check_runtime)
+    for k, v in pairs(array) do
         if type(v) == "table" then
             if is_sprite(v) then
                 if not check_runtime or v.apply_runtime_tint then
@@ -24,9 +21,9 @@ function hack_tint(array, tint,check_runtime)
     end
 end
 
-
+-- 修改精灵数组的缩放比例
 function hack_scale(array, scale)
-    for k, v in pairs (array) do
+    for k, v in pairs(array) do
         if type(v) == "table" then
             if is_sprite(v) then
                 v.scale = (v.scale or 1) * scale
@@ -50,7 +47,6 @@ function hack_scale(array, scale)
     end
 end
 
-
 function scale_box(box, scale)
     box[1][1] = box[1][1] * scale
     box[1][2] = box[1][2] * scale
@@ -59,13 +55,12 @@ function scale_box(box, scale)
     return box
 end
 
-function get_random_pos_near(pos,dist)
-    return {x=pos.x+math.random(-dist,dist),y=pos.y+math.random(-dist,dist)}
+-- 获取给定位置附近的随机位置
+function get_random_pos_near(pos, dist)
+    return { x = pos.x + math.random(-dist, dist), y = pos.y + math.random(-dist, dist) }
 end
 
-
-
-
+-- 判断字符串是否以指定的前缀开头
 function start_with(String, Start)
     return string.sub(String, 1, string.len(Start)) == Start
 end

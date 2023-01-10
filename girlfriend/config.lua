@@ -5,20 +5,20 @@ girl_entity = "girlfriend-compilatron"
 
 girlfreed_base_name = "girlfriend-"
 
-global = global or {}
+--global = global or {}
 
-global.girlfriends = global.girlfriends or {}
-
-global.girl_entity = global.girl_entity or {}
-
-global.RocketLaunched = global.RocketLaunched or {}
-global.girlfriendsDialog = global.girlfriendsDialog or {}
-global.NextTime = global.NextTime or {}
-
-girlfriends = global.girlfriends
-RocketLaunched = global.RocketLaunched
-girlfriendsDialog = global.girlfriendsDialog
-NextTime = global.NextTime
+--global.girlfriends = global.girlfriends or {}
+--
+--global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
+--
+--global.RocketLaunched = global.RocketLaunched or {}
+--global.girlfriendsDialog = global.girlfriendsDialog or {}
+--global.NextTime = global.NextTime or {}
+--
+--girlfriends = global.girlfriends
+--RocketLaunched = global.RocketLaunched
+--girlfriendsDialog = global.girlfriendsDialog
+--NextTime = global.NextTime
 
 maxMsg = 159
 

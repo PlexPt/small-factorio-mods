@@ -10,11 +10,29 @@ data:extend({
         --~ setting_type = "startup",
         setting_type = "runtime-per-user",
         allowed_values = {
-          "player_follows_character",
-          "character_follows_player",
+          "please select in game left top",
         },
-        default_value = "player_follows_character",
-        order = "[girlfriend]-cc"
+        default_value = "please select in game left top",
+        order = "[girlfriend]-ww"
+    },
+    {
+        type = "string-setting",
+        name = "girlfriend_distance",
+        --~ setting_type = "startup",
+        setting_type = "runtime-per-user",
+        allowed_values = {
+          "5",
+          "10",
+          "20",
+          "50",
+          "100",
+          "500",
+          "1000",
+          "2000",
+          "10000",
+        },
+        default_value = "10",
+        order = "[girlfriend]-dd"
     },
 
 })

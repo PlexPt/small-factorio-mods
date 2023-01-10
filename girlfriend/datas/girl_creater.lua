@@ -17,6 +17,7 @@ function create_girl_unit(character, surname, set_color, scale, hp, attack_param
     --girlfreedunit.flags = { "hidden", "placeable-player", "placeable-enemy", "placeable-off-grid", "breaths-air", "not-repairable" }
     girlfreedunit.name = name
     girlfreedunit.localised_name = { "entity-name." .. surname }
+    girlfreedunit.localised_description = { "entity-description." .. surname }
     girlfreedunit.selection_box = scale_box(table.deepcopy(character.selection_box), scale)
     girlfreedunit.sticker_box = scale_box(table.deepcopy(character.sticker_box), scale)
     girlfreedunit.icon = character.icon
@@ -89,16 +90,16 @@ function create_girl_unit(character, surname, set_color, scale, hp, attack_param
 
     -- tint character_corpse
     local girl_corpse = table.deepcopy(data.raw["character-corpse"][character.character_corpse])
-
-    local corpse = table.deepcopy(girl_corpse)
-    corpse.name = girlfreedunit.name .. "-corpse"
-    corpse.order = "zzz-" .. name
-    hack_scale(corpse, scale) --1+ scale/2)
-    hack_tint(corpse, color, true)
+    local corpse_name = girl_corpse.name
+    girl_corpse.name = girlfreedunit.name .. "-corpse"
+    girl_corpse.localised_name = { "", "entity-name." .. surname, "genshin-impact-skin.corpse" }
+    girl_corpse.order = "zzz-" .. name
+    hack_scale(girl_corpse, scale) --1+ scale/2)
+    hack_tint(girl_corpse, color, true)
 
     data:extend {
         girlfreedunit,
-        corpse
+        girl_corpse
     }
 
 end

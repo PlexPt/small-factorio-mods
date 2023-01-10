@@ -45,11 +45,11 @@ function changeGirl(entity_name, player)
         return
     end
 
-    local girl = girlfriends[player.name]
+    local girl = global.girlfriends[player.name]
     if girl then
         girl.destroy()
-        global.girl_entity = global.girl_entity or {}
-        global.girl_entity[player.name] = entity_name
+        global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
+        global.player_chosen_girlfriend[player.name] = entity_name
     end
 
 end

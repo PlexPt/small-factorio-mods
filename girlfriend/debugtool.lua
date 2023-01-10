@@ -2,6 +2,9 @@ local debug_util = {}
 
 debug_util.debug_mode = true
 
+log = debug_util.debug_mode and log or function()
+end
+
 debug_log = debug_util.debug_mode and log or function()
 end
 

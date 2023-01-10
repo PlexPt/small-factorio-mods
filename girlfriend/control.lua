@@ -8,8 +8,6 @@ require("script/gutil")
 
 require("script/gui")
 
-
-
 local function teleport_player_safely(player, surface, position)
     if player and surface then
         position = surface.find_non_colliding_position("character", position, 50, 0.5, false) or position
@@ -75,7 +73,7 @@ function drawDialog(player, girlfriend, text)
                                                           position = position,
                                                           source = girlfriend,
                                                           text = text })
-        girlfriendsDialog[player.name] = dialog
+        global.girlfriends_dialog[player.name] = dialog
 
     end
 end
@@ -93,14 +91,14 @@ function drawDialog2(player, unit)
                                                       position = position,
                                                       source = unit,
                                                       text = text })
-        girlfriendsDialog[player.name] = dialog
+        global.girlfriends_dialog[player.name] = dialog
 
     end
 end
 
 function destroyDialog(player, girlfriend)
     if player and player.valid and girlfriend then
-        local dialog = girlfriendsDialog[player.name]
+        local dialog = global.girlfriends_dialog[player.name]
         if dialog then
             dialog.destroy()
         end
@@ -145,9 +143,13 @@ script.on_nth_tick(60, function(event)
             tick = event.tick
             check_girl(player)
 
-            local girl = girlfriends[player.name]
+            local girl = global.girlfriends[player.name]
 
             local distance = getDistance(girl.position, player.position)
+
+            local p_settings = settings.get_player_settings(player)
+            local follow_player_distance = p_settings["girlfriend_distance"] and p_settings["girlfriend_distance"].value
+            follow_player_distance = tonumber(follow_player_distance)
             if distance > follow_player_distance then
                 follow_player_safely(girl, player)
             end
@@ -162,14 +164,14 @@ script.on_nth_tick(600, function(event)
         if (player and player.valid and player.character) then
             check_girl(player)
 
-            local girl = girlfriends[player.name]
-            local nextTick = NextTime[player.name]
+            local girl = global.girlfriends[player.name]
+            local nextTick = global.girl_next_dialog_time[player.name]
             if not nextTick then
                 drawDialog(player, girl)
-                NextTime[player.name] = GetNextTime(tick)
+                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
             elseif (nextTick <= tick) then
                 drawDialog(player, girl)
-                NextTime[player.name] = GetNextTime(tick)
+                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
             end
         end
     end
@@ -189,32 +191,33 @@ local function on_player_joined_game (event)
     end
 
 end
+
 local function on_rocket_launched (event)
     log("=====================================火箭发射 on_rocket_launched==============================================")
 
     --debugtool.infoless((event.rocket))
     --debugtool.infoless((event.rocket.last_user))
-    debugtool.infoless((event.rocket_silo))
-    debugtool.infoless((event.rocket_silo.last_user))
+    --debugtool.infoless((event.rocket_silo))
+    --debugtool.infoless((event.rocket_silo.last_user))
     local player = event.rocket_silo.last_user
 
     if (player and player.valid and player.character) then
         local tick = event.tick
         check_girl(player)
 
-        local girl = girlfriends[player.name]
+        local girl = global.girlfriends[player.name]
 
-        if RocketLaunched[player.name] then
+        if global.rocket_launched[player.name] then
             if math.random(1, 10) == 5 then
                 --  已经说过了  小概率触发
                 drawDialog(player, girl, GetRandomMsg("msg.rocket-", 10))
-                NextTime[player.name] = GetNextTime(tick)
+                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
             end
         else
             drawDialog(player, girl, GetRandomMsg("msg.rocket-", 10))
-            NextTime[player.name] = GetNextTime(tick)
+            global.girl_next_dialog_time[player.name] = GetNextTime(tick)
 
-            RocketLaunched[player.name] = true
+            global.rocket_launched[player.name] = true
         end
 
 
@@ -230,9 +233,9 @@ local function on_player_died (event)
     if (player and player.valid) then
         local tick = event.tick
         check_girl(player)
-        local girl = girlfriends[player.name]
+        local girl = global.girlfriends[player.name]
         drawDialog(player, girl, GetRandomMsg("msg.player-die-", 10))
-        NextTime[player.name] = GetNextTime(tick)
+        global.girl_next_dialog_time[player.name] = GetNextTime(tick)
     end
     debugtool.infoless(event.cause)
 
@@ -240,26 +243,36 @@ end
 
 local function on_entity_died(event)
     getAllGirl()
+    local prototype = event.prototype.name
+    local unit_number = event.unit_number
+    local corpses = event.corpses
+    local position = event.position
+    local surface_index = event.surface_index
 
     --@see getAllGirl()
     if global.girl_list then
         for k, girl in pairs(global.girl_list) do
-            if girl.entity == event.entity.name then
+            if girl.entity == prototype then
                 log("===================================== 女朋友亡语 ==============================================")
                 local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
 
-                local text_obj = rendering.draw_text {
-                    text = GetRandomMsg("msg.die-", 30),
-                    surface = event.entity.surface,
-                    target = event.entity.position,
-                    target_offset = { 0, -4 },
-                    color = pink2,
-                    scale = 1,
-                    time_to_live = 60 * 60,
-                    alignment = "center"
-                    -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
-                    --font = "compi",
-                }
+                --local text_obj = rendering.draw_text {
+                --    text = GetRandomMsg("msg.die-", 30),
+                --    surface = event.entity.surface,
+                --    target = event.entity.position,
+                --    target_offset = { 0, -4 },
+                --    color = pink2,
+                --    scale = 1,
+                --    time_to_live = 60 * 60,
+                --    alignment = "center"
+                --    -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
+                --    --font = "compi",
+                --}
+
+                local dialog = game.surfaces[surface_index].create_entity({ name = "compi-speech-bubble",
+                                                                            position = position,
+                                                                            source = corpses[1],
+                                                                            text = GetRandomMsg("msg.die-", 30) })
 
             end
         end
@@ -304,9 +317,9 @@ local function on_research_finished (event)
                 if (player and player.valid and player.character) then
                     check_girl(player)
 
-                    local girl = girlfriends[player.name]
+                    local girl = global.girlfriends[player.name]
                     drawDialog(player, girl, GetRandomMsg("msg.research-", 10))
-                    NextTime[player.name] = GetNextTime(tick)
+                    global.girl_next_dialog_time[player.name] = GetNextTime(tick)
                 end
             end
         end
@@ -316,7 +329,7 @@ end
 
 script.on_event(defines.events.on_player_joined_game, on_player_joined_game)
 script.on_event(defines.events.on_player_died, on_player_died)
-script.on_event(defines.events.on_entity_died, on_entity_died)
+script.on_event(defines.events.on_post_entity_died, on_entity_died, { { filter = "type", type = "unit" } })
 script.on_event(defines.events.on_rocket_launched, on_rocket_launched)
 script.on_event(defines.events.on_research_finished, on_research_finished)
 
@@ -324,12 +337,12 @@ script.on_event(defines.events.on_research_finished, on_research_finished)
 
 -- 检查女朋友状态 如果死了就重新找一个
 function check_girl(player)
-    if not girlfriends[player.name] then
+    if not global.girlfriends[player.name] then
         local girl = create_girl(player)
-        girlfriends[player.name] = girl
-    elseif not girlfriends[player.name].valid then
+        global.girlfriends[player.name] = girl
+    elseif not global.girlfriends[player.name].valid then
         local girl = create_girl(player)
-        girlfriends[player.name] = girl
+        global.girlfriends[player.name] = girl
     end
 
 end
@@ -343,14 +356,17 @@ function create_girl(player)
     position = surface.find_non_colliding_position("character", position, 100, 0.5, false)
 
     if position then
-        local girl_name = global.girl_entity[player.name]
+        local girl_name = global.player_chosen_girlfriend[player.name]
         if not girl_name then
-            global.girl_entity[player.name] = girl_entity
+            global.player_chosen_girlfriend[player.name] = girl_entity
             girl_name = girl_entity
         end
 
         local girl = player.surface.create_entity({ name = girl_name, position = position, force = player.force })
         drawName(player, girl)
+
+        --game.print(girl.unit_number)
+
         return girl
     else
         player.print("女朋友：你周围没有位置了，我挤不过来！")
@@ -361,13 +377,29 @@ function create_girl(player)
 
 end
 
-script.on_init(function()
+function config_global()
+    global.girlfriends = global.girlfriends or {}
 
+    global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
+    global.rocket_launched = global.rocket_launched or {}
+    global.girlfriends_dialog = global.girlfriends_dialog or {}
+    global.girl_next_dialog_time = global.girl_next_dialog_time or {}
+
+end
+
+script.on_init(function()
+    config_global()
 
     for _, player in pairs(game.players) do
         if player and player.valid then
             show_gui(player)
         end
     end
+end)
+
+script.on_configuration_changed(function()
+
+    config_global()
+
 end)
 
