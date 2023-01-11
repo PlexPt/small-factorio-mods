@@ -121,6 +121,25 @@ function destroyDialog(player, girlfriend)
     end
 end
 
+local function random_condom(player)
+    if player and player.valid and player.character then
+        local items = {
+            "condom",
+            "vibrator",
+            "vibrator2",
+            "vibrator3",
+            "vibrator4",
+        }
+        for k, item in pairs(items) do
+
+            if  get_random_call(0.1) then
+                --插入一些东西
+                player.insert({ name = item, count = 1 })
+            end
+        end
+    end
+end
+
 -- msg.die-
 -- msg.player-die-
 -- msg.msg-
@@ -174,10 +193,12 @@ script.on_nth_tick(60, function(event)
 end)
 
 script.on_nth_tick(600, function(event)
+
     local tick = event.tick
     for k, player in pairs(game.players) do
         if (player and player.valid and player.character) then
             check_girl(player)
+            random_condom(player)
 
             local girl = global.girlfriends[player.name]
             local nextTick = global.girl_next_dialog_time[player.name]
@@ -196,10 +217,15 @@ local function on_player_joined_game (event)
     local player = game.players[event.player_index]
     if (player and player.valid and player.character) then
 
-        local msg = ""
+        local msg = {"welcome"}
 
         if msg then
             player.print(msg)
+        end
+        local msg2 = {"welcome2"}
+
+        if msg then
+            player.print(msg2)
         end
 
         check_girl(player)
@@ -283,26 +309,30 @@ local function on_entity_died(event)
                 log("===================================== 女朋友亡语 ==============================================")
                 local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
 
-                --local text_obj = rendering.draw_text {
-                --    text = GetRandomMsg("msg.die-", 30),
-                --    surface = event.entity.surface,
-                --    target = event.entity.position,
-                --    target_offset = { 0, -4 },
-                --    color = pink2,
-                --    scale = 1,
-                --    time_to_live = 60 * 60,
-                --    alignment = "center"
-                --    -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
-                --    --font = "compi",
-                --}
+                if prototype == "girlfriend-compilatron" then
 
-                -- 死亡气泡
-                pcall(function()
-                    local dialog = game.surfaces[surface_index].create_entity({ name = "compi-speech-bubble",
-                                                                                position = position,
-                                                                                source = corpses[1],
-                                                                                text = GetRandomMsg("msg.die-", 30) })
-                end)
+                    rendering.draw_text {
+                        text = GetRandomMsg("msg.die-", 30),
+                        surface = event.entity.surface,
+                        target = event.entity.position,
+                        target_offset = { 0, -4 },
+                        color = pink2,
+                        scale = 1,
+                        time_to_live = 60 * 60,
+                        alignment = "center"
+                        -- Allowed fonts: default-dialog-button default-game compilatron-message-font default-large default-large-semibold default-large-bold heading-1 compi
+                        --font = "compi",
+                    }
+                else
+                    -- 死亡气泡
+                    if corpses[1] then
+                        game.surfaces[surface_index].create_entity({ name = "compi-speech-bubble",
+                                                                     position = position,
+                                                                     source = corpses[1],
+                                                                     text = GetRandomMsg("msg.die-", 30) })
+                    end
+                end
+
             end
         end
     end

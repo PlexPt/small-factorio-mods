@@ -81,6 +81,12 @@ function get_runtime_setting (key)
 
 end
 
+-- 根据概率随机出结果
+function get_random_call (rate)
+    local r = math.random()
+    return r < rate
+end
+
 
 
 

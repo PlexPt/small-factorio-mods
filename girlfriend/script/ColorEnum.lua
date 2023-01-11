@@ -23,3 +23,7 @@ local colors = {
 }
 
 return colors
+
+--#ff48d0 粉色
+--ff69b4 洋玫瑰紅／#ff0da6
+--Goldenrod／金菊色／#daa520
