@@ -16,6 +16,20 @@ data:extend({
         order = "[girlfriend]-ww"
     },
     {
+        type = "bool-setting",
+        name = "girlfriend_trouble",
+        setting_type =  "runtime-global",
+        default_value = true,
+        order = "[girlfriend]-trouble"
+    },
+    {
+        type = "bool-setting",
+        name = "girlfriend_trouble_user",
+        setting_type =  "runtime-per-user",
+        default_value = true,
+        order = "[girlfriend]-trouble"
+    },
+    {
         type = "string-setting",
         name = "girlfriend_distance",
         --~ setting_type = "startup",

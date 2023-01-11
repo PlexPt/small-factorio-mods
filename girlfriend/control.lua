@@ -23,13 +23,29 @@ local function follow_player_safely(girl, player)
         --character.teleport(position, surface)
 
         if surface2 and surface.index == surface2.index then
-            girl.set_command({
-                type = defines.command.go_to_location,
-                destination = position,
-                --destination_entity = player,
-                radius = 1,
-                distraction = defines.distraction.none
-            })
+
+            local girlfriend_trouble = get_runtime_setting("girlfriend_trouble")
+            local girlfriend_trouble_user = get_runtime_user_setting(player, "girlfriend_trouble_user")
+
+            if girlfriend_trouble and girlfriend_trouble_user then
+                --捣蛋
+                girl.set_command({
+                    type = defines.command.build_base,
+                    destination = position,
+                    ignore_planner = true,
+                    distraction = defines.distraction.none
+                })
+
+            else
+                girl.set_command({
+                    type = defines.command.go_to_location,
+                    destination = position,
+                    --destination_entity = player,
+                    radius = 1,
+                    distraction = defines.distraction.none
+                })
+            end
+
         else
             --跟不上了，毁灭吧
             girl.destroy()
@@ -147,8 +163,7 @@ script.on_nth_tick(60, function(event)
 
             local distance = getDistance(girl.position, player.position)
 
-            local p_settings = settings.get_player_settings(player)
-            local follow_player_distance = p_settings["girlfriend_distance"] and p_settings["girlfriend_distance"].value
+            local follow_player_distance = get_runtime_user_setting(player, "girlfriend_distance")
             follow_player_distance = tonumber(follow_player_distance)
             if distance > follow_player_distance then
                 follow_player_safely(girl, player)
@@ -188,6 +203,18 @@ local function on_player_joined_game (event)
         end
 
         check_girl(player)
+    end
+
+end
+
+local function on_player_left_game (event)
+    local player = game.players[event.player_index]
+    if (player and player.valid) then
+        local girl = global.girlfriends[player.name]
+        if girl and girl.valid then
+            girl.destroy()
+            log("==玩家离开了：" .. player.name)
+        end
     end
 
 end
@@ -269,11 +296,13 @@ local function on_entity_died(event)
                 --    --font = "compi",
                 --}
 
-                local dialog = game.surfaces[surface_index].create_entity({ name = "compi-speech-bubble",
-                                                                            position = position,
-                                                                            source = corpses[1],
-                                                                            text = GetRandomMsg("msg.die-", 30) })
-
+                -- 死亡气泡
+                pcall(function()
+                    local dialog = game.surfaces[surface_index].create_entity({ name = "compi-speech-bubble",
+                                                                                position = position,
+                                                                                source = corpses[1],
+                                                                                text = GetRandomMsg("msg.die-", 30) })
+                end)
             end
         end
     end
@@ -324,7 +353,6 @@ local function on_research_finished (event)
             end
         end
     end
-
 end
 
 script.on_event(defines.events.on_player_joined_game, on_player_joined_game)
@@ -332,6 +360,7 @@ script.on_event(defines.events.on_player_died, on_player_died)
 script.on_event(defines.events.on_post_entity_died, on_entity_died, { { filter = "type", type = "unit" } })
 script.on_event(defines.events.on_rocket_launched, on_rocket_launched)
 script.on_event(defines.events.on_research_finished, on_research_finished)
+script.on_event(defines.events.on_player_left_game, on_player_left_game)
 
 
 

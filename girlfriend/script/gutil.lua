@@ -65,8 +65,21 @@ function start_with(String, Start)
     return string.sub(String, 1, string.len(Start)) == Start
 end
 
+function get_runtime_user_setting (player, key)
 
+    local p_settings = settings.get_player_settings(player)
+    if p_settings ~= nil then
 
+        local v = p_settings[key].value
+        return v
+    end
+    return nil
+end
+
+function get_runtime_setting (key)
+    return settings.global[key].value
+
+end
 
 
 
