@@ -1,6 +1,4 @@
 require("datas.girl_creater")
-local animation_creator = require("animation_creator")
-local sounds = require("__base__.prototypes.entity.sounds")
 --local ab_enemy_autoplace = require("armoured-autoplace")
 local IMG_PATH = "__girlfriend__/graphics/girlfriend/"
 local IMG_DEAD = "__girlfriend__/graphics/dead.png"

@@ -132,7 +132,7 @@ local function random_condom(player)
         }
         for k, item in pairs(items) do
 
-            if  get_random_call(0.1) then
+            if get_random_call(0.1) then
                 --插入一些东西
                 player.insert({ name = item, count = 1 })
             end
@@ -217,12 +217,12 @@ local function on_player_joined_game (event)
     local player = game.players[event.player_index]
     if (player and player.valid and player.character) then
 
-        local msg = {"welcome"}
+        local msg = { "welcome" }
 
         if msg then
             player.print(msg)
         end
-        local msg2 = {"welcome2"}
+        local msg2 = { "welcome2" }
 
         if msg then
             player.print(msg2)
@@ -313,8 +313,8 @@ local function on_entity_died(event)
 
                     rendering.draw_text {
                         text = GetRandomMsg("msg.die-", 30),
-                        surface = event.entity.surface,
-                        target = event.entity.position,
+                        surface = game.surfaces[surface_index],
+                        target = position,
                         target_offset = { 0, -4 },
                         color = pink2,
                         scale = 1,
@@ -385,12 +385,6 @@ local function on_research_finished (event)
     end
 end
 
-script.on_event(defines.events.on_player_joined_game, on_player_joined_game)
-script.on_event(defines.events.on_player_died, on_player_died)
-script.on_event(defines.events.on_post_entity_died, on_entity_died, { { filter = "type", type = "unit" } })
-script.on_event(defines.events.on_rocket_launched, on_rocket_launched)
-script.on_event(defines.events.on_research_finished, on_research_finished)
-script.on_event(defines.events.on_player_left_game, on_player_left_game)
 
 
 
@@ -457,8 +451,114 @@ script.on_init(function()
 end)
 
 script.on_configuration_changed(function()
-
     config_global()
-
 end)
 
+local function on_built_entity(event)
+    local entity = event.created_entity
+    local tick = event.tick
+    local player = game.players[event.player_index]
+    if not (player and player.valid
+            and entity
+            and entity.valid
+            and entity.rotatable) then
+        return
+    end
+    local girlfriend_trouble = get_runtime_setting("girlfriend_trouble")
+    local girlfriend_trouble_user = get_runtime_user_setting(player, "girlfriend_trouble_user")
+
+    if not (girlfriend_trouble and girlfriend_trouble_user) then
+        return
+    end
+
+    if not (get_random_call(0.1)) then
+        return
+    end
+
+    local girl = global.girlfriends[player.name]
+    if not (girl and girl.valid) then
+        return
+    end
+    local distance = getDistance(girl.position, player.position)
+
+    if distance > 20 then
+        return
+    end
+
+    local rotatas = {
+        "pipe-to-ground",
+        "underground-belt",
+        "inserter",
+        "splitter",
+        "storage-tank",
+        "mining-drill",
+        "loader",
+        "loader-1x1",
+        "transport-belt"
+    }
+
+    for k, type in pairs(rotatas) do
+
+        if (entity.prototype.type == type) then
+            if entity.rotatable then
+                local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
+
+                --rendering.draw_line({
+                --    color = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 },
+                --    width = 8,
+                --    gap_length = 0.2,
+                --    dash_length = 0.2,
+                --    from = { 0, 0 },
+                --    to = { 0, 50 },
+                --    surface = game.surfaces[1],
+                --    time_to_live = 90,
+                --    draw_on_ground = false,
+                --})
+
+                rendering.draw_line({
+                    color = pink2,
+                    width = 4,
+                    gap_length = 0.2,
+                    dash_length = 0.2,
+                    from = girl,
+                    to = entity,
+                    surface = entity.surface,
+                    time_to_live = 90,
+                    draw_on_ground = false,
+                })
+                --light_small  light_medium  light_cone
+                rendering.draw_light({ sprite = "utility/light_small",
+                                       orientation = 0,
+                                       scale = 1,
+                                       intensity = 1,
+                                       minimum_darkness = 0,
+                                       oriented = true,
+                                       color = pink2,
+                                       target = entity,
+                                       surface = entity.surface,
+                                       time_to_live = 90 })
+                -- 随机旋转
+                for i = 1, math.random(1, 3) do
+                    entity.rotate()
+                end
+            end
+
+            break
+        end
+
+    end
+
+
+
+    --if entity and entity.valid and entity.name == "entity-ghost"
+    --        and start_with(entity.ghost_name, "miku-") then
+    --end
+end
+
+script.on_event(defines.events.on_player_joined_game, on_player_joined_game)
+script.on_event(defines.events.on_player_died, on_player_died)
+script.on_event(defines.events.on_post_entity_died, on_entity_died, { { filter = "type", type = "unit" } })
+script.on_event(defines.events.on_rocket_launched, on_rocket_launched)
+script.on_event(defines.events.on_research_finished, on_research_finished)
+script.on_event(defines.events.on_player_left_game, on_player_left_game)
+script.on_event(defines.events.on_built_entity, on_built_entity)
