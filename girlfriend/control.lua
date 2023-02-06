@@ -503,18 +503,6 @@ local function on_built_entity(event)
             if entity.rotatable then
                 local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
 
-                --rendering.draw_line({
-                --    color = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 },
-                --    width = 8,
-                --    gap_length = 0.2,
-                --    dash_length = 0.2,
-                --    from = { 0, 0 },
-                --    to = { 0, 50 },
-                --    surface = game.surfaces[1],
-                --    time_to_live = 90,
-                --    draw_on_ground = false,
-                --})
-
                 rendering.draw_line({
                     color = pink2,
                     width = 4,
