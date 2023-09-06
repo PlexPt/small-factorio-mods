@@ -46,7 +46,6 @@ function getStripesAnimation(path, min, max, width, height, animation_speed, shi
         shift = shift or util.by_pixel(0, 0),
         scale = scale or 1,
         stripes = getStripes(path, min, max)
-
     }
 
     return animation

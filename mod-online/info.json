@@ -1,0 +1,11 @@
+{
+  "name": "online-mod",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "在线MOD快速开发平台",
+  "homepage": "https://mod.plexpt.com/",
+  "author": "plexpt",
+  "description": "零基础快速简单mod构建开发，无需学习代码，可直接导出mod代码，提供一套优雅简单的解决方案，\n请直接访问 https://mod.plexpt.com/",
+  "dependencies": [
+  ]
+}
