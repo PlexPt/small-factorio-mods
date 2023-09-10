@@ -1,6 +1,7 @@
 require("mini_util")
 require("rescale_entity")
 
+require("recipe")
 --TODO "small-remnants" paota  huagong
 
 -- 电力
@@ -92,14 +93,14 @@ rescale_entity(electricfurnace, 1 / 3)
 --chemical-plant
 --oil-refinery
 
-
 local refinery = data.raw["assembling-machine"]["oil-refinery"]
-rescale_entity(refinery, 3 / 5)
+rescale_entity(refinery, 1 / 5)
 fixPipeConnections(refinery)
 
 local chemical = data.raw["assembling-machine"]["chemical-plant"]
-rescale_entity(chemical, 2 / 3)
+rescale_entity(chemical, 1 / 3)
 fixPipeConnections(chemical)
+--table.insert(chemical.crafting_categories, "oil-processing")
 
 local centrifuge = data.raw["assembling-machine"]["centrifuge"]
 rescale_entity(centrifuge, 1 / 3)
@@ -168,14 +169,58 @@ rescale_entity(roboport, 1 / 4)
 local substation = data.raw["electric-pole"]["substation"]
 rescale_entity(substation, 1 / 2)
 
-
-
 local substation2 = data.raw["electric-pole"]["big-electric-pole"]
 rescale_entity(substation2, 1 / 2)
 
+local artilleryturret = data.raw["artillery-turret"]["artillery-turret"]
+rescale_entity(artilleryturret, 1 / 3)
 
 
+--    type = "electric-turret",
+--    name = "laser-turret",
 
+local laserturret = data.raw["electric-turret"]["laser-turret"]
+rescale_entity(laserturret, 1 / 2)
+
+local turret = data.raw["ammo-turret"]["gun-turret"]
+rescale_entity(turret, 1 / 2)
+
+local flamethrower = data.raw["fluid-turret"]["flamethrower-turret"]
+rescale_entity(flamethrower, 1 / 2)
+scale_collision(flamethrower)
+flamethrower.not_enough_fuel_indicator_light.size = 0.7
+flamethrower.enough_fuel_indicator_light.size = 0.7
+flamethrower.fluid_box.pipe_connections = {
+    { position = { -1, 0 } },
+    { position = { 1, 0 } }
+}
+
+local rocket = data.raw["rocket-silo"]["rocket-silo"]
+rescale_entity(rocket, 1 / 9)
+rocket. hole_clipping_box = { { -1, -1 }, { 1, 1 } }
+rocket. silo_fade_out_start_distance = 1
+rocket. silo_fade_out_end_distance = 3
+
+
+--    rocket_initial_offset = {0, 1.5},
+--    rocket_rise_offset = {0, -3.5},
+--    rocket_launch_offset = {0, -256},
+--    rocket_render_layer_switch_distance = 7.5,
+--    full_render_layer_switch_distance = 9,
+--    effects_fade_in_start_distance = 4.5,
+--    effects_fade_in_end_distance = 7.5,
+--    shadow_fade_out_start_ratio = 0.25,
+--    shadow_fade_out_end_ratio = 0.75,
+--    rocket_visible_distance_from_center = 2.75,
+--    rocket_above_wires_slice_offset_from_center = -3,
+--    rocket_air_object_slice_offset_from_center = -5.5
+
+local rocket2 = data.raw["rocket-silo-rocket"]["rocket-silo-rocket"]
+rescale_entity(rocket2, 1 / 9)
+rocket2.rocket_render_layer_switch_distance = 0
+rocket2.full_render_layer_switch_distance = 1
+rocket2.effects_fade_in_start_distance = 0
+rocket2.effects_fade_in_end_distance = 1
 
 
 

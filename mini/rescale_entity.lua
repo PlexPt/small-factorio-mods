@@ -1,8 +1,10 @@
 local fields = {
     "shift",
     "scale",
+    "base_shift",
     "collision_box",
     "selection_box",
+    "drawing_box",
     "north_position",
     "south_position",
     "east_position",
@@ -93,6 +95,8 @@ local function rescale(entity, scalar)
             -- If we're not, see if there's a filename, which means we're in a low-res table
         elseif entity.filename then
             entity.scale = entity.scale or 1
+        elseif entity.filenames then
+            entity.scale = entity.scale or 1
         end
 
         -- Check to see if we need to scale this key's value
@@ -141,17 +145,32 @@ function fixPipeConnections(self)
         --    self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 0, 1 } } }
         --end
         if string.match(self.name, "refinery") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -1, 2 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "input", position = { 1, 2 } } }
-            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { -1, -2 } } }
-            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { 0, -2 } } }
-            self.fluid_boxes[5].pipe_connections = { { type = "output", position = { 1, -2 } } }
+
+            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -1, 0 } } }
+            self.fluid_boxes[1].pipe_covers =nil
+            --self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 1, 0 } } }
+            self.fluid_boxes[2] = {
+                production_type = "output",
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {
+                    {
+                        type = "output",
+                        position = { 1, 0 }
+                    }
+                }
+            }
+            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { 0, 1 } } }
+            self.fluid_boxes[3].pipe_covers =nil
+            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { 0, -1 } } }
+            self.fluid_boxes[4].pipe_covers =nil
+            self.fluid_boxes[5] = nil
         end
         if string.match(self.name, "chemical") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -0.5, -1.5 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "input", position = { 0.5, -1.5 } } }
-            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { -0.5, 1.5 } } }
-            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { 0.5, 1.5 } } }
+            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { 0, -1 } } }
+            self.fluid_boxes[2].pipe_connections = { { type = "input", position = { 0, 1 } } }
+            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { 1, 0 } } }
+            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { -1, 0 } } }
         end
         if string.match(self.name, "electro") then
             self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -0.5, -1.5 } } }
