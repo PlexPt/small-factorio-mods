@@ -6,9 +6,11 @@ local function scale_vector(v, scale)
         return
     end
     if (type(v) == "table") then
+        if v[1] then
+            v[1] = v[1] * scale
+            v[2] = v[2] * scale
 
-        v[1] = v[1] * scale
-        v[2] = v[2] * scale
+        end
 
     end
 end
@@ -108,11 +110,16 @@ local function scale_graphics_set(graphics_set, scale)
     for _, animation in pairs(graphics_set.animation) do
         scale_animation(animation, scale)
     end
-    for _, points in pairs(graphics_set.shift_animation_waypoints) do
-        for _, point in pairs(points) do
-            scale_vector(point, scale)
+    if graphics_set.shift_animation_waypoints then
+
+
+        for _, points in pairs(graphics_set.shift_animation_waypoints) do
+            for _, point in pairs(points) do
+                scale_vector(point, scale)
+            end
         end
     end
+
     for _, v in pairs(graphics_set.working_visualisations) do
         scale_animation(v.animation, scale)
         scale_animation(v.north_animation, scale)
@@ -263,6 +270,9 @@ function scale_collision(entity)
 end
 
 function minify(entity, scale)
+    if not entity then
+        return
+    end
 
     scale_collision(entity)
     scale_other(entity)

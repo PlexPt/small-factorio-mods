@@ -84,6 +84,9 @@ local function scale(object, scale)
 end
 
 local function rescale(entity, scalar)
+    if not entity then
+        return
+    end
 
     for key, value in pairs(entity) do
         -- This section checks to see where we are, and for the existence of scale.
@@ -126,12 +129,16 @@ local function rescale(entity, scalar)
 end
 
 function rescale_entity(entity, scalar)
+    if not entity then
+        return
+    end
     rescale(entity, scalar)
 
     scale_circuit_connector_sprites(entity.circuit_connector_sprites, scalar)
     scale_circuit_wire_connection_points(entity.circuit_wire_connection_points, scalar)
     scale_wire_positions(entity.connection_points, scalar)
     entity.scale_entity_info_icon = true
+    return entity
 end
 
 function fixPipeConnections(self)
@@ -243,10 +250,10 @@ function fixHeatConnections(self)
     if self.energy_source then
         if self.energy_source.type == "heat" then
             self.energy_source.connections = {
-                { direction = 2, position = { 0, 0 } },
-                { direction = 6, position = { 0, 0 } },
                 { direction = 0, position = { 0, 0 } },
-                { direction = 4, position = { 0, 0 } }
+                { direction = 2, position = { 0, 0 } },
+                { direction = 4, position = { 0, 0 } },
+                { direction = 6, position = { 0, 0 } },
             }
         end
     end
