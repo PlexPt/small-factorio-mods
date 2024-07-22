@@ -126,22 +126,22 @@ rescale_entity(reactor, 1 / 5)
 reactor.heat_buffer.connections = {
 
     {
-        position = { 0, -1 },
+        position = { 0, 0 },
         direction = defines.direction.north
     },
 
     {
-        position = { 1, 0 },
+        position = { 0, 0 },
         direction = defines.direction.east
     },
 
     {
-        position = { 0, 1 },
+        position = { 0, 0 },
         direction = defines.direction.south
     },
 
     {
-        position = { -1, 0 },
+        position = { 0, 0 },
         direction = defines.direction.west
     }
 }

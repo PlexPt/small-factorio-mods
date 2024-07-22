@@ -108,7 +108,7 @@ entity.input_fluid_box.pipe_connections = {
     { position = { 1, 0 } },
     { position = { 0, 1 } },
 }
-entity.resource_searching_radius = 0.49
+entity.resource_searching_radius = 1.49
 entity.vector_to_place_result = { 0, -0.85 }
 
 scale_graphics_set(entity.graphics_set)

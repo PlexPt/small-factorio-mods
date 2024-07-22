@@ -1,9 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 3.0.0
+Version: 3.1.0
 Date: 2024-07-22
   Changes:
     - fix advanced-oil-processing return empty-barrel
     - fix K2 "coke-liquefaction"
+    - fix nuclear-reactor
 
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0

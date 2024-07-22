@@ -244,7 +244,7 @@ local function scale_other(entity)
     end
 
     if entity.resource_searching_radius then
-        entity.resource_searching_radius = 0.49
+        entity.resource_searching_radius = 1.49
     end
 
     if entity.vector_to_place_result then
