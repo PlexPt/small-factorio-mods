@@ -7,18 +7,18 @@ girlfreed_base_name = "girlfriend-"
 
 --global = global or {}
 
---global.girlfriends = global.girlfriends or {}
+--storage.girlfriends = storage.girlfriends or {}
 --
---global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
+--storage.player_chosen_girlfriend = storage.player_chosen_girlfriend or {}
 --
---global.RocketLaunched = global.RocketLaunched or {}
---global.girlfriendsDialog = global.girlfriendsDialog or {}
---global.NextTime = global.NextTime or {}
+--storage.RocketLaunched = storage.RocketLaunched or {}
+--storage.girlfriendsDialog = storage.girlfriendsDialog or {}
+--storage.NextTime = storage.NextTime or {}
 --
---girlfriends = global.girlfriends
---RocketLaunched = global.RocketLaunched
---girlfriendsDialog = global.girlfriendsDialog
---NextTime = global.NextTime
+--girlfriends = storage.girlfriends
+--RocketLaunched = storage.RocketLaunched
+--girlfriendsDialog = storage.girlfriendsDialog
+--NextTime = storage.NextTime
 
 maxMsg = 159
 

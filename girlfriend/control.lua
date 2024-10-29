@@ -89,7 +89,7 @@ function drawDialog(player, girlfriend, text)
                                                           position = position,
                                                           source = girlfriend,
                                                           text = text })
-        global.girlfriends_dialog[player.name] = dialog
+        storage.girlfriends_dialog[player.name] = dialog
 
     end
 end
@@ -107,14 +107,14 @@ function drawDialog2(player, unit)
                                                       position = position,
                                                       source = unit,
                                                       text = text })
-        global.girlfriends_dialog[player.name] = dialog
+        storage.girlfriends_dialog[player.name] = dialog
 
     end
 end
 
 function destroyDialog(player, girlfriend)
     if player and player.valid and girlfriend then
-        local dialog = global.girlfriends_dialog[player.name]
+        local dialog = storage.girlfriends_dialog[player.name]
         if dialog then
             dialog.destroy()
         end
@@ -178,7 +178,7 @@ script.on_nth_tick(60, function(event)
             tick = event.tick
             check_girl(player)
 
-            local girl = global.girlfriends[player.name]
+            local girl = storage.girlfriends[player.name]
 
             local distance = getDistance(girl.position, player.position)
 
@@ -200,14 +200,14 @@ script.on_nth_tick(600, function(event)
             check_girl(player)
             random_condom(player)
 
-            local girl = global.girlfriends[player.name]
-            local nextTick = global.girl_next_dialog_time[player.name]
+            local girl = storage.girlfriends[player.name]
+            local nextTick = storage.girl_next_dialog_time[player.name]
             if not nextTick then
                 drawDialog(player, girl)
-                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+                storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
             elseif (nextTick <= tick) then
                 drawDialog(player, girl)
-                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+                storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
             end
         end
     end
@@ -236,7 +236,7 @@ end
 local function on_player_left_game (event)
     local player = game.players[event.player_index]
     if (player and player.valid) then
-        local girl = global.girlfriends[player.name]
+        local girl = storage.girlfriends[player.name]
         if girl and girl.valid then
             girl.destroy()
             log("==玩家离开了：" .. player.name)
@@ -258,19 +258,19 @@ local function on_rocket_launched (event)
         local tick = event.tick
         check_girl(player)
 
-        local girl = global.girlfriends[player.name]
+        local girl = storage.girlfriends[player.name]
 
-        if global.rocket_launched[player.name] then
+        if storage.rocket_launched[player.name] then
             if math.random(1, 10) == 5 then
                 --  已经说过了  小概率触发
                 drawDialog(player, girl, GetRandomMsg("msg.rocket-", 10))
-                global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+                storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
             end
         else
             drawDialog(player, girl, GetRandomMsg("msg.rocket-", 10))
-            global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+            storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
 
-            global.rocket_launched[player.name] = true
+            storage.rocket_launched[player.name] = true
         end
 
 
@@ -286,9 +286,9 @@ local function on_player_died (event)
     if (player and player.valid) then
         local tick = event.tick
         check_girl(player)
-        local girl = global.girlfriends[player.name]
+        local girl = storage.girlfriends[player.name]
         drawDialog(player, girl, GetRandomMsg("msg.player-die-", 10))
-        global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+        storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
     end
     debugtool.infoless(event.cause)
 
@@ -303,8 +303,8 @@ local function on_entity_died(event)
     local surface_index = event.surface_index
 
     --@see getAllGirl()
-    if global.girl_list then
-        for k, girl in pairs(global.girl_list) do
+    if storage.girl_list then
+        for k, girl in pairs(storage.girl_list) do
             if girl.entity == prototype then
                 log("===================================== 女朋友亡语 ==============================================")
                 local pink2 = { r = 1, g = 179 / 255, b = 230 / 255, a = 1 }
@@ -376,9 +376,9 @@ local function on_research_finished (event)
                 if (player and player.valid and player.character) then
                     check_girl(player)
 
-                    local girl = global.girlfriends[player.name]
+                    local girl = storage.girlfriends[player.name]
                     drawDialog(player, girl, GetRandomMsg("msg.research-", 10))
-                    global.girl_next_dialog_time[player.name] = GetNextTime(tick)
+                    storage.girl_next_dialog_time[player.name] = GetNextTime(tick)
                 end
             end
         end
@@ -390,12 +390,12 @@ end
 
 -- 检查女朋友状态 如果死了就重新找一个
 function check_girl(player)
-    if not global.girlfriends[player.name] then
+    if not storage.girlfriends[player.name] then
         local girl = create_girl(player)
-        global.girlfriends[player.name] = girl
-    elseif not global.girlfriends[player.name].valid then
+        storage.girlfriends[player.name] = girl
+    elseif not storage.girlfriends[player.name].valid then
         local girl = create_girl(player)
-        global.girlfriends[player.name] = girl
+        storage.girlfriends[player.name] = girl
     end
 
 end
@@ -409,9 +409,9 @@ function create_girl(player)
     position = surface.find_non_colliding_position("character", position, 100, 0.5, false)
 
     if position then
-        local girl_name = global.player_chosen_girlfriend[player.name]
+        local girl_name = storage.player_chosen_girlfriend[player.name]
         if not girl_name then
-            global.player_chosen_girlfriend[player.name] = girl_entity
+            storage.player_chosen_girlfriend[player.name] = girl_entity
             girl_name = girl_entity
         end
 
@@ -431,12 +431,12 @@ function create_girl(player)
 end
 
 function config_global()
-    global.girlfriends = global.girlfriends or {}
+    storage.girlfriends = storage.girlfriends or {}
 
-    global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
-    global.rocket_launched = global.rocket_launched or {}
-    global.girlfriends_dialog = global.girlfriends_dialog or {}
-    global.girl_next_dialog_time = global.girl_next_dialog_time or {}
+    storage.player_chosen_girlfriend = storage.player_chosen_girlfriend or {}
+    storage.rocket_launched = storage.rocket_launched or {}
+    storage.girlfriends_dialog = storage.girlfriends_dialog or {}
+    storage.girl_next_dialog_time = storage.girl_next_dialog_time or {}
 
 end
 
@@ -475,7 +475,7 @@ local function on_built_entity(event)
         return
     end
 
-    local girl = global.girlfriends[player.name]
+    local girl = storage.girlfriends[player.name]
     if not (girl and girl.valid) then
         return
     end

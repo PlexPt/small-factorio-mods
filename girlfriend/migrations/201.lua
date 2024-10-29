@@ -1,6 +1,6 @@
-global.girlfriends = global.girlfriends or {}
+storage.girlfriends = storage.girlfriends or {}
 
-global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
-global.rocket_launched = global.rocket_launched or {}
-global.girlfriends_dialog = global.girlfriends_dialog or {}
-global.girl_next_dialog_time = global.girl_next_dialog_time or {}
+storage.player_chosen_girlfriend = storage.player_chosen_girlfriend or {}
+storage.rocket_launched = storage.rocket_launched or {}
+storage.girlfriends_dialog = storage.girlfriends_dialog or {}
+storage.girl_next_dialog_time = storage.girl_next_dialog_time or {}

@@ -45,11 +45,11 @@ function changeGirl(entity_name, player)
         return
     end
 
-    local girl = global.girlfriends[player.name]
+    local girl = storage.girlfriends[player.name]
     if girl then
         girl.destroy()
-        global.player_chosen_girlfriend = global.player_chosen_girlfriend or {}
-        global.player_chosen_girlfriend[player.name] = entity_name
+        storage.player_chosen_girlfriend = storage.player_chosen_girlfriend or {}
+        storage.player_chosen_girlfriend[player.name] = entity_name
     end
 
 end
@@ -81,10 +81,10 @@ script.on_event(defines.events.on_gui_click, function(event)
 end)
 
 function getAllGirl()
-    if global.girl_list then
+    if storage.girl_list then
         return
     end
-    global.girl_list = {
+    storage.girl_list = {
         --{ name = "Item 1", image = "path/to/image1.png" },
         -- Add more items here.
     }
@@ -100,20 +100,20 @@ function getAllGirl()
                 image = "entity/" .. name,
                 entity = character.name
             }
-            table.insert(global.girl_list, entity)
+            table.insert(storage.girl_list, entity)
 
         end
     end
 
 
 end
---请注意，这段代码假设已经定义了全局变量global.girl_list和global.selected_entity。global.girl_list是一个包含要在GUI中显示的实体的表，
---每个实体都应该有一个字符串名称和一个图像路径。 global.selected_entity是一个变量，用于保存玩家选择的实体。
+--请注意，这段代码假设已经定义了全局变量storage.girl_list和storage.selected_entity。storage.girl_list是一个包含要在GUI中显示的实体的表，
+--每个实体都应该有一个字符串名称和一个图像路径。 storage.selected_entity是一个变量，用于保存玩家选择的实体。
 --在调用此函数时，它将向玩家显示一个竖排的列表，列表中的每个项目都有一个名称，一张图片和一个选择按钮。玩家可以点
 function showEntitySelectionGUI(player)
     getAllGirl()
 
-    global.girl_list = global.girl_list or {
+    storage.girl_list = storage.girl_list or {
         --{ name = "Item 1", image = "path/to/image1.png" },
         -- Add more items here.
     }
@@ -175,7 +175,7 @@ function showEntitySelectionGUI(player)
     local flow = scroll_pane.add { type = "flow", name = "girl_selection_flow", direction = "vertical" }
 
     -- Iterate through the list of entities and add a button for each one
-    for _, entity in pairs(global.girl_list) do
+    for _, entity in pairs(storage.girl_list) do
         local list_frame = flow.add { type = "frame", name = "list_frame_" .. entity.entity, direction = "horizontal", } --
 
         -- Add the entity's image as a sprite to the button
