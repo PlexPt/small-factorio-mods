@@ -14,17 +14,17 @@
 ---
 
 --- @type Logger
-local logging = require("MiscLib/logging")
+local logging = require("logging")
 --- @type Vector2D
-local Vector2D = require("MiscLib/vector2d")
+local Vector2D = require("vector2d")
 --- @type EntityTransportType
-local EntityTransportType = require("MiscLib/enum/entity_transport_type")
+local EntityTransportType = require("enum/entity_transport_type")
 --- @type TransportLineType
-local TransportLineType = require("MiscLib/enum/line_type")
+local TransportLineType = require("enum/line_type")
 --- @type DirectionHelper
-local DirectionHelper = require("MiscLib/direction_helper")
+local DirectionHelper = require("direction_helper")
 --- @type ArrayList
-local ArrayList = require("MiscLib/array_list")
+local ArrayList = require("array_list")
 
 local function log(message)
     logging.log(message, "transportType")
@@ -42,10 +42,10 @@ TransportLineGroup.loaded = false
 function TransportLineGroup.add(normal, underground, splitter, pump)
     assert(normal and underground)
     local group = {
-        [EntityTransportType.onGround] = game.entity_prototypes[normal],
-        [EntityTransportType.underground] = game.entity_prototypes[underground],
-        [EntityTransportType.splitter] = game.entity_prototypes[splitter],
-        [EntityTransportType.pump] = game.entity_prototypes[pump]
+        [EntityTransportType.onGround] = prototypes.entity[normal],
+        [EntityTransportType.underground] = prototypes.entity[underground],
+        [EntityTransportType.splitter] = prototypes.entity[splitter],
+        [EntityTransportType.pump] = prototypes.entity[pump]
     }
     TransportLineGroup.normalGroupDict[normal] = group
     TransportLineGroup.undergroundGroupDict[underground] = group
@@ -117,7 +117,7 @@ end
 function EntityRoutingAttribute.from(entity_name)
     assert(entity_name)
 
-    local prototype = game.entity_prototypes[entity_name]
+    local prototype = prototypes.entity[entity_name]
     if not prototype then
         log("prototype " .. entity_name .. " is not an entity prototype")
         return nil
@@ -289,10 +289,10 @@ end
 --- when an entity's group is not found, we infer its group from its attributes (like belt speed and entity name)
 function EntityRoutingAttribute:inferLineGroup(entity_name)
     if EntityRoutingAttribute.from(entity_name).lineType == TransportLineType.itemLine then
-        local groupBeltSpeed = game.entity_prototypes[entity_name].belt_speed
+        local groupBeltSpeed = prototypes.entity[entity_name].belt_speed
         assert(groupBeltSpeed, " item line is supposed to have belt speed, but \"" .. entity_name .. "\" doesn't?")
         local beltVersion, undergroundVersion, splitterVersion
-        for _, entityPrototype in pairs(game.entity_prototypes) do
+        for _, entityPrototype in pairs(prototypes.entity) do
             if entityPrototype.belt_speed == groupBeltSpeed then
                 if entityPrototype.max_underground_distance then
                     undergroundVersion = entityPrototype
@@ -319,9 +319,9 @@ function EntityRoutingAttribute:inferLineGroup(entity_name)
         -- Infer fluid pipes based on its name. By default, assume on ground is pipe, underground is pipe-to-ground
         local testPrefix = entity_name:gsub("-pipe$", ""):gsub("-pipe-to-ground$", ""):gsub("-pump$", "")
         local inferredGroup = {
-            [EntityTransportType.onGround] = game.entity_prototypes[testPrefix .. "-pipe"] or game.entity_prototypes["pipe"],
-            [EntityTransportType.underground] = game.entity_prototypes[testPrefix .. "-pipe-to-ground"] or game.entity_prototypes["pipe-to-ground"],
-            [EntityTransportType.pump] = game.entity_prototypes[testPrefix .. "-pump"] or game.entity_prototypes["pump"]
+            [EntityTransportType.onGround] = prototypes.entity[testPrefix .. "-pipe"] or prototypes.entity["pipe"],
+            [EntityTransportType.underground] = prototypes.entity[testPrefix .. "-pipe-to-ground"] or prototypes.entity["pipe-to-ground"],
+            [EntityTransportType.pump] = prototypes.entity[testPrefix .. "-pump"] or prototypes.entity["pump"]
         }
         return inferredGroup
     end

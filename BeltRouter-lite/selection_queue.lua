@@ -5,9 +5,9 @@
 ---
 
 --- @type ArrayList
-local ArrayList = require("MiscLib/array_list")
+local ArrayList = require("array_list")
 --- @type Logger
-local logging = require("MiscLib/logging")
+local logging = require("logging")
 
 --- @class EntitySelectionInfo
 --- @field entity LuaEntity
@@ -74,8 +74,8 @@ function SelectionQueue:pop()
         if not selection then
             return nil
         end
-        rendering.destroy(selection.rectangleId)
-        rendering.destroy(selection.textId)
+        selection.rectangleId.destroy()
+        selection.textId.destroy()
         self:__updateLabelNumbers()
         return selection.entity
     end
@@ -87,8 +87,8 @@ function SelectionQueue:removeIndex(index)
     --- @type EntitySelectionInfo
     local removedSelection = self.queue:pop(index)
     if removedSelection then
-        rendering.destroy(removedSelection.rectangleId)
-        rendering.destroy(removedSelection.textId)
+        removedSelection.rectangleId.destroy()
+        removedSelection.textId.destroy()
         self:__clearInvalidSelections()
         self:__updateLabelNumbers()
         return removedSelection.entity

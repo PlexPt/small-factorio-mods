@@ -3,9 +3,9 @@
 --- Created by seancheey.
 --- DateTime: 10/20/20 9:08 PM
 ---
-local assertNotNull = require("MiscLib/assert_not_null")
+local assertNotNull = require("assert_not_null")
 --- @type Vector2D
-local Vector2D = require("MiscLib/vector2d")
+local Vector2D = require("vector2d")
 
 --- Represents the dictionary of minimum travel distance from endingEntity to some belt (represented by a position vector + direction)
 --- @class MinDistanceDict

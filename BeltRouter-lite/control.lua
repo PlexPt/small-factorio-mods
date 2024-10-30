@@ -8,13 +8,13 @@
 --- @alias player_index number
 
 --- @type Copier
-local Copy = require("MiscLib/copy")
+local Copy = require("copy")
 --- @type Logger
-local logging = require("MiscLib/logging")
+local logging = require("logging")
 --- @type EntityRoutingAttribute
-local EntityRoutingAttribute = require("MiscLib/path_find/entity_routing_attribute")
+local EntityRoutingAttribute = require("path_find/entity_routing_attribute")
 --- @type AsyncTaskManager
-local AsyncTaskManager = require("MiscLib/async_task")
+local AsyncTaskManager = require("async_task")
 --- @type SelectionQueue
 local SelectionQueue = require("selection_queue")
 --- @type TransportLineConnector

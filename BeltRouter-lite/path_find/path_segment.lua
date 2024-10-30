@@ -4,17 +4,17 @@
 --- DateTime: 10/6/20 1:13 AM
 ---
 
-local assertNotNull = require("MiscLib/assert_not_null")
+local assertNotNull = require("assert_not_null")
 --- @type Vector2D
-local Vector2D = require("MiscLib/vector2d")
+local Vector2D = require("vector2d")
 --- @type EntityRoutingAttribute
-local EntityRoutingAttribute = require("MiscLib/path_find/entity_routing_attribute")
+local EntityRoutingAttribute = require("path_find/entity_routing_attribute")
 --- @type ArrayList
-local ArrayList = require("MiscLib/array_list")
+local ArrayList = require("array_list")
 --- @type TransportLineType
-local TransportLineType = require("MiscLib/enum/line_type")
+local TransportLineType = require("enum/line_type")
 --- @type DirectionHelper
-local DirectionHelper = require("MiscLib/direction_helper")
+local DirectionHelper = require("direction_helper")
 
 --- @class LuaEntitySpec
 --- @field name string

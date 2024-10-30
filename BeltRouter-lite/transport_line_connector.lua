@@ -6,25 +6,25 @@
 ---     targetBelt/sourceBelt: If belt A is point towards belt B, then belt B is the targetBelt of A. reversely, belt A is belt B's sourceBelt
 ---     |->| |->| |->| for this situation, in terms of the belt in the middle, the 1st belt is its sourceBelt, and 3rd is its targetBelt
 
-local assertNotNull = require("MiscLib/assert_not_null")
+local assertNotNull = require("assert_not_null")
 --- @type Logger
-local logging = require("MiscLib/logging")
+local logging = require("logging")
 --- @type ArrayList
-local ArrayList = require("MiscLib/array_list")
+local ArrayList = require("array_list")
 --- @type MinHeap
-local MinHeap = require("MiscLib/minheap")
+local MinHeap = require("minheap")
 --- @type Vector2D
-local Vector2D = require("MiscLib/vector2d")
+local Vector2D = require("vector2d")
 --- @type EntityRoutingAttribute
-local EntityRoutingAttribute = require("MiscLib/path_find/entity_routing_attribute")
+local EntityRoutingAttribute = require("path_find/entity_routing_attribute")
 --- @type PathSegment
-local PathSegment = require("MiscLib/path_find/path_segment")
+local PathSegment = require("path_find/path_segment")
 --- @type TransportLineType
-local TransportLineType = require("MiscLib/enum/line_type")
+local TransportLineType = require("enum/line_type")
 --- @type PathNode
-local PathNode = require("MiscLib/path_find/path_node")
+local PathNode = require("path_find/path_node")
 --- @type MinDistanceDict
-local MinDistanceDict = require("MiscLib/path_find/min_distance_dict")
+local MinDistanceDict = require("path_find/min_distance_dict")
 local release_mode = require("release")
 
 local DirectionHelper = {}

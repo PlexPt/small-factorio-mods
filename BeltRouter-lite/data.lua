@@ -40,6 +40,9 @@ data:extend {
         name = "toggle-waypoint-mode",
         toggleable = true,
         icon = "__BeltRouter-lite__/icon/waypoint-mode.png",
+        icon_size = 278,
+        small_icon = "__BeltRouter-lite__/icon/waypoint-mode.png",
+        small_icon_size = 278,
         action = "lua"
     }
 }

@@ -5,7 +5,7 @@
 ---
 local assertNotNull = require("assert_not_null")
 --- @type Logger
-local logging = require("MiscLib/logging")
+local logging = require("logging")
 
 --- Transport chain is an intermediate generated backward linked list node that represents a whole transport line.
 --- Each node in this linked list represents either one belt, or a pair of underground belt. (in this case the "entity" field represents the input belt, and output belt is inferred by entityDistance + direction)
