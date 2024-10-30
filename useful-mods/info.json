@@ -1,7 +1,7 @@
 {
   "name": "useful-mods",
-  "version": "1.0.0",
-  "factorio_version": "1.1",
+  "version": "2.0.0",
+  "factorio_version": "2.0",
   "title": "优秀辅助模组包",
   "author": "plexpt",
   "description": "一些优秀的，兼容性比较好的mod. 在游戏内直接下载我。",
@@ -22,7 +22,7 @@
     "FNEI",
     "YARM",
     "stdlib",
-    "EvoGUI",
+    "StatsGui",
     "WaterWell",
     "BottleneckLite",
     "TimeTools",

@@ -1,14 +1,13 @@
 {
 	"name": "cloning-vat",
-	"version": "0.0.1",
+	"factorio_version": "2.0",
+	"version": "2.0.0",
 	"title": "Cloning Vat",
 	"author": "plexpt",
 	"contact": "QQ群289362487",
 	"homepage": "https://mod.plexpt.com/",
 	"description": "The cloning vat is a structure in Command & Conquer: Red Alert 2. this mod is like that",
 	"dependencies": [
-		"base",
 		"stdlib"
-	],
-	"factorio_version": "1.1"
+	]
 }

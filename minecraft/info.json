@@ -1,7 +1,7 @@
 {
   "name": "minecraft",
-  "factorio_version": "1.1",
-  "version": "1.0.2",
+  "factorio_version": "2.0",
+  "version": "2.0.0",
   "title": "Minecraft skin",
   "author": "plexpt",
   "description": "Zombie - 僵尸\nSkeleton - 骷髅\nCreeper - 苦力怕\nPigZombie - 僵尸猪人\nGhast - 恶魂\nEnderman - 末影人\nSilverfish - 蠹虫\nEndermite - 末影螨\nSlime - 史莱姆\nLavaSlime - 岩浆史莱姆\nWitch - 女巫\nGuardian - 水下保卫\nBlaze - 烈焰人\nSpider - 蜘蛛\nCaveSpider - 洞穴蜘蛛\nEnderDragon - 末影龙Boss\nWither - 凋零Boss\nGiant - 巨型僵尸",
