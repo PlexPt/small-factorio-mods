@@ -1,13 +1,13 @@
 {
   "name": "miku",
-  "version": "2.1.0",
-  "factorio_version": "1.1",
+  "version": "2.3.0",
+  "factorio_version": "2.0",
   "title": "Miku Roboport",
   "author": "plexpt",
   "contact": "plexpt",
   "homepage": "https://github.com/PlexPt",
   "dependencies": [
-    "base >= 1.1.0"
+
   ],
   "description": "Add a miku roboport.\nit has very nice animations.\n\n初音未来神像\n拥有非常精美的动画.\n既见未来 为何不拜？\n\n群289362487"
 }

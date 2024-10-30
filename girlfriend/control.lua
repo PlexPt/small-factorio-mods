@@ -29,22 +29,22 @@ local function follow_player_safely(girl, player)
 
             if girlfriend_trouble and girlfriend_trouble_user then
                 --捣蛋
-                girl.set_command({
+                girl.commandable.set_command({
                     type = defines.command.build_base,
                     destination = position,
                     ignore_planner = true,
                     distraction = defines.distraction.none
                 })
 
-            else
-                girl.set_command({
+            end
+                girl.commandable.set_command({
                     type = defines.command.go_to_location,
                     destination = position,
                     --destination_entity = player,
                     radius = 1,
                     distraction = defines.distraction.none
                 })
-            end
+
 
         else
             --跟不上了，毁灭吧

@@ -6,6 +6,9 @@
   "author": "plexpt",
   "description": "the innovative mod that redefines the scale of your factory! Ever wondered what Factorio would be like if all the production equipment and buildings were downsized? Now you have the chance to experience it first-hand!\n\nKey Features\nSmaller Size, Bigger Fun: All the machines and buildings from the original game have been reduced in size, making your factory layout more compact and presenting new design challenges.\n\nHigh Compatibility: Robust design that is compatible with most other Factorio mods.\n\nFresh Perspective: Experience the joy of planning and running an efficient factory from a micro-level viewpoint.\n\nPerformance Optimized: Smaller machines mean higher performance, running smoothly even on lower-end hardware.\n\nGet ready to embrace the challenge and rediscover your favorite game in a whole new light!",
   "dependencies": [
-    "? Krastorio2"
+    "? Krastorio2",
+    "? Mini_Trains",
+    "? SmallRobots",
+    "? minime"
   ]
 }

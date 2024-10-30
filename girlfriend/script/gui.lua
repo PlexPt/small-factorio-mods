@@ -88,8 +88,7 @@ function getAllGirl()
         --{ name = "Item 1", image = "path/to/image1.png" },
         -- Add more items here.
     }
-
-    local characters = game.get_filtered_entity_prototypes({
+    local characters = prototypes.get_entity_filtered({
         { filter = "type", type = "unit" }
     })
     for name, character in pairs(characters) do
@@ -167,8 +166,8 @@ function showEntitySelectionGUI(player)
     tagfield.style.width = 200
     tagfield.visible = false
 
-    local edittag = title_table.add { name = "rpg_bt_edittag", type = "sprite-button", sprite = "utility/rename_icon_normal", style = "shortcut_bar_button_small", tooltip = { 'player_tag' } }
-    edittag.visible = false
+    --local edittag = title_table.add { name = "rpg_bt_edittag", type = "sprite-button", sprite = "utility/rename_icon_normal", style = "shortcut_bar_button_small", tooltip = { 'player_tag' } }
+    --edittag.visible = false
     local closeb = title_table.add { name = "close_girl_selection", type = "sprite-button", sprite = "utility/close_black", style = "shortcut_bar_button_small" }
 
     local scroll_pane = gui.add { type = "scroll-pane", name = "girl_selection_scroll_pane", direction = "vertical" }

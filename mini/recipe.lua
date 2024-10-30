@@ -1,36 +1,39 @@
 --修改炼油厂2配方
+-- 修改高级炼油配方，使用水桶代替水
+
 --    type = "recipe",
 --    name = "advanced-oil-processing",
 
-local r1 = data.raw["recipe"]["advanced-oil-processing"]
+local advancedOilProcessingRecipe = data.raw["recipe"]["advanced-oil-processing"]
 
-if r1 then
+if advancedOilProcessingRecipe then
 
-    if r1.ingredients[1] and r1.ingredients[1].name == "water" then
-        r1.ingredients[1] = { type = "item", name = "water-barrel", amount = 1 }
+    if advancedOilProcessingRecipe.ingredients[1] and advancedOilProcessingRecipe.ingredients[1].name == "water" then
+        advancedOilProcessingRecipe.ingredients[1] = { type = "item", name = "water-barrel", amount = 1 }
     end
 
     -- 确保使用后的水桶返回
-    table.insert(r1.results, { type = "item", name = "empty-barrel", amount = 1 })
+    -- 添加结果中的空桶，以确保使用后的桶返回
+    table.insert(advancedOilProcessingRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
 end
 
 -- 修改 coal-liquefaction 配方
-local r2 = data.raw["recipe"]["coal-liquefaction"]
-if r2 then
+local coalLiquefactionRecipe = data.raw["recipe"]["coal-liquefaction"]
+if coalLiquefactionRecipe then
 
-    if r2.ingredients[3] and r2.ingredients[3].name == "steam" then
-        r2.ingredients[3] = { type = "item", name = "steam-barrel", amount = 1 }
+    if coalLiquefactionRecipe.ingredients[3] and coalLiquefactionRecipe.ingredients[3].name == "steam" then
+        coalLiquefactionRecipe.ingredients[3] = { type = "item", name = "steam-barrel", amount = 1 }
     end
 
     -- 确保使用后的蒸汽桶返回
-    table.insert(r2.results, { type = "item", name = "empty-barrel", amount = 1 })
+    table.insert(coalLiquefactionRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
 end
 
 
 -- 修改 basic-oil-processing 配方
-local r3 = data.raw["recipe"]["basic-oil-processing"]
-r3.ingredients[1].fluidbox_index = nil
-r3.results[1].fluidbox_index = nil
+local basicOilProcessingRecipe = data.raw["recipe"]["basic-oil-processing"]
+basicOilProcessingRecipe.ingredients[1].fluidbox_index = nil
+basicOilProcessingRecipe.results[1].fluidbox_index = nil
 
 
 
@@ -63,18 +66,18 @@ r3.results[1].fluidbox_index = nil
 --    allow_decomposition = false,
 --  },
 --}
-local r4 = data.raw["recipe"]["coke-liquefaction"]
+local cokeLiquefactionRecipe = data.raw["recipe"]["coke-liquefaction"]
 
-if r4 then
-    --if r4.ingredients[2] and r4.ingredients[2].name == "light-oil" then
-    --    r4.ingredients[2] = { type = "item", name = "light-oil-barrel", amount = 1 }
+if cokeLiquefactionRecipe then
+    --if cokeLiquefactionRecipe.ingredients[2] and cokeLiquefactionRecipe.ingredients[2].name == "light-oil" then
+    --    cokeLiquefactionRecipe.ingredients[2] = { type = "item", name = "light-oil-barrel", amount = 1 }
     --end
 
-    if r4.ingredients[3] and r4.ingredients[3].name == "steam" then
-        r4.ingredients[3] = { type = "item", name = "steam-barrel", amount = 1 }
+    if cokeLiquefactionRecipe.ingredients[3] and cokeLiquefactionRecipe.ingredients[3].name == "steam" then
+        cokeLiquefactionRecipe.ingredients[3] = { type = "item", name = "steam-barrel", amount = 1 }
     end
 
     -- 确保使用后的蒸汽桶返回
-    table.insert(r4.results, { type = "item", name = "empty-barrel", amount = 1 })
+    table.insert(cokeLiquefactionRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
 end
 

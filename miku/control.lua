@@ -3,7 +3,7 @@ local upgrade_miku = function(entity, isghost)
     local p = entity.position
     local f = entity.force
     local h = entity.health
-    local mh = entity.prototype.max_health
+    local mh = entity.prototype.get_max_health()
     local next_upgrade = entity.prototype.next_upgrade
     local d = entity.direction
     local o = entity.orientation
@@ -91,7 +91,7 @@ end
 
 --加入队列
 local function init_queue()
-    global.miku = global.miku or {}
+    storage.miku = storage.miku or {}
 end
 
 --加入队列
@@ -103,7 +103,7 @@ local function put_miku(entity, tick)
     }
 
     init_queue()
-    table.insert(global.miku, obj)
+    table.insert(storage.miku, obj)
 end
 
 local function on_entity_created(event)
@@ -163,15 +163,15 @@ end
 local function on_tick(event)
     init_queue()
 
-    for k, task in pairs(global.miku) do
+    for k, task in pairs(storage.miku) do
 
         if task and task.entity and task.entity.valid then
             if game.tick == task.next_tick then
                 upgrade_miku(task.entity)
-                global.miku[k] = nil
+                storage.miku[k] = nil
             end
         else
-            global.miku[k] = nil
+            storage.miku[k] = nil
         end
 
     end
