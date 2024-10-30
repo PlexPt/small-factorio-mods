@@ -153,7 +153,10 @@ local function on_player_cursor_stack_changed (event)
 
     if player and player.cursor_ghost and player.cursor_ghost.name then
 
-        if start_with(player.cursor_ghost.name, "miku-") then
+        -- Ensure that player.cursor_ghost.name is treated as a string
+        local ghostName = tostring(player.cursor_ghost.name) -- Convert to string if it's userdata
+
+        if start_with(ghostName, "miku-") then
             player.cursor_ghost = "miku-1"
         end
 
