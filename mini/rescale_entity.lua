@@ -144,56 +144,55 @@ end
 function fixPipeConnections(self)
     if self.fluid_boxes then
         if string.match(self.name, "assembling") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { 0, -1 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 0, 1 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+            self.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
         end
-        --if string.match(self.name, "boiler") then
-        --    self.fluid_boxes[1].pipe_connections = { { type = "input", position = { 0, -1 } } }
-        --    self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 0, 1 } } }
-        --end
+
         if string.match(self.name, "refinery") then
 
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -1, 0 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { -0.4, 0 }
             self.fluid_boxes[1].pipe_covers =nil
             --self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 1, 0 } } }
             self.fluid_boxes[2] = {
                 production_type = "output",
-                pipe_covers = pipecoverspictures(),
+                volume = 100,
+                pipe_covers = nil,
                 base_level = 1,
                 pipe_connections = {
                     {
-                        type = "output",
-                        position = { 1, 0 }
+                        direction = 8,
+                        flow_direction = "output",
+                        position = { 0.47, 0 }
                     }
                 }
             }
-            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { 0, 1 } } }
+            self.fluid_boxes[3].pipe_connections[1].position = { 0, 0.4 }
             self.fluid_boxes[3].pipe_covers =nil
-            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { 0, -1 } } }
+            self.fluid_boxes[4].pipe_connections[1].position = { 0, -0.4 }
             self.fluid_boxes[4].pipe_covers =nil
             self.fluid_boxes[5] = nil
         end
         if string.match(self.name, "chemical") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { 0, -1 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "input", position = { 0, 1 } } }
-            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { 1, 0 } } }
-            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { -1, 0 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+            self.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+            self.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+            self.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
         end
         if string.match(self.name, "electro") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { -0.5, -1.5 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "input", position = { 0.5, -1.5 } } }
-            self.fluid_boxes[3].pipe_connections = { { type = "output", position = { -0.5, 1.5 } } }
-            self.fluid_boxes[4].pipe_connections = { { type = "output", position = { 0.5, 1.5 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { -0.5, -1.5 }
+            self.fluid_boxes[2].pipe_connections[1].position = { 0.5, -1.5 }
+            self.fluid_boxes[3].pipe_connections[1].position = { -0.5, 1.5 }
+            self.fluid_boxes[4].pipe_connections[1].position = { 0.5, 1.5 }
         end
         if string.match(self.name, "bobmetal") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input", position = { 0.5, -1.5 } } }
-            self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 0.5, 1.5 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { 0.5, -1.5 }
+            self.fluid_boxes[2].pipe_connections[1].position = { 0.5, 1.5 }
         end
         if string.match(self.name, "bobchem") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input-output", position = { 0.5, -1.5 } } }
+            self.fluid_boxes[1].pipe_connections[1]. position = { 0.5, -1.5 }
         end
         if string.match(self.name, "bobmulti") then
-            self.fluid_boxes[1].pipe_connections = { { type = "input-output", position = { 0.5, -1.5 } } }
+            self.fluid_boxes[1].pipe_connections[1].position = { 0.5, -1.5 }
         end
     end
     if self.fluid_box then

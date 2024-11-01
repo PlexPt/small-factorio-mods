@@ -14,7 +14,7 @@ if advancedOilProcessingRecipe then
 
     -- 确保使用后的水桶返回
     -- 添加结果中的空桶，以确保使用后的桶返回
-    table.insert(advancedOilProcessingRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
+    table.insert(advancedOilProcessingRecipe.results, { type = "item", name = "barrel", amount = 1 })
 end
 
 -- 修改 coal-liquefaction 配方
@@ -26,7 +26,7 @@ if coalLiquefactionRecipe then
     end
 
     -- 确保使用后的蒸汽桶返回
-    table.insert(coalLiquefactionRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
+    table.insert(coalLiquefactionRecipe.results, { type = "item", name = "barrel", amount = 1 })
 end
 
 
@@ -78,6 +78,6 @@ if cokeLiquefactionRecipe then
     end
 
     -- 确保使用后的蒸汽桶返回
-    table.insert(cokeLiquefactionRecipe.results, { type = "item", name = "empty-barrel", amount = 1 })
+    table.insert(cokeLiquefactionRecipe.results, { type = "item", name = "barrel", amount = 1 })
 end
 

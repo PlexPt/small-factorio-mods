@@ -1,58 +1,67 @@
+----------------------------------------------------------------------
 -- 电力设施缩放调整
 local electricMiningDrill = data.raw["mining-drill"]["electric-mining-drill"]
 minify(electricMiningDrill, 1 / 3)
+----------------------------------------------------------------------
 
 local burnerMiningDrill = data.raw["mining-drill"]["burner-mining-drill"]
 minify(burnerMiningDrill, 1 / 2)
+----------------------------------------------------------------------
 
 local beaconEntity = data.raw["beacon"]["beacon"]
 rescale_entity(beaconEntity, 1 / 3)
 
+----------------------------------------------------------------------
 local heatExchanger = data.raw["boiler"]["heat-exchanger"]
 rescale_entity(heatExchanger, 1 / 3)
 scale_collision(heatExchanger)
 fixHeatConnections(heatExchanger)
-heatExchanger.fluid_box.pipe_connections = {
-    { type = "input-output", position = { 1, 0 } },
-    { type = "input-output", position = { -1, 0 } }
-}
-heatExchanger.output_fluid_box.pipe_connections[1].position = { 0, -0.7 }
+--heatExchanger.fluid_box.pipe_connections = {
+--    { type = "input-output", position = { 1, 0 } },
+--    { type = "input-output", position = { -1, 0 } }
+--}
+heatExchanger.fluid_box.pipe_connections[1].position = { 0.4, 0 }
+heatExchanger.fluid_box.pipe_connections[2].position = { -0.4, 0 }
+
+heatExchanger.output_fluid_box.pipe_connections[1].position = { 0, -0.4 }
+
+----------------------------------------------------------------------
 
 local boilerEntity = data.raw["boiler"]["boiler"]
 rescale_entity(boilerEntity, 1 / 3)
 scale_collision(boilerEntity)
 
 boilerEntity.fluid_box.pipe_connections = {
-    { type = "input-output", position = { 1, 0 } },
-    { type = "input-output", position = { -1, 0 } }
+    { flow_direction = "input-output", direction = 12, position = { 0.39, 0 } },
+    { flow_direction = "input-output", direction = 4, position = { -0.39, 0 } }
 }
-boilerEntity.output_fluid_box.pipe_connections[1].position = { 0, -0.7 }
+
+boilerEntity.output_fluid_box.pipe_connections[1].position = { 0, -0.4 }
+----------------------------------------------------------------------
 
 local steamEngine = data.raw["generator"]["steam-engine"]
 minify(steamEngine, 1 / 3)
 
 if steamEngine.fluid_box then
-    steamEngine.fluid_box.pipe_connections = {
-        { type = "input-output", position = { 0, 1 } },
-        { type = "input-output", position = { 0, -1 } }
-    }
+    steamEngine.fluid_box.pipe_connections[1].position = { 0, 0.4 }
+    steamEngine.fluid_box.pipe_connections[2].position = { 0, -0.4 }
 end
+----------------------------------------------------------------------
 
 local steamTurbine = data.raw["generator"]["steam-turbine"]
 minify(steamTurbine, 1 / 3)
 
 if steamTurbine.fluid_box then
-    steamTurbine.fluid_box.pipe_connections = {
-        { type = "input-output", position = { 0, 1 } },
-        { type = "input-output", position = { 0, -1 } }
-    }
+    steamTurbine.fluid_box.pipe_connections[1].position = { 0, 0.4 }
+    steamTurbine.fluid_box.pipe_connections[2].position = { 0, -0.4 }
 end
+----------------------------------------------------------------------
 
 -- 抽油机设备调整
 local pumpJack = data.raw["mining-drill"]["pumpjack"]
 rescale_entity(pumpJack, 1 / 3)
 scale_collision(pumpJack)
-pumpJack.output_fluid_box.pipe_connections[1].positions = { { 0, -0.7 }, { 0.7, 0 }, { 0, 0.7 }, { -0.7, 0 } }
+pumpJack.output_fluid_box.pipe_connections[1].positions = { { 0, -0.4 }, { 0.4, 0 }, { 0, 0.4 }, { -0.4, 0 } }
 
 --fixPipeConnections(pumpjack)
 
@@ -98,9 +107,12 @@ fixPipeConnections(chemicalPlant)
 
 local centrifugeEntity = data.raw["assembling-machine"]["centrifuge"]
 rescale_entity(centrifugeEntity, 1 / 3)
+----------------------------------------------------------------------
 
 local assemblingMachine1 = data.raw["assembling-machine"]["assembling-machine-1"]
 minify(assemblingMachine1, 1 / 3)
+assemblingMachine1.graphics_set.animation.layers["scale"] = nil
+----------------------------------------------------------------------
 
 local assemblingMachine2 = data.raw["assembling-machine"]["assembling-machine-2"]
 rescale_entity(assemblingMachine2, 1 / 3)
@@ -133,15 +145,17 @@ rescale_entity(radarEntity, 1 / 3)
 local labEntity = data.raw["lab"]["lab"]
 rescale_entity(labEntity, 1 / 3)
 
+----------------------------
 local storageTank = data.raw["storage-tank"]["storage-tank"]
 rescale_entity(storageTank, 1 / 3)
 storageTank.fluid_box.pipe_picture = pipe_pictures_hide
-storageTank.fluid_box.pipe_connections = {
-    { position = { 0, -1 } },
-    { position = { 1, 0 } },
-    { position = { 0, 1 } },
-    { position = { -1, 0 } }
-}
+storageTank.fluid_box.pipe_connections[1].position = { 0, -0.4 }
+storageTank.fluid_box.pipe_connections[2].position = { 0.4, 0 }
+storageTank.fluid_box.pipe_connections[3].position = { 0, 0.4 }
+storageTank.fluid_box.pipe_connections[4].position = { -0.4, 0 }
+
+
+----------------------------
 
 local roboportEntity = data.raw["roboport"]["roboport"]
 rescale_entity(roboportEntity, 1 / 4)
@@ -166,10 +180,9 @@ rescale_entity(flamethrowerTurret, 1 / 2)
 scale_collision(flamethrowerTurret)
 flamethrowerTurret.not_enough_fuel_indicator_light.size = 0.7
 flamethrowerTurret.enough_fuel_indicator_light.size = 0.7
-flamethrowerTurret.fluid_box.pipe_connections = {
-    { position = { -1, 0 } },
-    { position = { 1, 0 } }
-}
+
+flamethrowerTurret.fluid_box.pipe_connections[1].position = { -0.4, 0 }
+flamethrowerTurret.fluid_box.pipe_connections[2].position = { 0.4, 0 }
 
 local rocketSilo = data.raw["rocket-silo"]["rocket-silo"]
 rescale_entity(rocketSilo, 1 / 9)
@@ -196,3 +209,7 @@ rocketSiloRocket.rocket_render_layer_switch_distance = 0
 rocketSiloRocket.full_render_layer_switch_distance = 1
 rocketSiloRocket.effects_fade_in_start_distance = 0
 rocketSiloRocket.effects_fade_in_end_distance = 1
+
+
+local assemblingMachine1 = data.raw["assembling-machine"]["assembling-machine-1"]
+loge(assemblingMachine1, "assemblingMachine1")

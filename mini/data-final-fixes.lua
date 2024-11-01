@@ -1,3 +1,15 @@
+
+function loge(entity, name)
+    if name == nil then
+        name = ""
+    end
+    log("=======================" .. name .. "==============================")
+    log(serpent.block(entity))
+    log("=======================" .. name .. "==============================")
+end
+
+
+require("rawview")
 require("mini_util")
 require("rescale_entity")
 
@@ -12,12 +24,6 @@ function check_mod(mod_name)
     end
 
     return false
-end
-
-function loge(entity, name)
-    log("=======================" .. name .. "==============================")
-    log(serpent.block(entity))
-    log("=======================" .. name .. "==============================")
 end
 
 require("mods.base")

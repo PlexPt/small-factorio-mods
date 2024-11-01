@@ -9,9 +9,7 @@ local function scale_vector(v, scale)
         if v[1] then
             v[1] = v[1] * scale
             v[2] = v[2] * scale
-
         end
-
     end
 end
 
@@ -22,12 +20,9 @@ local function scale_layer(layer, scale)
     if not layer then
         return
     end
+
     layer.scale = (layer.scale or 1) * scale
     scale_vector(layer.shift, scale)
-    if layer.hr_version then
-        layer.hr_version.scale = layer.hr_version.scale or 0.5
-        scale_layer(layer.hr_version, scale)
-    end
 end
 
 -- 缩放动画
@@ -37,12 +32,14 @@ local function scale_animation(animation, scale)
     if not animation then
         return
     end
+
     if not animation.layers then
         scale_layer(animation, scale)
         return
     end
-    for _, layer in pairs(animation.layers) do
-        scale_layer(layer, scale)
+
+    for _, layer in  pairs(animation.layers) do
+        scale_layer(layer, scale)  -- 调用 scale_layer 函数
     end
 end
 
@@ -92,7 +89,6 @@ local function scale_animations(animations, scale)
     if not animations.north then
         return
     end
-
     for _, animation in pairs(animations) do
         scale_animation(animation, scale)
     end
@@ -110,6 +106,7 @@ local function scale_graphics_set(graphics_set, scale)
     for _, animation in pairs(graphics_set.animation) do
         scale_animation(animation, scale)
     end
+
     if graphics_set.shift_animation_waypoints then
 
 
@@ -120,16 +117,20 @@ local function scale_graphics_set(graphics_set, scale)
         end
     end
 
-    for _, v in pairs(graphics_set.working_visualisations) do
-        scale_animation(v.animation, scale)
-        scale_animation(v.north_animation, scale)
-        scale_animation(v.west_animation, scale)
-        scale_animation(v.south_animation, scale)
-        scale_animation(v.east_animation, scale)
-        scale_vector(v.north_position, scale)
-        scale_vector(v.west_position, scale)
-        scale_vector(v.south_position, scale)
-        scale_vector(v.east_position, scale)
+    --loge(graphics_set, "graphics_set")
+    if graphics_set.working_visualisations then
+
+        for _, v in pairs(graphics_set.working_visualisations) do
+            scale_animation(v.animation, scale)
+            scale_animation(v.north_animation, scale)
+            scale_animation(v.west_animation, scale)
+            scale_animation(v.south_animation, scale)
+            scale_animation(v.east_animation, scale)
+            scale_vector(v.north_position, scale)
+            scale_vector(v.west_position, scale)
+            scale_vector(v.south_position, scale)
+            scale_vector(v.east_position, scale)
+        end
     end
 end
 
@@ -213,34 +214,14 @@ end
 local function scale_other(entity)
     if entity.input_fluid_box then
 
-        entity.input_fluid_box.pipe_connections = {
-            { position = { -1, 0 } },
-            { position = { 1, 0 } },
-            { position = { 0, 1 } },
-        }
+        entity.input_fluid_box.pipe_connections[1].position = { -0.4, 0 }
+        entity.input_fluid_box.pipe_connections[2].position = { 0.4, 0 }
+        entity.input_fluid_box.pipe_connections[3].position = { 0, 0.4 }
+
     end
 
     if entity.output_fluid_box then
-        --if entity.type == "boiler" then
-        --    entity.output_fluid_box.pipe_connections = {
-        --        {
-        --            positions = { 0, -0.5 },
-        --            type = "output"
-        --        }
-        --    }
-        --
-        --else
-        --    entity.output_fluid_box.pipe_connections = {}
-        --    --{
-        --    --    {
-        --    --        positions = { { 1, -1 },
-        --    --                      { 1, -1 },
-        --    --                      { -1, 1 },
-        --    --                      { -1, 1 } },
-        --    --        type = "output"
-        --    --    }
-        --    --}
-        --end
+
     end
 
     if entity.resource_searching_radius then
@@ -257,10 +238,12 @@ local function scale_other(entity)
 
     entity.scale_entity_info_icon = true
 end
+
 function scale_collision(entity)
     if not entity then
         return
     end
+
     entity.collision_box = { { -0.4, -0.4 }, { 0.4, 0.4 } }
     entity.selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
     if entity.drawing_box then

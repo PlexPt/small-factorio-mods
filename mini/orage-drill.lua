@@ -102,12 +102,10 @@ local entity = data.raw["mining-drill"]["electric-mining-drill"]
 entity.collision_box = { { -0.4, -0.4 }, { 0.4, 0.4 } }
 entity.selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
 
+entity.input_fluid_box.pipe_connections[1].position = { -0.4, 0 }
+entity.input_fluid_box.pipe_connections[2].position = { 0.4, 0 }
+entity.input_fluid_box.pipe_connections[3].position = { 0, 0.4 }
 
-entity.input_fluid_box.pipe_connections = {
-    { position = { -1, 0 } },
-    { position = { 1, 0 } },
-    { position = { 0, 1 } },
-}
 entity.resource_searching_radius = 1.49
 entity.vector_to_place_result = { 0, -0.85 }
 
