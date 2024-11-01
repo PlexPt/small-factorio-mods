@@ -1,12 +1,11 @@
 {
-  "name": "phoenix",
-  "factorio_version": "2.0",
-  "version": "2.0.0",
-  "title": "Phoenix",
-  "author": "plexpt",
-  "description": "Adds phoenix to the game with custom sprites and animations. It is a flying biter.  \n\n神兽凤凰.",
-  "dependencies": [
-    "base",
-    "(?) alien-biomes"
-  ]
+    "name": "phoenix",
+    "factorio_version": "2.0",
+    "version": "2.0.1",
+    "title": "Phoenix",
+    "author": "plexpt",
+    "description": "Adds phoenix to the game with custom sprites and animations. It is a flying biter.  \n\n神兽凤凰.",
+    "dependencies": [
+        "(?) alien-biomes"
+    ]
 }

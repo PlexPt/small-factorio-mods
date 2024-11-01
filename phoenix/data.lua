@@ -12,7 +12,7 @@ phoenix.icon = IMG_PATH .. "1.png"
 phoenix.icon_size = 480
 
 --.collision_box = { { 0, 0 }, { 0, 0 } }
-phoenix.collision_mask = {}
+phoenix.collision_mask = { layers = {} }
 phoenix.selection_box = { { -1, -2.0 }, { 1, 2.0 } }
 phoenix.distance_per_frame = 0.1
 phoenix.resistances = {
