@@ -1,0 +1,30 @@
+{
+  "entity": [
+    [
+      "transport-belt-loader",
+      "comfortable-loader"
+    ],
+    [
+      "fast-transport-belt-loader",
+      "fast-comfortable-loader"
+    ],
+    [
+      "express-transport-belt-loader",
+      "express-comfortable-loader"
+    ]
+  ],
+  "item": [
+    [
+      "transport-belt-loader",
+      "comfortable-loader"
+    ],
+    [
+      "fast-transport-belt-loader",
+      "fast-comfortable-loader"
+    ],
+    [
+      "express-transport-belt-loader",
+      "express-comfortable-loader"
+    ]
+  ]
+}
