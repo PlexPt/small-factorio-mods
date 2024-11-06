@@ -5,16 +5,21 @@ data:extend({
         type = "recipe",
         name = "thermal-cloning-vat",
         ingredients = {
-            {"stone", 10},
+            { type = "item", name = "stone", amount = 10 },
+
         },
-        result = "thermal-cloning-vat"
+        results = {
+            { type = "item", name = "thermal-cloning-vat", amount = 1, probability = 0.9 },
+        }
     },
     {
         type = "recipe",
         name = "electric-cloning-vat",
         ingredients = {
-            {"iron-plate", 10},
+            { type = "item", name = "iron-plate", amount = 50 },
         },
-        result = "electric-cloning-vat"
+        results = {
+            { type = "item", name = "electric-cloning-vat", amount = 1, probability = 0.9 },
+        }
     }
 })

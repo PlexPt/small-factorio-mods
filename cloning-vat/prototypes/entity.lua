@@ -19,10 +19,10 @@ local cloningvat = {
     },
     energy_source = {
         type = "burner", -- 这里"burner"对于热能
-        fuel_category = "chemical",
+        fuel_categories = { "chemical" },
         effectivity = 1,
         fuel_inventory_size = 4,
-        emissions_per_minute = 100,
+        emissions_per_minute = { pollution = 100 },
         usage_priority = "secondary-input",
         light_flicker = {
             color = { 0, 0, 0 },
@@ -51,18 +51,20 @@ local cloningvat = {
     selection_box = { { -4.5, -4.5 }, { 4.5, 4.5 } },
     scale_entity_info_icon = true,
     always_draw_idle_animation = true,
-    animation = {
-        layers = {
-            {
-                filename = "__cloning-vat__/graphics/entity/thermal-cloning-vat.png",
-                priority = "extra-high",
-                width = 500,
-                height = 500,
-                frame_count = 1,
-                scale = 0.6
-                --shift = util.by_pixel(14.5, 2)
+    graphics_set = {
+        animation = {
+            layers = {
+                {
+                    filename = "__cloning-vat__/graphics/entity/thermal-cloning-vat.png",
+                    priority = "extra-high",
+                    width = 500,
+                    height = 500,
+                    frame_count = 1,
+                    scale = 0.6
+                    --shift = util.by_pixel(14.5, 2)
+                }
             }
-        }
+        },
     },
     resistances = {
         {
@@ -78,21 +80,34 @@ local cloningvat = {
             percent = 30
         }
     },
-    fluid_boxes =
-    {
+    fluid_boxes = {
         {
             production_type = "input",
             --pipe_covers = pipecoverspictures(),  -- 这是一个标准的函数来显示流体管道连接的覆盖图
             base_area = 10,
             base_level = -1,
-            pipe_connections = {{ type="input", position = {-5, 0} }}  -- 你可以更改这个位置以符合你的实体的图形
+            pipe_connections = {
+                {
+                    direction = defines.direction.west,
+                    flow_direction = "input",
+                    position = { -4.25, 0 }
+                }
+            }, -- 你可以更改这个位置以符合你的实体的图形
+            volume = 1000
         },
         {
             production_type = "output",
             --pipe_covers = pipecoverspictures(),
             base_area = 10,
             base_level = 1,
-            pipe_connections = {{ type="output", position = {5, 0} }} -- 同样，更改这个位置以适应你的设计
+            pipe_connections = {
+                {
+                    direction = defines.direction.east,
+                    flow_direction = "output",
+                    position = { 4.25, 0 }
+                }
+            }, -- 同样，更改这个位置以适应你的设计
+            volume = 1000
         }
     },
 
@@ -107,9 +122,9 @@ electriccloningvat.minable = { mining_time = 1, result = "electric-cloning-vat" 
 electriccloningvat.icon = "__cloning-vat__/graphics/icons/electric-cloning-vat.png"
 electriccloningvat.energy_usage = "90kW"
 electriccloningvat.energy_source = { type = "electric",
-                                     emissions_per_minute = 100,
+                                     emissions_per_minute = { pollution = 100 },
                                      usage_priority = "secondary-input" }
-electriccloningvat. animation = {
+electriccloningvat. graphics_set. animation = {
     layers = {
         {
             filename = "__cloning-vat__/graphics/entity/electric-cloning-vat.png",

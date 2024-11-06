@@ -9,7 +9,6 @@ local function table_contains(table, value)
     return false
 end
 
-
 local items = data.raw["item"]
 
 for _, item in pairs(items) do
@@ -28,9 +27,12 @@ for _, item in pairs(items) do
                 allow_decomposition = false,
                 allow_as_intermediate = false,
                 energy_required = 10,
-                ingredients = { { item.name, 1 } },
-                result = item.name,
-                result_count = 2
+                ingredients = {
+                    { name = item.name, type = "item", amount = 1 }
+                },
+                results = {
+                    { name = item.name, type = "item", amount = 2 },
+                }
             }
         })
     else
@@ -44,23 +46,23 @@ local fluids = data.raw["fluid"]
 
 for _, fluid in pairs(fluids) do
 
-        data:extend({
-            {
-                type = "recipe",
-                name = "cloning-vat-fluid-" .. fluid.name,
-                category = "cloning",
-                enabled = true,
-                hidden = true,
-                hide_from_player_crafting = true,
-                allow_decomposition = false,
-                allow_as_intermediate = false,
-                energy_required = 10,
-                ingredients = { { type = "fluid", name = fluid.name, amount = 100 } }, -- 可以调整amount值以匹配您希望的输入量
-                results = {
-                    { type = "fluid", name = fluid.name, amount = 200 }, -- 输出是输入的两倍
-                },
-                main_product = fluid.name,
-            }
-        })
+    data:extend({
+        {
+            type = "recipe",
+            name = "cloning-vat-fluid-" .. fluid.name,
+            category = "cloning",
+            enabled = true,
+            hidden = true,
+            hide_from_player_crafting = true,
+            allow_decomposition = false,
+            allow_as_intermediate = false,
+            energy_required = 10,
+            ingredients = { { type = "fluid", name = fluid.name, amount = 100 } }, -- 可以调整amount值以匹配您希望的输入量
+            results = {
+                { type = "fluid", name = fluid.name, amount = 200 }, -- 输出是输入的两倍
+            },
+            main_product = fluid.name,
+        }
+    })
 
 end
