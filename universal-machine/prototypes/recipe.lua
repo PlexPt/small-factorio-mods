@@ -19,31 +19,31 @@ data:extend({
         name = "double-iron-plate",
         icon = "__universal-machine__/graphics/double-iron-plate.png",
         icon_size = 32,
-        ingredients = { { type = "item", name = "iron-ore", amount = 12 } },
-        results = { { type = "item", name = "iron-plate", amount = 8 } }
+        ingredients = { { type = "item", name = "iron-ore", amount = 10 } },
+        results = { { type = "item", name = "iron-plate", amount = 5 } }
     },
     {
         type = "recipe",
         name = "double-copper-plate",
         icon = "__universal-machine__/graphics/double-copper-plate.png",
         icon_size = 32,
-        ingredients = { { type = "item", name = "copper-ore", amount = 12 } },
-        results = { { type = "item", name = "copper-plate", amount = 8 } }
+        ingredients = { { type = "item", name = "copper-ore", amount = 10 } },
+        results = { { type = "item", name = "copper-plate", amount = 5 } }
     },
-    {
-        type = "recipe",
-        name = "u-iron-plate",
-        category = "smelting",
-        energy_required = 6.4,
-        ingredients = { { type = "item", name = "iron-ore", amount = 1 } },
-        results = { { type = "item", name = "iron-plate", amount = 1 } }
-    },
-    {
-        type = "recipe",
-        name = "u-copper-plate",
-        category = "smelting",
-        energy_required = 6.4,
-        ingredients = { { type = "item", name = "copper-ore", amount = 1 } },
-        results = { { type = "item", name = "copper-plate", amount = 1 } }
-    },
+    --{
+    --    type = "recipe",
+    --    name = "u-iron-plate",
+    --    category = "smelting",
+    --    energy_required = 6.4,
+    --    ingredients = { { type = "item", name = "iron-ore", amount = 1 } },
+    --    results = { { type = "item", name = "iron-plate", amount = 1 } }
+    --},
+    --{
+    --    type = "recipe",
+    --    name = "u-copper-plate",
+    --    category = "smelting",
+    --    energy_required = 6.4,
+    --    ingredients = { { type = "item", name = "copper-ore", amount = 1 } },
+    --    results = { { type = "item", name = "copper-plate", amount = 1 } }
+    --},
 })

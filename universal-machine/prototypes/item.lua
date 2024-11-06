@@ -7,6 +7,7 @@ data:extend(
               subgroup = "production-machine",
               order = "a-a",
               place_result = "universal-machine",
+              weight = 10,
               stack_size = 5
             },
 

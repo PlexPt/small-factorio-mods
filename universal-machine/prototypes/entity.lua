@@ -6,7 +6,7 @@ data:extend({
         icon = "__universal-machine__/graphics/icon.png",
         icon_size = 144,
         flags = { "placeable-neutral", "placeable-player", "player-creation" },
-        minable = { hardness = 0.2, mining_time = 2, result = "universal-machine" },
+        minable = { hardness = 0.2, mining_time = 1, result = "universal-machine" },
         max_health = 2000,
         inventory_size = 300,
         corpse = "big-remnants",
@@ -157,8 +157,28 @@ data:extend({
                 pollution = 96
             }
         },
+
+        -- Added circuit connector property
+        circuit_connector = circuit_connector_definitions["assembling-machine"],
+
+        --{
+        --    points = {
+        --        shadow = {
+        --            red = { 576 / 32, 316 / 32 },
+        --            green = { 504 / 32, 316 / 32 }
+        --        },
+        --        wire = {
+        --            red = { 268 / 32, 24 / 32 },
+        --            green = { 196 / 32, 24 / 32 }
+        --        }
+        --    },
+        --},
+
+        -- Added circuit wire max distance property
+        circuit_wire_max_distance = 15,
         energy_usage = "100MW",
         ingredient_count = 6,
+        module_slots = 20,
         module_specification = { module_slots = 20 },
         allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" },
         heating_energy = "100kW",

@@ -3,8 +3,8 @@ data:extend(
 
             { type = "technology",
               name = "universal-machine",
-              icon_size = 256,
-              icon = "__base__/graphics/technology/automation-3.png",
+              icon = "__universal-machine__/graphics/icon.png",
+              icon_size = 144,
               effects = {
                   {
                       type = "unlock-recipe",
