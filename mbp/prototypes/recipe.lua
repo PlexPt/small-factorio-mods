@@ -6,12 +6,12 @@ data:extend(
               enabled = false,
               energy_required = 10,
               ingredients = {
-                  { "assembling-machine-1", 32 },
-                  { "iron-plate", 100 },
-                  { "steel-plate", 100 },
-                  { "electronic-circuit", 150 },
+                  { type = "item", name = "assembling-machine-1", amount = 64 },
+                  { type = "item", name = "iron-plate", amount = 100 },
+                  { type = "item", name = "copper-plate", amount = 100 },
+                  { type = "item", name = "copper-cable", amount = 100 },
+                  { type = "item", name = "electronic-circuit", amount = 150 },
               },
-              result = "mbp",
-              result_count = 1,
+              results = { { type = "item", name = "mbp", amount = 1 } }
             },
         })

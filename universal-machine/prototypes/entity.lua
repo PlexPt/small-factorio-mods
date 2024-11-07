@@ -18,8 +18,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = -1,
                 pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -4, -4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -28,8 +26,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = -1,
                 pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -2, -4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -38,8 +34,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = -1,
                 pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 0, -4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -48,8 +42,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = -1,
                 pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 2, -4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -58,8 +50,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = -1,
                 pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 4, -4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -68,8 +58,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = 1,
                 pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { -2, 4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -78,8 +66,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = 1,
                 pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 0, 4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -88,8 +74,6 @@ data:extend({
                 volume = 1000,
                 pipe_picture = assembler3pipepictures(),
                 pipe_covers = pipecoverspictures(),
-                base_area = 10,
-                base_level = 1,
                 pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 2, 4 } } },
                 secondary_draw_orders = { north = -1 }
             },
@@ -97,7 +81,6 @@ data:extend({
         fluid_boxes_off_when_no_fluid_recipe = true,
         collision_box = { { -4.1, -4.1 }, { 4.1, 4.1 } },
         selection_box = { { -4.8, -5 }, { 4.8, 5 } },
-        drawing_box = { { -4.8, -4.8 }, { 4.8, 4.8 } },
         graphics_set = {
             animation = {
                 layers = {
@@ -179,13 +162,10 @@ data:extend({
         energy_usage = "100MW",
         ingredient_count = 6,
         module_slots = 20,
-        module_specification = { module_slots = 20 },
         allowed_effects = { "consumption", "speed", "productivity", "pollution", "quality" },
-        heating_energy = "100kW",
+        heating_energy = feature_flags["freezing"] and "100kW" or nil,
         open_sound = { filename = "__base__/sound/machine-open.ogg", volume = 0.85 },
         close_sound = { filename = "__base__/sound/machine-close.ogg", volume = 0.75 },
-        vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
-
         working_sound = {
             audible_distance_modifier = 0.5,
             fade_in_ticks = 4,
