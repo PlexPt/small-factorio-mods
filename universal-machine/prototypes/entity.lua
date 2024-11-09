@@ -1,3 +1,8 @@
+local pipe_pic = assembler3pipepictures()
+local pipecoverpic = pipecoverspictures()
+
+pipe_pic.north.shift = util.by_pixel(2.25, 25)
+
 data:extend({
 
     {
@@ -16,71 +21,112 @@ data:extend({
             {
                 production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -4, -4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -2, -2.4 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -2, -4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 0, -2.4 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 0, -4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 2, -2.4 } } },
+                secondary_draw_orders = { north = -1 }
+            },
+            --北
+            {
+                production_type = "input",
+                volume = 1000,
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, -2 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 2, -4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, 0 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 4, -4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, 2 } } },
+                secondary_draw_orders = { north = -1 }
+            },
+            --{
+            --    production_type = "input",
+            --    volume = 1000,
+            --    pipe_picture = pipe_pic,
+            --    pipe_covers = pipecoverpic,
+            --    pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 4, -4 } } },
+            --    secondary_draw_orders = { north = -1 }
+            --},
+            {
+                production_type = "output",
+                volume = 1000,
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { -2, 2.4 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "output",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { -2, 4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 0, 2.4 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
                 production_type = "output",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 0, 4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 2, 2.4 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
-                production_type = "output",
+                production_type = "input",
                 volume = 1000,
-                pipe_picture = assembler3pipepictures(),
-                pipe_covers = pipecoverspictures(),
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 2, 4 } } },
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, -2 } } },
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                volume = 1000,
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, 0 } } },
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                volume = 1000,
+                pipe_picture = pipe_pic,
+                pipe_covers = pipecoverpic,
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, 2 } } },
                 secondary_draw_orders = { north = -1 }
             },
         },
         fluid_boxes_off_when_no_fluid_recipe = true,
-        collision_box = { { -4.1, -4.1 }, { 4.1, 4.1 } },
-        selection_box = { { -4.8, -5 }, { 4.8, 5 } },
+        collision_box = { { -2.4, -2.4 }, { 2.4, 2.4 } },
+        selection_box = { { -2.5, -2.5 }, { 2.5, 2.5 } },
         graphics_set = {
             animation = {
                 layers = {
@@ -93,7 +139,7 @@ data:extend({
                         frame_count = 32,
                         line_length = 8,
                         shift = util.by_pixel(0, -0.75),
-                        scale = 1.75,
+                        scale = 1,
 
                     },
                     {
@@ -105,7 +151,7 @@ data:extend({
                         line_length = 8,
                         draw_as_shadow = true,
                         shift = util.by_pixel(28, 4),
-                        scale = 1.75
+                        scale = 1
                     },
                 },
             },
@@ -141,24 +187,8 @@ data:extend({
             }
         },
 
-        -- Added circuit connector property
         circuit_connector = circuit_connector_definitions["assembling-machine"],
-
-        --{
-        --    points = {
-        --        shadow = {
-        --            red = { 576 / 32, 316 / 32 },
-        --            green = { 504 / 32, 316 / 32 }
-        --        },
-        --        wire = {
-        --            red = { 268 / 32, 24 / 32 },
-        --            green = { 196 / 32, 24 / 32 }
-        --        }
-        --    },
-        --},
-
-        -- Added circuit wire max distance property
-        circuit_wire_max_distance = 15,
+        circuit_wire_max_distance = 20,
         energy_usage = "100MW",
         ingredient_count = 6,
         module_slots = 20,
