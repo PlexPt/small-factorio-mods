@@ -7,26 +7,27 @@
 --- @class DirectionHelper
 --- @type DirectionHelper
 local DirectionHelper = {}
-DirectionHelper.allStraightDirections = { 0, 2, 4, 6 }
+--DirectionHelper.allStraightDirections = { 0, 2, 4, 6 }
+DirectionHelper.allStraightDirections = { 0, 4, 8, 12 }  -- 新版直线方向
 
 --- shift direction with number of 45 degrees
 local function shift(direction, n45deg)
-    return (direction + n45deg) % 8
+    return (direction + n45deg) % 16
 end
 
 --- @return defines.direction
 function DirectionHelper.reverseOf(direction)
-    return shift(direction, 4)
+    return shift(direction, 8)
 end
 
 --- @return defines.direction[]
 function DirectionHelper.listFrontLeftRightOf(direction)
-    return { direction, shift(direction, 2), shift(direction, 6) }
+    return { direction, shift(direction, 4), shift(direction, 12) }
 end
 
 --- @return defines.direction[]
 function DirectionHelper.listTailLeftRightOf(direction)
-    return { shift(direction, 4), shift(direction, 2), shift(direction, 6) }
+    return { shift(direction, 8), shift(direction, 4), shift(direction, 12) }
 end
 
 function DirectionHelper.listReverseOf(direction)
@@ -39,6 +40,43 @@ end
 
 function DirectionHelper.listAllStraightDirectionOf(direction)
     return DirectionHelper.allStraightDirections
+end
+
+
+-- 新版方向映射到旧版方向的表
+local new_to_old_directions = {
+    [0] = 0,   -- North -> North
+    [2] = 1,   -- NorthEast -> Northeast
+    [4] = 2,   -- East -> East
+    [6] = 3,   -- SouthEast -> Southeast
+    [8] = 4,   -- South -> South
+    [10] = 5,  -- SouthWest -> Southwest
+    [12] = 6,  -- West -> West
+    [14] = 7   -- NorthWest -> Northwest
+}
+
+-- 函数：将新版方向转换为旧版方向
+function DirectionHelper.convert_direction(new_direction)
+    return new_direction
+    --return new_to_old_directions[new_direction] or 0  -- 返回旧版方向值，若无对应则返回0
+end
+
+-- 旧版方向映射到新版方向的表
+local old_to_new_directions = {
+    [0] = 0,   -- North -> North
+    [1] = 2,   -- Northeast -> NorthEast
+    [2] = 4,   -- East -> East
+    [3] = 6,   -- Southeast -> SouthEast
+    [4] = 8,   -- South -> South
+    [5] = 10,  -- Southwest -> SouthWest
+    [6] = 12,  -- West -> West
+    [7] = 14   -- Northwest -> NorthWest
+}
+
+-- 函数：将旧版方向转换为新版方向
+function DirectionHelper.convert_direction_reverse(old_direction)
+    return old_direction
+    --return old_to_new_directions[old_direction] or 0 -- 返回新版方向值，若无对应则返回nil
 end
 
 return DirectionHelper

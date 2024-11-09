@@ -39,7 +39,7 @@ end
 --- @param direction defines.direction
 --- @return Vector2D
 function DirectionHelper.targetPosition(position, direction)
-    return Vector2D.fromPosition(position) + Vector2D.fromDirection(direction or defines.direction.north)
+    return Vector2D.fromPosition(position) + Vector2D.fromDirection(direction or belt_old_directions.north)
 end
 
 --- @param position Vector2D
@@ -47,7 +47,7 @@ end
 --- @return LuaEntity[] | ArrayList
 function DirectionHelper.neighboringEntities(position, getEntityFunc)
     local entities = ArrayList.new()
-    for _, direction in ipairs { defines.direction.north, defines.direction.east, defines.direction.south, defines.direction.west } do
+    for _, direction in ipairs { belt_old_directions.north, belt_old_directions.east, belt_old_directions.south, belt_old_directions.west } do
         local entity = getEntityFunc(Vector2D.fromDirection(direction) + position)
         if entity ~= nil then
             entities:add(entity)
@@ -224,7 +224,7 @@ function TransportLineConnector:testCanPlace(newChain, minDistanceDict, starting
         for testDiff = 1, pathUnit.distance - 2, 1 do
             local testPos = pathUnit.position + Vector2D.fromDirection(pathUnit.direction):scale(testDiff)
             local entityInMiddle = self.getEntityFunc(testPos)
-            if entityInMiddle and (entityInMiddle.name == pathUnit.name) and (((pathUnit.direction or defines.direction.north) - entityInMiddle.direction) % 4) == 0
+            if entityInMiddle and (entityInMiddle.name == pathUnit.name) and (((pathUnit.direction or belt_old_directions.north) - entityInMiddle.direction) % 4) == 0
             then
                 logging.log("can't cross other entity facing" .. tostring(entityInMiddle.direction), "placing")
                 return false

@@ -142,7 +142,7 @@ function EntityRoutingAttribute.from(entity_name)
             type.beltType = EntityTransportType.onGround
         end
     elseif type.lineType == TransportLineType.fluidLine then
-        if prototype.pumping_speed ~= nil then
+        if prototype.type =="offshore-pump" or prototype.type == "pump" then
             type.beltType = EntityTransportType.pump
         else
             type.beltType = EntityTransportType.pipe

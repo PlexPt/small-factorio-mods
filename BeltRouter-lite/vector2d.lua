@@ -28,25 +28,60 @@ end
 function Vector2D.fromDirection(direction)
     assertNotNull(direction)
 
-    if direction == 0 then
-        return Vector2D.new(0, -1)
-    elseif direction == 1 then
-        return Vector2D.new(1, -1)
-    elseif direction == 2 then
-        return Vector2D.new(1, 0)
-    elseif direction == 3 then
-        return Vector2D.new(1, 1)
-    elseif direction == 4 then
-        return Vector2D.new(0, 1)
-    elseif direction == 5 then
-        return Vector2D.new(-1, 1)
-    elseif direction == 6 then
-        return Vector2D.new(-1, 0)
-    elseif direction == 7 then
-        return Vector2D.new(-1, -1)
-    else
-        return nil
-    end
+
+    -- 1.1
+    --0
+    --North
+    --1
+    --Northeast
+    --2
+    --East
+    --3
+    --Southeast
+    --4
+    --South
+    --5
+    --Southwest
+    --6
+    --West
+    --7
+    --Northwest
+
+    -- 创建一个映射表，将方向映射到对应的二维向量
+    local directionMap = {
+        [defines.direction.north] = Vector2D.new(0, -1),
+        [defines.direction.northeast] = Vector2D.new(1, -1),
+        [defines.direction.east] = Vector2D.new(1, 0),
+        [defines.direction.southeast] = Vector2D.new(1, 1),
+        [defines.direction.south] = Vector2D.new(0, 1),
+        [defines.direction.southwest] = Vector2D.new(-1, 1),
+        [defines.direction.west] = Vector2D.new(-1, 0),
+        [defines.direction.northwest] = Vector2D.new(-1, -1)
+    }
+
+    -- 返回映射表中对应的Vector2D，如果不存在则返回nil
+    return directionMap[direction] or nil
+
+
+    --if direction == 0 then
+    --    return Vector2D.new(0, -1)
+    --elseif direction == 1 then
+    --    return Vector2D.new(1, -1)
+    --elseif direction == 2 then
+    --    return Vector2D.new(1, 0)
+    --elseif direction == 3 then
+    --    return Vector2D.new(1, 1)
+    --elseif direction == 4 then
+    --    return Vector2D.new(0, 1)
+    --elseif direction == 5 then
+    --    return Vector2D.new(-1, 1)
+    --elseif direction == 6 then
+    --    return Vector2D.new(-1, 0)
+    --elseif direction == 7 then
+    --    return Vector2D.new(-1, -1)
+    --else
+    --    return nil
+    --end
 end
 
 --- @return defines.direction

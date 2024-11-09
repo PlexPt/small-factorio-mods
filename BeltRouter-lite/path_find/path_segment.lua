@@ -47,7 +47,7 @@ function PathSegment:fromLuaEntity(entity, halfUndergroundPipeAsInput)
     local newUnit = PathSegment:new {
         name = entityName,
         position = Vector2D.fromPosition(entity.position),
-        direction = entity.direction or defines.direction.north,
+        direction = DirectionHelper.convert_direction(entity.direction) or belt_old_directions.north,
         distance = 1,
         type = (entity.type == "underground-belt") and entity.belt_to_ground_type
     }

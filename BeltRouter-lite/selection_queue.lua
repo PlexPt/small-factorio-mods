@@ -130,7 +130,10 @@ function SelectionQueue:__clearInvalidSelections()
                 logging.log("removed one invalid selection")
                 self:removeIndex(i)
             else
+
+                --newEntity.direction = DirectionHelper.convert_direction(newEntity.direction)
                 self.queue[i].entity = newEntity
+
                 i = i + 1
             end
         end
@@ -139,8 +142,8 @@ end
 
 function SelectionQueue:__updateLabelNumbers()
     for i, otherSelection in ipairs(self.queue) do
-        if rendering.is_valid(otherSelection.textId) then
-            rendering.set_text(otherSelection.textId, i)
+        if otherSelection and otherSelection.textId and otherSelection.valid then
+            otherSelection.text = i
         else
             rendering.draw_text {
                 surface = game.players[self.playerIndex].surface,
