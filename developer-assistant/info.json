@@ -1,0 +1,14 @@
+{
+    "name": "developer-assistant",
+    "version": "0.0.3",
+    "factorio_version": "2.0",
+    "title": "Developer Assistant",
+    "author": "plexpt",
+    "contact": "plexpt",
+    "homepage": "https://github.com/PlexPt",
+    "dependencies": [
+        "0-event-trace",
+        "gvv"
+    ],
+    "description": "A mod to assist developers with debugging and testing."
+}
