@@ -1,24 +1,25 @@
 local fields = {
-    "shift",
-    "scale",
-    "base_shift",
-    "collision_box",
-    "selection_box",
-    "drawing_box",
-    "north_position",
-    "south_position",
-    "east_position",
-    "west_position",
-    "window_bounding_box",
-    "circuit_wire_connection_points",
+    shift = true,
+    scale = true,
+    base_shift = true,
+    collision_box = true,
+    selection_box = true,
+    drawing_box = true,
+    north_position = true,
+    south_position = true,
+    east_position = true,
+    west_position = true,
+    window_bounding_box = true,
+    circuit_wire_connection_points = true,
 }
 
 local ignored_fields = {
-    "fluid_boxes",
-    "fluid_box",
-    "energy_source",
-    "input_fluid_box",
+    fluid_boxes = true,
+    fluid_box = true,
+    energy_source = true,
+    input_fluid_box = true,
 }
+
 pipe_pictures_hide = {
     north = {
         filename = "__core__/graphics/empty.png",
@@ -33,21 +34,10 @@ pipe_pictures_hide = {
         height = 1
     },
     south = {
-        filename = "__base__/graphics/entity/pipe-covers/pipe-cover-north.png",
+        filename = "__core__/graphics/empty.png",
         priority = "extra-high",
-        width = 64,
-        height = 64,
-        frame_count = 1,
-        shift = util.by_pixel(0, -32),
-        hr_version = {
-            filename = "__base__/graphics/entity/pipe-covers/hr-pipe-cover-north.png",
-            priority = "extra-high",
-            width = 128,
-            height = 128,
-            frame_count = 1,
-            shift = util.by_pixel(0, -32),
-            scale = 0.5
-        }
+        width = 1,
+        height = 1
     },
     west = {
         filename = "__core__/graphics/empty.png",
@@ -103,20 +93,15 @@ local function rescale(entity, scalar)
         end
 
         -- Check to see if we need to scale this key's value
-        for n = 1, #fields do
-            if fields[n] == key then
-                entity[key] = scale(value, scalar)
-                -- Move to the next key rather than digging down further
-                goto continue
-            end
+        if fields[key] then
+            entity[key] = scale(value, scalar)
+            goto continue
         end
 
         -- Check to see if we need to ignore this key
-        for n = 1, #ignored_fields do
-            if ignored_fields[n] == key then
-                -- Move to the next key rather than digging down further
-                goto continue
-            end
+        if ignored_fields[key] then
+            -- Move to the next key rather than digging down further
+            goto continue
         end
 
         if (type(value) == "table") then
@@ -141,8 +126,18 @@ function rescale_entity(entity, scalar)
     return entity
 end
 
+function removePipeCovers(boxs)
+    for _, box in ipairs(boxs) do
+        box.pipe_covers = nil
+        box.pipe_covers_frozen = nil
+    end
+end
+
+
 function fixPipeConnections(self)
     if self.fluid_boxes then
+        removePipeCovers(self.fluid_boxes)
+
         if string.match(self.name, "assembling") then
             self.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
             self.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
@@ -150,48 +145,58 @@ function fixPipeConnections(self)
 
         if string.match(self.name, "refinery") then
 
-            self.fluid_boxes[1].pipe_connections[1].position = { -0.4, 0 }
-            self.fluid_boxes[1].pipe_covers =nil
+            self.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
+            self.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
             --self.fluid_boxes[2].pipe_connections = { { type = "output", position = { 1, 0 } } }
             self.fluid_boxes[2] = {
                 production_type = "output",
-                volume = 100,
+                volume = 1000,
                 pipe_covers = nil,
-                base_level = 1,
                 pipe_connections = {
                     {
-                        direction = 8,
-                        flow_direction = "output",
-                        position = { 0.47, 0 }
+                        direction = defines.direction.south,
+                        flow_direction = "input-output",
+                        position = { 0, 0.44 }
                     }
                 }
             }
-            self.fluid_boxes[3].pipe_connections[1].position = { 0, 0.4 }
-            self.fluid_boxes[3].pipe_covers =nil
-            self.fluid_boxes[4].pipe_connections[1].position = { 0, -0.4 }
-            self.fluid_boxes[4].pipe_covers =nil
+            self.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
+            self.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+
+            self.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
+            self.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
             self.fluid_boxes[5] = nil
         end
         if string.match(self.name, "chemical") then
+            loge(self.fluid_boxes, "chemical")
+
+            self.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
             self.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+            self.fluid_boxes[2].pipe_connections[1].direction = defines.direction.south
             self.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+            self.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
             self.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+            self.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
             self.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
         end
         if string.match(self.name, "electro") then
+
             self.fluid_boxes[1].pipe_connections[1].position = { -0.5, -1.5 }
             self.fluid_boxes[2].pipe_connections[1].position = { 0.5, -1.5 }
             self.fluid_boxes[3].pipe_connections[1].position = { -0.5, 1.5 }
             self.fluid_boxes[4].pipe_connections[1].position = { 0.5, 1.5 }
         end
         if string.match(self.name, "bobmetal") then
+
             self.fluid_boxes[1].pipe_connections[1].position = { 0.5, -1.5 }
             self.fluid_boxes[2].pipe_connections[1].position = { 0.5, 1.5 }
         end
         if string.match(self.name, "bobchem") then
+
             self.fluid_boxes[1].pipe_connections[1]. position = { 0.5, -1.5 }
         end
         if string.match(self.name, "bobmulti") then
+
             self.fluid_boxes[1].pipe_connections[1].position = { 0.5, -1.5 }
         end
     end

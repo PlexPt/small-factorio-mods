@@ -24,7 +24,7 @@ function getSeqPicsRange(prefix, min, max)
 end
 
 local function getHr(s)
-    return getAnimationWithHr(s)
+    return s
 end
 
 local function getIdlePics(min, max, IMG_PATH)
@@ -142,7 +142,7 @@ local function getIdle(IMG_PATH)
         animation_speed = 0.5,
         scale = 1,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining(imgPath)

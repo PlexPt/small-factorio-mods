@@ -1,3 +1,5 @@
+require("circuit-connector-sprites")
+
 ----------------------------------------------------------------------
 -- 电力设施缩放调整
 local electricMiningDrill = data.raw["mining-drill"]["electric-mining-drill"]
@@ -20,6 +22,10 @@ fixHeatConnections(heatExchanger)
 --    { type = "input-output", position = { 1, 0 } },
 --    { type = "input-output", position = { -1, 0 } }
 --}
+
+heatExchanger.fluid_box.pipe_covers = nil
+heatExchanger.output_fluid_box.pipe_covers = nil
+
 heatExchanger.fluid_box.pipe_connections[1].position = { 0.4, 0 }
 heatExchanger.fluid_box.pipe_connections[2].position = { -0.4, 0 }
 
@@ -30,6 +36,8 @@ heatExchanger.output_fluid_box.pipe_connections[1].position = { 0, -0.4 }
 local boilerEntity = data.raw["boiler"]["boiler"]
 rescale_entity(boilerEntity, 1 / 3)
 scale_collision(boilerEntity)
+boilerEntity.fluid_box.pipe_covers = nil
+boilerEntity.output_fluid_box.pipe_covers = nil
 
 boilerEntity.fluid_box.pipe_connections = {
     { flow_direction = "input-output", direction = 12, position = { 0.39, 0 } },
@@ -110,8 +118,8 @@ rescale_entity(centrifugeEntity, 1 / 3)
 ----------------------------------------------------------------------
 
 local assemblingMachine1 = data.raw["assembling-machine"]["assembling-machine-1"]
-minify(assemblingMachine1, 1 / 3)
-assemblingMachine1.graphics_set.animation.layers["scale"] = nil
+rescale_entity(assemblingMachine1, 1 / 3)
+--assemblingMachine1.graphics_set.animation.layers["scale"] = nil
 ----------------------------------------------------------------------
 
 local assemblingMachine2 = data.raw["assembling-machine"]["assembling-machine-2"]
@@ -139,20 +147,146 @@ nuclearReactor.heat_buffer.connections = {
     { position = { 0, 0 }, direction = defines.direction.west }
 }
 
+local pad = data.raw["cargo-landing-pad"]["cargo-landing-pad"]
+rescale_entity(pad, 1 / 8)
+
 local radarEntity = data.raw["radar"]["radar"]
 rescale_entity(radarEntity, 1 / 3)
 
 local labEntity = data.raw["lab"]["lab"]
 rescale_entity(labEntity, 1 / 3)
 
+if data.raw["lab"]["biolab"] then
+    local biolab = data.raw["lab"]["biolab"]
+    rescale_entity(biolab, 1 / 5)
+end
+
+if data.raw["agricultural-tower"] and data.raw["agricultural-tower"]["agricultural-tower"] then
+    local agricultural = data.raw["agricultural-tower"]["agricultural-tower"]
+    rescale_entity(agricultural, 1 / 3)
+end
+
+----------------------------
+
+if data.raw["assembling-machine"]["captive-biter-spawner"] then
+    local captive = data.raw["assembling-machine"]["captive-biter-spawner"]
+    rescale_entity(captive, 1 / 5)
+end
+----------------------------
+
+if data.raw["assembling-machine"]["biochamber"] then
+    local biochamber = data.raw["assembling-machine"]["biochamber"]
+    rescale_entity(biochamber, 1 / 3)
+
+    biochamber.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
+    biochamber.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+    biochamber.fluid_boxes[2].pipe_connections[1].direction = defines.direction.south
+    biochamber.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+    biochamber.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
+    biochamber.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+    biochamber.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
+    biochamber.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
+    removePipeCovers(biochamber)
+
+end
+----------------------------
+
+if data.raw["assembling-machine"]["foundry"] then
+    local foundry = data.raw["assembling-machine"]["foundry"]
+    rescale_entity(foundry, 1 / 5)
+
+    foundry.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
+    foundry.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+    foundry.fluid_boxes[2].pipe_connections[1].direction = defines.direction.south
+    foundry.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+    foundry.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
+    foundry.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+    foundry.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
+    foundry.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
+
+    removePipeCovers(foundry)
+
+end
+----------------------------
+
+if data.raw["assembling-machine"]["electromagnetic-plant"] then
+    local foundry = data.raw["assembling-machine"]["electromagnetic-plant"]
+    rescale_entity(foundry, 1 / 4)
+
+    foundry.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
+    foundry.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+    foundry.fluid_boxes[2].pipe_connections[1].direction = defines.direction.south
+    foundry.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+    foundry.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
+    foundry.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+    foundry.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
+    foundry.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
+
+    removePipeCovers(foundry)
+end
+----------------------------
+
+if data.raw["assembling-machine"]["cryogenic-plant"] then
+    local foundry = data.raw["assembling-machine"]["cryogenic-plant"]
+    rescale_entity(foundry, 1 / 5)
+
+
+    foundry.fluid_boxes[1].pipe_connections[1].direction = defines.direction.north
+    foundry.fluid_boxes[1].pipe_connections[1].position = { 0, -0.4 }
+    foundry.fluid_boxes[2].pipe_connections[1].direction = defines.direction.south
+    foundry.fluid_boxes[2].pipe_connections[1].position = { 0, 0.4 }
+    foundry.fluid_boxes[3].pipe_connections[1].direction = defines.direction.east
+    foundry.fluid_boxes[3].pipe_connections[1].position = { 0.4, 0 }
+    foundry.fluid_boxes[4].pipe_connections[1].direction = defines.direction.west
+    foundry.fluid_boxes[4].pipe_connections[1].position = { -0.4, 0 }
+    foundry.fluid_boxes[5] = nil
+    foundry.fluid_boxes[6] = nil
+    removePipeCovers(foundry)
+
+
+end
+----------------------------
+
+if data.raw["lightning-attractor"]["lightning-collector"] then
+    local collector = data.raw["lightning-attractor"]["lightning-collector"]
+    rescale_entity(collector, 1 / 2)
+end
+----------------------------
+
+if data.raw["reactor"]["heating-tower"] then
+    local collector = data.raw["reactor"]["heating-tower"]
+    rescale_entity(collector, 1 / 3)
+end
 ----------------------------
 local storageTank = data.raw["storage-tank"]["storage-tank"]
 rescale_entity(storageTank, 1 / 3)
-storageTank.fluid_box.pipe_picture = pipe_pictures_hide
+storageTank.fluid_box.pipe_picture = nil
+storageTank.fluid_box.pipe_covers = nil
 storageTank.fluid_box.pipe_connections[1].position = { 0, -0.4 }
 storageTank.fluid_box.pipe_connections[2].position = { 0.4, 0 }
 storageTank.fluid_box.pipe_connections[3].position = { 0, 0.4 }
 storageTank.fluid_box.pipe_connections[4].position = { -0.4, 0 }
+
+scale_circuit_wire_connection_points(storageTank.circuit_connector, scale)
+
+----------------------------
+local pump = data.raw["pump"]["pump"]
+--rescale_entity(pump, 1 / 3)
+pump.collision_box = { { -0.29, -0.5 }, { 0.29, 0.5 } }
+pump.selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
+--pump.fluid_box.pipe_picture = nil
+--pump.fluid_box.pipe_covers = nil
+pump.fluid_box.pipe_connections[1].position = { 0, -0.4 }
+pump.fluid_box.pipe_connections[2].position = { 0, 0.4 }
+
+--scale_circuit_wire_connection_points(pump.circuit_connector, scale)
+
+----------------------------
+
+local entity = data.raw["electric-energy-interface"]["electric-energy-interface"]
+rescale_entity(entity, 1 / 2)
+
+entity.circuit_connector = circuit_connector_definitions["pump"]
 
 
 ----------------------------
@@ -211,5 +345,32 @@ rocketSiloRocket.effects_fade_in_start_distance = 0
 rocketSiloRocket.effects_fade_in_end_distance = 1
 
 
-local assemblingMachine1 = data.raw["assembling-machine"]["assembling-machine-1"]
-loge(assemblingMachine1, "assemblingMachine1")
+-- todo
+local todo = {
+    "fusion-reactor",
+    "electromagnetic-plant",
+    "cryogenic-plant",
+}
+
+
+
+--  data.raw["lab"]["biolab"]
+--  data.raw["agricultural-tower"]["agricultural-tower"]
+
+
+--聚变  data.raw["fusion-reactor"]["fusion-reactor"]
+--  data.raw["fusion-generator"]["fusion-generator"]
+--电磁  data.raw["assembling-machine"]["electromagnetic-plant"]
+--低温  data.raw["assembling-machine"]["cryogenic-plant"]
+--热塔  data.raw["reactor"]["heating-tower"]
+--生物舱  data.raw["assembling-machine"]["biochamber"]
+--铸造厂  data.raw["assembling-machine"]["foundry"]
+--回收  data.raw["furnace"]["recycler"]
+--大型采矿钻机  data.raw["mining-drill"]["big-mining-drill"]
+--单带 data.raw["lane-splitter"]["lane-splitter"]
+--
+
+
+
+
+--data.raw["assembling-machine"]["captive-biter-spawner"]

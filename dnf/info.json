@@ -1,15 +1,13 @@
 {
-  "name": "DNF-mod",
-  "version": "0.0.2",
-  "factorio_version": "1.1",
-  "title": "DNF",
-  "author": "plexpt",
-  "contact": "plexpt",
-  "homepage": "https://github.com/PlexPt",
-  "dependencies": [
-    "DNF-music",
-    "base"
-  ],
-  "description": "DNF. Coming soon..."
+    "name": "DNF-mod",
+    "version": "0.0.5",
+    "factorio_version": "2.0",
+    "title": "DNF",
+    "author": "plexpt",
+    "contact": "plexpt",
+    "homepage": "https://github.com/PlexPt",
+    "dependencies": [
+        "DNF-music"
+    ],
+    "description": "DNF. Coming soon..."
 }
-

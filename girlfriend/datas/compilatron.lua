@@ -16,12 +16,13 @@ local compilatron_animations =
 {
     walk =
     {
-        width = 40,
-        height = 52,
+        width = 78,
+        height = 104,
         frame_count = 2,
         axially_symmetrical = false,
         direction_count = 32,
-        shift = util.by_pixel(0.0, -14.0),
+        shift = util.by_pixel(0.0, -14),
+        scale = 0.5,
         stripes =
         {
             {
@@ -34,40 +35,18 @@ local compilatron_animations =
                 width_in_frames = 2,
                 height_in_frames = 16
             }
-        },
-
-        hr_version =
-        {
-            width = 78,
-            height = 104,
-            frame_count = 2,
-            axially_symmetrical = false,
-            direction_count = 32,
-            shift = util.by_pixel(0.0, -14),
-            scale = 0.5,
-            stripes =
-            {
-                {
-                    filename = "__base__/graphics/entity/compilatron/hr-compilatron-walk-1.png",
-                    width_in_frames = 2,
-                    height_in_frames = 16
-                },
-                {
-                    filename = "__base__/graphics/entity/compilatron/hr-compilatron-walk-2.png",
-                    width_in_frames = 2,
-                    height_in_frames = 16
-                }
-            }
         }
     },
     walk_shadow =
     {
-        width = 72,
-        height = 30,
+        width = 142,
+        height = 56,
         frame_count = 2,
+        axially_symmetrical = false,
         direction_count = 32,
-        shift = util.by_pixel(19, 0.0),
+        shift = util.by_pixel(15.5, -0.5),
         draw_as_shadow = true,
+        scale = 0.5,
         stripes = util.multiplystripes(2,
                 {
                     {
@@ -75,26 +54,7 @@ local compilatron_animations =
                         width_in_frames = 1,
                         height_in_frames = 32
                     }
-                }),
-        hr_version =
-        {
-            width = 142,
-            height = 56,
-            frame_count = 2,
-            axially_symmetrical = false,
-            direction_count = 32,
-            shift = util.by_pixel(15.5, -0.5),
-            draw_as_shadow = true,
-            scale = 0.5,
-            stripes = util.multiplystripes(2,
-                    {
-                        {
-                            filename = "__base__/graphics/entity/compilatron/hr-compilatron-walk-shadow.png",
-                            width_in_frames = 1,
-                            height_in_frames = 32
-                        }
-                    })
-        }
+                })
     }
 }
 
@@ -102,7 +62,7 @@ local girlfriend = {
     type = "unit",
     name = "compilatron",
     icon = "__base__/graphics/icons/compilatron.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icon_size = 64,
     flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "not-repairable", "breaths-air" },
     map_color = { r = 0, g = 0.365, b = 0.58, a = 1 },
     max_health = 100,

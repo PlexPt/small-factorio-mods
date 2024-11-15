@@ -33,16 +33,6 @@ local function getRunning()
         direction_count = 8,
         animation_speed = 0.8,
         scale = 0.3,
-        hr_version = {
-            filename = imgpath .. "running.png",
-            width = 200,
-            height = 200,
-            --shift = util.by_pixel(0.0, -23.0),
-            frame_count = 24,
-            direction_count = 8,
-            animation_speed = 0.8,
-            scale = 0.3,
-        }
     }
 end
 
@@ -56,16 +46,6 @@ local function getRunningGun()
         direction_count = 18,
         animation_speed = 0.8,
         scale = 0.3,
-        hr_version = {
-            filename = imgpath .. "running-gun.png",
-            width = 200,
-            height = 200,
-            --shift = util.by_pixel(0.0, -23.0),
-            frame_count = 24,
-            direction_count = 18,
-            animation_speed = 0.8,
-            scale = 0.3,
-        }
     }
 end
 
@@ -91,19 +71,6 @@ local function getIdle()
         direction_count = 1,
         animation_speed = 0.2,
         scale = 0.4,
-        hr_version = {
-            filenames = getIdlePics(),
-            slice = 1,
-            width = 200,
-            height = 200,
-            shift = util.by_pixel(-20.0, 0.0),
-            frame_count = 255,
-            line_length = 1,
-            lines_per_file = 1,
-            direction_count = 1,
-            animation_speed = 0.2,
-            scale = 0.4
-        }
     }
 end
 

@@ -14,5 +14,5 @@
 --
 ------------------------------------------------------------------------------------
 
--- Keep or overwrite the default prototypes?                   --
+-- Keep or overwrite the default prototypes?
 CharModHelper.check_my_prototypes(TIANYI)

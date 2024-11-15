@@ -5,9 +5,10 @@ data:extend(
               enabled = true,
               energy_required = 10,
               ingredients = {
-                  { "stone", 100 },
+                  { type = "item", name = "stone", amount = 100 },
               },
-              result = "atsword_majesty",
-              result_count = 1,
+              results = {
+                  { type = "item", name = "atsword_majesty", amount = 1, probability = 0.9 },
+              }
             },
         })

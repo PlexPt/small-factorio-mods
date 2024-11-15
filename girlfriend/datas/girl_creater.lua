@@ -106,7 +106,7 @@ function create_girl_unit(character, surname, set_color, scale, hp, attack_param
         type = "unit",
         name = "compilatron",
         icon = "__base__/graphics/icons/compilatron.png",
-        icon_size = 64, icon_mipmaps = 4,
+        icon_size = 64,
         flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "not-repairable", "breaths-air" },
         map_color = { r = 0, g = 0.365, b = 0.58, a = 1 },
         max_health = 100,
@@ -184,7 +184,6 @@ function create_girl_unit(character, surname, set_color, scale, hp, attack_param
     girlfreedunit.sticker_box = scale_box(table.deepcopy(character.sticker_box), scale)
     girlfreedunit.icon = character.icon
     girlfreedunit.icon_size = character.icon_size
-    girlfreedunit.icon_mipmaps = character.icon_mipmaps
 
     girlfreedunit.map_color = color
     girlfreedunit.enemy_map_color = { r = 1 }

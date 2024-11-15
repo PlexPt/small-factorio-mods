@@ -14,9 +14,7 @@ local cloningvat = {
     source_inventory_size = 1,
     result_inventory_size = 1,
     allowed_effects = { 'consumption', 'speed', 'pollution' },
-    module_specification = {
-        module_slots = 5
-    },
+    module_slots = 5,
     energy_source = {
         type = "burner", -- 这里"burner"对于热能
         fuel_categories = { "chemical" },

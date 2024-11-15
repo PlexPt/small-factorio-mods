@@ -109,6 +109,45 @@ end
 
 
 
+--
+
+--log("=========================================================================================")
+--log("defines.direction.north"           .. "==".. defines.direction.north )
+--log("defines.direction.northnortheast" .. "==".. defines.direction.northnortheast )
+--log("defines.direction.northeast"       .. "==".. defines.direction.northeast )
+--log("defines.direction.eastnortheast"   .. "==".. defines.direction.eastnortheast )
+--log("defines.direction.east"            .. "==".. defines.direction.east )
+--log("defines.direction.eastsoutheast"   .. "==".. defines.direction.eastsoutheast )
+--log("defines.direction.southeast"       .. "==".. defines.direction.southeast )
+--log("defines.direction.southsoutheast" .. "==".. defines.direction.southsoutheast )
+--log("defines.direction.south"           .. "==".. defines.direction.south )
+--log("defines.direction.southsouthwest" .. "==".. defines.direction.southsouthwest )
+--log("defines.direction.southwest"       .. "==".. defines.direction.southwest )
+--log("defines.direction.westsouthwest"   .. "==".. defines.direction.westsouthwest )
+--log("defines.direction.west"            .. "==".. defines.direction.west )
+--log("defines.direction.westnorthwest"   .. "==".. defines.direction.westnorthwest )
+--log("defines.direction.northwest"       .. "==".. defines.direction.northwest )
+--log("defines.direction.northnorthwest" .. "==".. defines.direction.northnorthwest )
+
+--log("=========================================================================================")
+
+-- defines.direction.north==0
+-- defines.direction.northnortheast==1
+-- defines.direction.northeast==2
+-- defines.direction.eastnortheast==3
+-- defines.direction.east==4
+-- defines.direction.eastsoutheast==5
+-- defines.direction.southeast==6
+-- defines.direction.southsoutheast==7
+-- defines.direction.south==8
+-- defines.direction.southsouthwest==9
+-- defines.direction.southwest==10
+-- defines.direction.westsouthwest==11
+-- defines.direction.west==12
+-- defines.direction.westnorthwest==13
+-- defines.direction.northwest==14
+-- defines.direction.northnorthwest==15
+
 
 
 

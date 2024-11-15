@@ -1,0 +1,11 @@
+{
+  "name": "server-manager",
+  "version": "1.0.0",
+  "factorio_version": "1.1",
+  "title": "Server Manager",
+  "author": "plexpt",
+  "description": "Server Manager. Like OARC",
+  "dependencies": [
+    "stdlib"
+  ]
+}

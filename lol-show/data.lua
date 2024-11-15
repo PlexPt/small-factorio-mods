@@ -25,7 +25,7 @@ data:extend({{
                   frame_count = 118,
                   animation_speed = 0.5,
                   priority = "high",
-                  shift = util.by_pixel(0, -80),
+                  shift = util.by_pixel(0, -120),
                   slice = 1,
                   stripes = getStripes(),
                   scale = 1.0
@@ -33,7 +33,7 @@ data:extend({{
               {
                   type = "custom-input",
                   name = "LOL7",
-                  key_sequence = "LCTRL + H"
+                  key_sequence = "CONTROL + H"
               }
 })
 

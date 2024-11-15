@@ -24,7 +24,7 @@ function getStripesAnimation(path, max, width, height )
         width = width,
         height = height,
         frame_count = max,
-        line_length = 1,
+        --line_length = 1,
         draw_as_glow = true,
         direction_count = 1,
         --shift = util.by_pixel(0, -80),

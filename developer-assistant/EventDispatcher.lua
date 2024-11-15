@@ -1,6 +1,8 @@
 -- event_dispatcher.lua
 local EventDispatcher = {}
 EventDispatcher.handlers = {}
+EventDispatcher.gui_click_handlers = {}  -- 新增：专门存储GUI点击事件处理器
+EventDispatcher.inited = false
 
 -- 定义核心事件
 EventDispatcher.CORE_EVENTS = {
@@ -12,7 +14,7 @@ EventDispatcher.CORE_EVENTS = {
 -- 确保输入是数组的辅助函数
 local function ensure_array(value)
     if type(value) ~= "table" then
-        return {value}
+        return { value }
     end
     return value
 end
@@ -51,6 +53,58 @@ local function register_event(event_id, handler_func)
 
     -- 直接添加处理函数到数组
     table.insert(EventDispatcher.handlers[event_id], handler_func)
+end
+
+-- GUI点击事件的专门处理函数
+local function handle_gui_click(event)
+    local element = event.element
+    if not element or not element.valid then
+        return
+    end
+
+    local element_name = element.name
+    if not element_name then
+        return
+    end
+    local player = game.players[event.player_index]
+
+    if not player or not player.valid then
+        return
+    end
+
+    -- 调用所有匹配的处理函数
+    if EventDispatcher.gui_click_handlers[element_name] then
+        for _, handler in ipairs(EventDispatcher.gui_click_handlers[element_name]) do
+            handler(event, player)
+        end
+    end
+
+    -- 调用通配符处理函数（如果有的话）
+    if EventDispatcher.gui_click_handlers["*"] then
+        for _, handler in ipairs(EventDispatcher.gui_click_handlers["*"]) do
+            handler(event, player)
+        end
+    end
+end
+
+-- 注册GUI点击事件处理函数
+function EventDispatcher.on_gui_click(element_names, handler_func)
+    -- 确保已经注册了on_gui_click事件
+    if not EventDispatcher.inited then
+        EventDispatcher.on_event(defines.events.on_gui_click, handle_gui_click)
+        EventDispatcher.inited = true
+    end
+
+    -- 转换为数组形式
+    local names = ensure_array(element_names)
+
+    -- 注册到所有指定的元素名称
+    for _, name in ipairs(names) do
+        if not EventDispatcher.gui_click_handlers[name] then
+            EventDispatcher.gui_click_handlers[name] = {}
+        end
+        table.insert(EventDispatcher.gui_click_handlers[name], handler_func)
+    end
 end
 
 -- 为每个核心事件提供专门的注册函数

@@ -83,7 +83,6 @@ function modtool.icons.setItemIcon(_item_name, _icon_path, _icon_size, _icon_mip
         end
         data.raw[item_type][_item_name].icon = _icon_path
         data.raw[item_type][_item_name].icon_size = _icon_size or 64
-        data.raw[item_type][_item_name].icon_mipmaps = _icon_mipmaps
 
         return true
     end

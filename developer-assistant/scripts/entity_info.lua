@@ -1,19 +1,21 @@
+local bigunpack = require("lib.unpack")
+
 -- Function to create GUI for entity details
 local function create_entity_details_gui(player)
     -- Check if GUI already exists and destroy it
-    if player.gui.screen["entity_details_frame"] then
-        player.gui.screen["entity_details_frame"].destroy()
+    if player.gui.screen["dev_entity_details_frame"] then
+        player.gui.screen["dev_entity_details_frame"].destroy()
     end
 
     -- Create main frame in screen location
     local main_frame = player.gui.screen.add {
         type = "frame",
-        name = "entity_details_frame",
+        name = "dev_entity_details_frame",
         direction = "vertical"
     }
-    main_frame.style.width = 800
-    main_frame.style.height = 600
-    main_frame.location = { 0, 36 }
+    main_frame.style.maximal_width = 960
+    main_frame.style.maximal_height = 800
+    main_frame.auto_center = true
 
     -- Title bar with drag handle and close button
     local title_table = main_frame.add {
@@ -46,7 +48,7 @@ local function create_entity_details_gui(player)
     -- Close button
     local close_button = title_table.add {
         type = "sprite-button",
-        name = "entity_details_close",
+        name = "dev_entity_details_close",
         sprite = "utility/close",
         style = "frame_action_button"
     }
@@ -58,6 +60,7 @@ local function create_entity_details_gui(player)
         style = "inside_shallow_frame",
         --    direction = "vertical"
     }
+    content_frame.style.horizontally_stretchable = true
 
     -- Scroll pane for content
     local scroll_pane = content_frame.add {
@@ -66,25 +69,36 @@ local function create_entity_details_gui(player)
         horizontal_scroll_policy = "never",
         vertical_scroll_policy = "auto-and-reserve-space"
     }
-    scroll_pane.style.maximal_height = 500
+    scroll_pane.style.maximal_height = 780
+    scroll_pane.style.horizontally_stretchable = true
 
     -- Main content flow - Changed to table instead of flow
     local content_table = scroll_pane.add {
-        type = "table",
+        type = "flow",
         name = "entity_details_table",
-        column_count = 1
+        direction = "vertical",
+        --column_count = 1
     }
-    content_table.style.vertical_spacing = 8
-    content_table.style.horizontal_spacing = 8
+    --content_table.style.vertical_spacing = 8
+    --content_table.style.horizontal_spacing = 8
     content_table.style.padding = 12
 
     return main_frame
 end
 
+-- 函数：将 Direction 转换为 defines.direction 格式
+local function convertDirection(direction)
+    for k, v in pairs(defines.direction) do
+        if v == direction then
+            return string.format("defines.direction.%s (%d)", k, v)
+        end
+    end
+    return direction -- 如果没有匹配的方向，返回原始值
+end
 
 -- Function to update GUI with entity details
 local function update_entity_details_gui(player, entities)
-    local main_frame = player.gui.screen["entity_details_frame"]
+    local main_frame = player.gui.screen["dev_entity_details_frame"]
     if not main_frame then
         main_frame = create_entity_details_gui(player)
     end
@@ -97,13 +111,10 @@ local function update_entity_details_gui(player, entities)
         -- Entity header frame
         local entity_frame = content_table.add {
             type = "frame",
-            name = "entity_frame_" .. i,
             --style = "content_deep_frame",
             direction = "vertical"
         }
-
-        -- Rest of the code remains the same...
-        -- (The entity details population code doesn't need to change)
+        entity_frame.style.maximal_width = 760
 
         -- Entity header
         local header_flow = entity_frame.add {
@@ -129,85 +140,48 @@ local function update_entity_details_gui(player, entities)
         properties_table.style.horizontal_spacing = 16
         properties_table.style.vertical_spacing = 8
         properties_table.style.margin = 8
+        --properties_table.style.width = 760
+
+        --properties_table.style.column_widths = {
+        --    {
+        --        column = 1,
+        --        width = 80
+        --    },
+        --    {
+        --        column = 1,
+        --        minimal_width = 240,
+        --        maximal_width = 600
+        --    },
+        --}
+
+        local prototype = bigunpack("dev_" .. entity.type .. "_" .. entity.name)
 
         -- Add entity properties
         local properties = {
-            { "Name", entity.name },
+            { "Name", "[entity=" .. entity.name .. "] " .. entity.name },
             { "Type", entity.type },
-            { "Direction", entity.direction },
-            { "prototype", serpent.block(entity.prototype) },
+            { "Direction", convertDirection(entity.direction) },
+            { "prototype", prototype },
         }
 
-        for _, prop in ipairs(properties) do
-            -- Label
+        for k, prop in ipairs(properties) do
             properties_table.add {
                 type = "label",
                 caption = prop[1] .. ":",
                 style = "bold_label"
             }
-
-            -- Value
-            properties_table.add {
-                type = "label",
-                caption = tostring(prop[2]),
-                style = "label"
+            local type = prop[1] == "prototype" and "text-box" or "textfield"
+            local box = properties_table.add {
+                type = type,
+                text = tostring(prop[2]),
+                tooltip = { "gvv-mod.right-to-select-all" },
             }
-        end
-
-        -- Add prototype info if available
-        if entity.prototype then
-            --local proto_frame = entity_frame.add {
-            --    type = "frame",
-            --    --style = "content_deep_frame_in_shallow_frame",
-            --    direction = "vertical"
-            --}
-
-            --proto_frame.add {
-            --    type = "label",
-            --    caption = "Prototype Information",
-            --    style = "caption_label"
-            --}
-            --
-            --local proto_table = proto_frame.add {
-            --    type = "table",
-            --    column_count = 2,
-            --    style = "bordered_table"
-            --}
-            --proto_table.style.horizontal_spacing = 16
-            --proto_table.style.margin = 8
-
-            --for k, prop in pairs(entity.prototype) do
-            --    proto_table.add {
-            --        type = "label",
-            --        caption = k .. ":",
-            --        style = "bold_label"
-            --    }
-            --    proto_table.add {
-            --        type = "label",
-            --        caption = serpent.block(prop),
-            --
-            --        style = "label"
-            --    }
+            --if prop[1] == "prototype" then
+            --    box.style = "editor_lua_textbox"
             --end
-            --local proto_props = {
-            --    {"Max Health", entity.prototype.max_health},
-            --    {"Minable", entity.prototype.minable and "Yes" or "No"},
-            --    {"Rotatable", entity.prototype.rotatable and "Yes" or "No"},
-            --    {"Collision Mask", serpent.line(entity.prototype.collision_mask)},
-            --}
+            box.style.maximal_height = 300
+            box.style.width = 560
 
-            --for _, prop in ipairs(proto_props) do
-            --    proto_table.add {
-            --        type = "label",
-            --        caption = prop[1] .. ":",
-            --        style = "bold_label"
-            --    }
-            --    proto_table.add {
-            --        type = "label",
-            --        caption = tostring(prop[2]),
-            --        style = "label"
-            --    }
-            --end
         end
 
         -- Add separator between entities
@@ -221,7 +195,7 @@ end
 
 -- Function to update GUI with entity details
 local function update_entity_details_gui2(player, entities)
-    local main_frame = player.gui.screen["entity_details_frame"]
+    local main_frame = player.gui.screen["dev_entity_details_frame"]
     if not main_frame then
         main_frame = create_entity_details_gui(player)
     end
@@ -260,8 +234,8 @@ local function update_entity_details_gui2(player, entities)
                 style = "bold_label"
             })
             details_table.add({
-                type = "label",
-                caption = tostring(detail[2])
+                type = "text-box",
+                text = tostring(detail[2])
             })
         end
 
@@ -297,7 +271,7 @@ local function on_player_selected_area(event, destroy_all)
         -- Check if any entities were selected
         if entities and #entities > 0 then
 
-            if not player.gui.left["entity_details_frame"] then
+            if not player.gui.screen["dev_entity_details_frame"] then
                 create_entity_details_gui(player)
             end
             update_entity_details_gui(player, entities)
@@ -323,11 +297,11 @@ MyEvent.on_event(
 
 -- Add event handler for close button
 MyEvent.on_event(defines.events.on_gui_click, function(event)
-    if event.element.name == "entity_details_close" then
+    if event.element.name == "dev_entity_details_close" then
         if event.player_index then
             local p = game.players[event.player_index]
-            if p.gui.screen["entity_details_frame"] then
-                p.gui.screen["entity_details_frame"].destroy()
+            if p.gui.screen["dev_entity_details_frame"] then
+                p.gui.screen["dev_entity_details_frame"].destroy()
             end
         end
     end

@@ -243,8 +243,11 @@ local function tryUseWaypointMode(event)
         return
     end
     --- @type LuaEntity
-    local entity = event.created_entity
-    local routingAttribute = EntityRoutingAttribute.from((entity.name == "entity-ghost") and entity.ghost_name or event.created_entity.name)
+    local entity = event.entity
+    if not entity then
+        return
+    end
+    local routingAttribute = EntityRoutingAttribute.from((entity.name == "entity-ghost") and entity.ghost_name or event.entity.name)
     if not routingAttribute then
         return
     end
@@ -252,8 +255,8 @@ local function tryUseWaypointMode(event)
         player.print({ "error-message.select-entity-before-waypoint-mode" })
         return
     end
-    setEndingTransportLine(player, event.created_entity, getWaypointRoutingConfig(player))
-    setStartingTransportLine(player, event.created_entity)
+    setEndingTransportLine(player, event.entity, getWaypointRoutingConfig(player))
+    setStartingTransportLine(player, event.entity)
 end
 
 local function terminatePathFinding(event)

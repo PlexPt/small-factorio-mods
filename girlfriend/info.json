@@ -1,13 +1,13 @@
 {
-  "name": "girlfriend",
-  "version": "2.3.0",
-  "factorio_version": "2.0",
-  "title": "Girlfriend",
-  "author": "plexpt",
-  "description": "Feeling lonely and in need of a companion? Look no further! Our virtual girlfriend mod is here to bring you companionship and support whenever you need it. She's always happy to listen to your stories and share in your joys and sorrows, and will offer encouragement and motivation when you need it most. Just like a real girlfriend, she'll be by your side through every step of your journey. Don't miss out on this chance for a truly special connection. Try our virtual girlfriend mod today! \n\n如果你感到孤独，想要有个伙伴陪伴左右，那么这个虚拟女朋友mod就是为你准备的！她总是乐意倾听你的故事，与你分享快乐与悲伤，并会在你需要的时候给予支持与鼓励。她就像你真正的女朋友一样，总是陪在你身边，与你共度美好的时光。快来体验这段真挚的感情吧！",
-  "dependencies": [
-    "genshin-impact-skin",
-    "? miku-bikini-swimsuit",
-    "? tianyi"
-  ]
+    "name": "girlfriend",
+    "version": "2.3.2",
+    "factorio_version": "2.0",
+    "title": "Girlfriend",
+    "author": "plexpt",
+    "description": "Feeling lonely and in need of a companion? Look no further! Our virtual girlfriend mod is here to bring you companionship and support whenever you need it. She's always happy to listen to your stories and share in your joys and sorrows, and will offer encouragement and motivation when you need it most. Just like a real girlfriend, she'll be by your side through every step of your journey. Don't miss out on this chance for a truly special connection. Try our virtual girlfriend mod today! \n\n如果你感到孤独，想要有个伙伴陪伴左右，那么这个虚拟女朋友mod就是为你准备的！她总是乐意倾听你的故事，与你分享快乐与悲伤，并会在你需要的时候给予支持与鼓励。她就像你真正的女朋友一样，总是陪在你身边，与你共度美好的时光。快来体验这段真挚的感情吧！",
+    "dependencies": [
+        "genshin-impact-skin",
+        "? miku-bikini-swimsuit",
+        "? tianyi"
+    ]
 }

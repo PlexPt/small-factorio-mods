@@ -71,7 +71,7 @@ function debug_util.infoless(obj, level)
     end
     debug_log("------------ info------------------")
 
-    debug_log(debug_util.tojson(obj, level))
+    --debug_log(debug_util.tojson(obj, level))
 
     debug_log("------------ info end--------------")
 

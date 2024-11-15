@@ -8,7 +8,7 @@ data:extend({
         localised_name = { "entity-name.massive-explosion" },
         icon = "__base__/graphics/item-group/effects.png",
         icon_size = 64,
-        flags = { "not-on-map", "hidden" },
+        flags = { "not-on-map"  },
         subgroup = "explosions",
         animations = getStripesAnimation("atsword_majesty/", 30, 1067, 489),
     },

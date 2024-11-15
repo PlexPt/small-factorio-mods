@@ -38,7 +38,6 @@ local function create_loader_entity(tier_table)
         { icon = "__comfortable-loader__/graphics/icons/mipmaps/loader-icon-mask.png", tint = tier_table.colour },
     }
     entity.icon_size = 64
-    entity.icon_mipmaps = 4
     entity.flags = { "placeable-neutral", "player-creation" }
     entity.vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 1.0 }
     entity.open_sound = { filename = "__base__/sound/wooden-chest-open.ogg", volume = 1.0 }

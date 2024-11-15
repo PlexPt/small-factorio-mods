@@ -1,7 +1,6 @@
 local pipe_pic = assembler3pipepictures()
 local pipecoverpic = pipecoverspictures()
 
-pipe_pic.north.shift = util.by_pixel(2.25, 25)
 
 data:extend({
 
@@ -23,7 +22,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -2, -2.4 } } },
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { -2, -2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -31,7 +30,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 0, -2.4 } } },
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 0, -2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -39,7 +38,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 2, -2.4 } } },
+                pipe_connections = { { direction = defines.direction.north, flow_direction = "input", position = { 2, -2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             --北
@@ -48,7 +47,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, -2 } } },
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.3, -2 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -56,7 +55,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, 0 } } },
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.3, 0 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -64,7 +63,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.4, 2 } } },
+                pipe_connections = { { direction = defines.direction.west, flow_direction = "input", position = { -2.3, 2 } } },
                 secondary_draw_orders = { north = -1 }
             },
             --{
@@ -80,7 +79,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { -2, 2.4 } } },
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { -2, 2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -88,7 +87,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 0, 2.4 } } },
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 0, 2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -96,7 +95,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 2, 2.4 } } },
+                pipe_connections = { { direction = defines.direction.south, flow_direction = "output", position = { 2, 2.3 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -104,7 +103,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, -2 } } },
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.3, -2 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -112,7 +111,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, 0 } } },
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.3, 0 } } },
                 secondary_draw_orders = { north = -1 }
             },
             {
@@ -120,7 +119,7 @@ data:extend({
                 volume = 1000,
                 pipe_picture = pipe_pic,
                 pipe_covers = pipecoverpic,
-                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.4, 2 } } },
+                pipe_connections = { { direction = defines.direction.east, flow_direction = "output", position = { 2.3, 2 } } },
                 secondary_draw_orders = { north = -1 }
             },
         },

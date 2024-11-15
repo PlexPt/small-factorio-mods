@@ -16,34 +16,62 @@ local function teleport_player_safely(player, surface, position)
 end
 
 local function follow_player_safely(girl, player)
-    if girl and player and player.surface then
+    if girl and player and player.surface and player.position then
         local surface = player.surface
         local surface2 = girl.surface
+
         local position = surface.find_non_colliding_position("character", player.position, 50, 0.5, false)
         --character.teleport(position, surface)
 
-        if surface2 and surface.index == surface2.index then
+        if position and surface2 and surface.index == surface2.index then
 
             local girlfriend_trouble = get_runtime_setting("girlfriend_trouble")
             local girlfriend_trouble_user = get_runtime_user_setting(player, "girlfriend_trouble_user")
 
             if girlfriend_trouble and girlfriend_trouble_user then
                 --捣蛋
-                girl.commandable.set_command({
-                    type = defines.command.build_base,
-                    destination = position,
-                    ignore_planner = true,
-                    distraction = defines.distraction.none
-                })
+                --girl.commandable.set_command({
+                --    type = defines.command.build_base,
+                --    destination = position,
+                --    ignore_planner = true,
+                --    distraction = defines.distraction.none
+                --})
 
+                --    defines.command.attack
+                --Attack another entity.
+                --
+                --defines.command.go_to_location
+                --Go to a specific position.
+                --
+                --defines.command.compound
+                --Chain commands together, see defines.compound_command.
+                --
+                --defines.command.group
+                --Do what your group wants you to do.
+                --
+                --defines.command.attack_area
+                --Go to a place and attack what you see.
+                --
+                --defines.command.wander
+                --Chill.
+                --
+                --defines.command.flee
+                --Flee from another entity.
+                --
+                --defines.command.stop
+                --Stop moving and stay where you are.
+                --
+                --defines.command.build_base
+                --Go to a position and build a base there.
             end
-                girl.commandable.set_command({
-                    type = defines.command.go_to_location,
-                    destination = position,
-                    --destination_entity = player,
-                    radius = 1,
-                    distraction = defines.distraction.none
-                })
+
+            girl.commandable.set_command({
+                type = defines.command.go_to_location,
+                destination = position,
+                --destination_entity = player,
+                radius = 1,
+                distraction = defines.distraction.none
+            })
 
 
         else
@@ -198,7 +226,12 @@ script.on_nth_tick(600, function(event)
     for k, player in pairs(game.players) do
         if (player and player.valid and player.character) then
             check_girl(player)
-            random_condom(player)
+            local girlfriend_trouble = get_runtime_setting("girlfriend_trouble")
+            local girlfriend_trouble_user = get_runtime_user_setting(player, "girlfriend_trouble_user")
+
+            if girlfriend_trouble and girlfriend_trouble_user then
+                random_condom(player)
+            end
 
             local girl = storage.girlfriends[player.name]
             local nextTick = storage.girl_next_dialog_time[player.name]
@@ -390,10 +423,8 @@ end
 
 -- 检查女朋友状态 如果死了就重新找一个
 function check_girl(player)
-    if not storage.girlfriends[player.name] then
-        local girl = create_girl(player)
-        storage.girlfriends[player.name] = girl
-    elseif not storage.girlfriends[player.name].valid then
+    local friend = storage.girlfriends[player.name]
+    if not (friend and friend.valid) then
         local girl = create_girl(player)
         storage.girlfriends[player.name] = girl
     end
