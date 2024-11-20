@@ -1,6 +1,6 @@
 {
     "name": "developer-assistant",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "factorio_version": "2.0",
     "title": "Developer Assistant",
     "author": "plexpt",
@@ -8,6 +8,7 @@
     "homepage": "https://github.com/PlexPt",
     "dependencies": [
         "0-event-trace",
+        "some-luaconsole",
         "gvv"
     ],
     "description": "A mod to assist developers with debugging and testing. View entity information. Demonstrates all GUI element types"

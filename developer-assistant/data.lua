@@ -3,7 +3,7 @@ data:extend(
             {
                 type = "selection-tool",
                 name = "entity-selector",
-                icon = "__developer-assistant__/graphics/EntitySelector.png",
+                icon = "__developer-assistant__/graphics/picker.png",
                 flags = { "only-in-cursor", "not-stackable", "spawnable" },
                 subgroup = "tool",
                 order = "c[selection-tools]-a[entity-selector]",
@@ -32,9 +32,9 @@ data:extend(
                 action = "spawn-item",
                 item_to_spawn = "entity-selector",
                 toggleable = true,
-                icon = "__developer-assistant__/graphics/EntitySelector.png",
+                icon = "__developer-assistant__/graphics/picker.png",
                 icon_size = 512,
-                small_icon = "__developer-assistant__/graphics/EntitySelector.png",
+                small_icon = "__developer-assistant__/graphics/picker.png",
                 small_icon_size = 512,
             }
         }

@@ -51,7 +51,6 @@ local function bigpack(name, data)
         name = "big-data-" .. name,
         icon = "__core__/graphics/empty.png",
         icon_size = 1,
-        stack_size = 1,
         flags = { "not-on-map", "hide-alt-info", "not-blueprintable", "not-flammable" },
         localised_name = string.format("BIGDATA[%s]", name),
         localised_description = encode(data),
