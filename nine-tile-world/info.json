@@ -1,0 +1,9 @@
+{
+  "name": "nine-tile-world",
+  "version": "1.0.0",
+  "title": "9-Tile Wide World",
+  "author": "FactorioModder",
+  "description": "9 tiles wide world is all you need. Constrains all surfaces to exactly 9 tiles wide while maintaining balanced gameplay. ",
+  "factorio_version": "2.0",
+  "dependencies": []
+}

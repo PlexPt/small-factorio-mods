@@ -1,0 +1,13 @@
+{
+    "name": "free-loader",
+    "version": "1.0.0",
+    "title": "Free Loader",
+    "author": "plexpt",
+    "dependencies": [
+        "? aai-loaders",
+        "? loaders-modernized",
+        "? vanilla-loaders-hd"
+    ],
+    "description": "Free Loader is an efficient mod, designed to simplify production line building. This mod automatically reduces the cost of loaders added by other loader mods to the lowest possible, while eliminating the need for electricity, lubricant, or other fluids. This lets players focus entirely on designing and optimizing their production lines without worrying about resource management.",
+    "factorio_version": "2.0"
+}

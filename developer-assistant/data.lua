@@ -10,7 +10,7 @@ data:extend(
                 show_in_library = true,
                 hidden = true,
                 stack_size = 1,
-                icon_size = 512,
+                icon_size = 341,
                 stackable = false,
                 select = {
                     border_color = { r = 0, g = 1, b = 0 },
@@ -33,9 +33,9 @@ data:extend(
                 item_to_spawn = "entity-selector",
                 toggleable = true,
                 icon = "__developer-assistant__/graphics/picker.png",
-                icon_size = 512,
+                icon_size = 341,
                 small_icon = "__developer-assistant__/graphics/picker.png",
-                small_icon_size = 512,
+                small_icon_size = 341,
             }
         }
 )

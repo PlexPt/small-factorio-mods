@@ -30,9 +30,6 @@ deadlock.add_tier({
         { type = "item", name = "iron-gear-wheel", amount = 20 },
     },
 })
-if data.raw.technology["deadlock-stacking-2"] then
-    table.insert(data.raw.technology["deadlock-stacking-2"].prerequisites, "deadlock-stacking-1")
-end
 if data.raw["loader-1x1"]["fast-comfortable-loader"] then
     data.raw["loader-1x1"]["fast-comfortable-loader"].next_upgrade = "express-comfortable-loader"
 end
@@ -54,6 +51,28 @@ deadlock.add_tier({
     },
     loader_category = "crafting-with-fluid",
 })
-if data.raw.technology["deadlock-stacking-3"] then
-    table.insert(data.raw.technology["deadlock-stacking-3"].prerequisites, "deadlock-stacking-2")
+if mods["space-age"] then
+    if data.raw["loader-1x1"]["express-comfortable-loader"] then
+        data.raw["loader-1x1"]["express-comfortable-loader"].next_upgrade = "turbo-comfortable-loader"
+    end
+
+    --tier 4
+    deadlock.add_tier({
+        transport_belt = "turbo-transport-belt",
+        loader = "turbo-comfortable-loader",
+
+        colour = { r = 129, g = 139, b = 90 },
+        underground_belt = "turbo-underground-belt",
+        splitter = "turbo-splitter",
+        technology = "turbo-transport-belt",
+        order = "d",
+        loader_ingredients = {
+            { type = "item", name = "express-comfortable-loader", amount = 1 },
+            { type = "item", name = "iron-gear-wheel", amount = 40 },
+            { type = "item", name = "tungsten-plate", amount = 10 },
+            { type = "fluid", name = "lubricant", amount = 20 },
+        },
+        loader_category = "crafting-with-fluid",
+    })
+
 end
