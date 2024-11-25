@@ -867,6 +867,13 @@ anims.animations_dead = {
             characteranimations["level3addon"]["dead_mask"],
             characteranimations["level1"]["dead_shadow"],
         }
+    },
+    {
+        layers = {
+            characteranimations["level3addon"]["dead"],
+            characteranimations["level3addon"]["dead_mask"],
+            characteranimations["level1"]["dead_shadow"],
+        }
     }
 }
 
