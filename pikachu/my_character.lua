@@ -5,10 +5,6 @@ require("lib.animation_util")
 --~ local char_name = "miku-bikini-swimsuit-skin"
 local my_character = {}
 
-local function getHr(s)
-    return getAnimationWithHr(s)
-end
-
 local function getIdlePics(max, IMG_PATH)
     local s = getSeqPics(IMG_PATH .. "idle/", max)
     return s
@@ -63,7 +59,7 @@ local function getDead(IMG_PATH)
         frame_count = 1,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunning(IMG_PATH)
@@ -80,7 +76,7 @@ local function getRunning(IMG_PATH)
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunningGun(IMG_PATH)
@@ -97,7 +93,7 @@ local function getRunningGun(IMG_PATH)
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 
 end
 
@@ -115,7 +111,7 @@ local function getIdle(IMG_PATH)
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining(imgPath)

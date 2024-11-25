@@ -3,8 +3,6 @@ local util = require("util")
 local my_character = {}
 
 function getAnimationWithHr(s)
-    local hr = util.table.deepcopy(s)
-    s.hr_version = hr
     return s
 end
 
@@ -22,11 +20,6 @@ function getSeqPicsRange(prefix, min, max)
         table.insert(s, prefix .. i .. ".png")
     end
     return s
-end
-
-
-local function getHr(s)
-    return getAnimationWithHr(s)
 end
 
 local function getIdlePics(min, max, IMG_PATH)
@@ -93,7 +86,7 @@ local function getDead(IMG_PATH)
                 height_in_frames = 1,
             }, }
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunning(IMG_PATH)
@@ -110,7 +103,7 @@ local function getRunning(IMG_PATH)
         animation_speed = 0.3,
         scale = 1,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunningGun(IMG_PATH)
@@ -128,7 +121,7 @@ local function getRunningGun(IMG_PATH)
         scale = 1,
 
     }
-    return getHr(s)
+    return s
 
 end
 
@@ -146,7 +139,7 @@ local function getIdle(IMG_PATH)
         animation_speed = 0.5,
         scale = 1,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining(imgPath)
