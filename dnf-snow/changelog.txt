@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
-Version: 5.1.1
-Date: 2024-11-26
+Version: 5.2.0
+Date: 2024-11-27
 
   Info:
     - Character creation is now handled by "Helper for mods that create new characters" (added dependency). (thanks Pi-C)
