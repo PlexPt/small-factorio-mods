@@ -1,0 +1,84 @@
+---------------------------------------------------------------------------------------------------
+Version: 5.1.1
+Date: 2024-11-26
+
+  Info:
+    - Character creation is now handled by "Helper for mods that create new characters" (added dependency). (thanks Pi-C)
+
+  Bugfixes:
+    - Fixed crash on loading because of renamed soundfile from the base game.
+
+  Changes:
+    - Added this changelog. :-)
+
+  Locale:
+    - Capitalized names in English localization.
+
+---------------------------------------------------------------------------------------------------
+Version: 5.1.0
+Date: 2024-11-25
+
+  Changes:
+    - Removed obsolete HR animations.
+
+---------------------------------------------------------------------------------------------------
+Version: 5.0.0
+Date: 2024-10-30
+
+  Info:
+    - Updated mod for Factorio 2.0.
+
+---------------------------------------------------------------------------------------------------
+Version: 4.0.0
+Date: 2022-04-06
+
+  Changes:
+    - Changed dependency on "miniMAXIme" from optional to mutual (doesn't affect loading order) to avoid dependency cycle.
+
+---------------------------------------------------------------------------------------------------
+Version: 3.0.0
+Date: 2022-03-31
+
+  Changes:
+    - Keep default name of character corpse on creating the character. It will be changed in data-final-fixes, if necessary.
+
+  Locale:
+    - Fixed English localization.
+
+---------------------------------------------------------------------------------------------------
+Version: 2.3.0
+Date: 2022-03-31
+
+  Changes:
+    - Create the character in a way that it is compatible with "miniMAXIme".
+
+  Locale:
+    - Added Chinese and English localization.
+
+---------------------------------------------------------------------------------------------------
+Version: 2.2.0
+Date: 2022-03-30
+
+  Changes:
+    - Reduced speed of HR-version of running-with-gun animation.
+
+---------------------------------------------------------------------------------------------------
+Version: 2.1.0
+Date: 2022-03-30
+
+  Changes:
+    - Added directions to HR-version of idle animation.
+
+---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 2022-03-30
+
+  Changes:
+    - Added directions to idle animation.
+
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2022-03-30
+
+  Info:
+    - Initial release

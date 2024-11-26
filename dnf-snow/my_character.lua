@@ -8,9 +8,6 @@ local char_icon = IMG_PATH .. "idle/45.png"
 
 local char_name = common.char_name
 
-local function getHr(s)
-    return getAnimationWithHr(s)
-end
 
 local function getIdlePics(max)
     local s = getSeqPics("idle/", max)
@@ -66,7 +63,7 @@ local function getDead()
         frame_count = 2,
         scale = 0.5,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunning()
@@ -83,7 +80,7 @@ local function getRunning()
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunningGun()
@@ -100,7 +97,7 @@ local function getRunningGun()
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 
 end
 
@@ -118,7 +115,7 @@ local function getIdle()
         animation_speed = 0.4,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining()
@@ -230,6 +227,7 @@ data:extend(
                 reach_resource_distance = 2.7,
                 ticks_to_keep_gun = 600,
                 ticks_to_keep_aiming_direction = 100,
+                moving_sound_animation_positions = {10, 21},
                 --ticks you need to wait after firing a weapon or taking damage to get out of combat and get healed
                 ticks_to_stay_in_combat = 600,
                 damage_hit_tint = { r = 1, g = 0, b = 0, a = 0 },
