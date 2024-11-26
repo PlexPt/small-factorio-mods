@@ -1,0 +1,15 @@
+{
+    "name": "fruit",
+    "version": "0.1.2",
+    "title": "Fruit",
+    "author": "plexpt",
+    "contact": "q",
+    "homepage": "https://github.com/",
+    "description": "🍎🍊🍇 Introducing the Fruit for Factorio, adding delightful fruits to your game. We welcome all mod developers to freely modify, extend, or integrate this mod. Imagine new fruit processing machines, agricultural expansions, trade systems, decorative items, energy sources, technology branches, creatures, and events. Let your creativity flourish and enhance the Factorio experience for everyone! 🍎🍊🍇",
+    "factorio_version": "2.0",
+    "dependencies": [],
+    "languages": [
+        "en",
+        "zh"
+    ]
+}
