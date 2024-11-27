@@ -1,0 +1,101 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2024-11-30
+
+  Add:
+    - Apple
+    - Banana
+    - Orange
+    - Strawberry
+    - Watermelon
+    - Pear
+    - Kiwi
+    - Pineapple
+    - Grape
+    - Peach
+    - Mango
+    - Papaya
+    - Blueberry
+    - Plum
+    - Pomegranate
+    - Jackfruit
+    - Lychee
+    - Raspberry
+    - Blackberry
+    - Dragon_fruit
+    - Cantaloupe
+    - Passion_fruit
+    - Cherry
+    - Starfruit
+    - Tangerine
+    - Guava
+    - Carambola
+    - Coconut
+    - Rambutan
+    - Durian
+    - Longan
+    - Fig
+    - Tamarind
+    - Soursop
+    - Gooseberry
+    - Sapodilla
+    - Apricot
+    - Nectarine
+    - Cranberry
+    - Persimmon
+    - Elderberry
+    - Currant
+    - Loquat
+    - Mulberry
+    - Miracle_fruit
+    - Lemon
+    - Grapefruit
+    - Prune
+    -苹果
+    -香蕉
+    -橙子
+    -草莓
+    -西瓜
+    -梨
+    -猕猴桃
+    -菠萝
+    -葡萄
+    -桃子
+    -芒果
+    -木瓜
+    -蓝莓
+    -李子
+    -石榴
+    -菠萝蜜
+    -荔枝
+    -覆盆子
+    -黑莓
+    -火龙果
+    -哈密瓜
+    -百香果
+    -樱桃
+    -杨桃
+    -橘子
+    -番石榴
+    -五角星水果
+    -椰子
+    -龙眼
+    -榴莲
+    -龙眼
+    -无花果
+    -罗望子
+    -酸豆
+    -醋栗
+    -人参果
+    -杏
+    -油桃
+    -蔓越莓
+    -柿子
+    -接骨木果
+    -醋栗
+    -枇杷
+    -桑葚
+    -奇迹果
+    -柠檬
+    -西柚
+    -西梅
