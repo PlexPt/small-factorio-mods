@@ -791,6 +791,7 @@ MyEvent.on_gui_click("dev_run_code_button", function(event, player)
         local inner_flow = dev_gui_util.create_window_with_close(player, "Code Result", nil)
         inner_flow.add({
             type = "text-box",
+            style = "editor_lua_textbox",
             text = result
         })
     end
