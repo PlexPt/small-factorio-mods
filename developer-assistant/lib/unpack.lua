@@ -10,10 +10,13 @@ local function decode(data)
 end
 
 local function bigunpack(name)
-    assert(type(name) == "string", "missing name!")
-    local prototype = assert(prototypes.entity["big-data-" .. name],
-            string.format("big data '%s' not defined!", name))
-    return decode(prototype.localised_description)
+
+    if type(name) == "string" then
+        local prototype = prototypes.entity["big-data-" .. name]
+        if prototype then
+            return decode(prototype.localised_description)
+        end
+    end
 end
 
 

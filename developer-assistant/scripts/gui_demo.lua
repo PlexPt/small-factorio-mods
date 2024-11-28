@@ -4,6 +4,10 @@
 --https://wiki.factorio.com/Rich_text
 
 local bigunpack = require("lib.unpack")
+local example_codes = require("scripts.example_codes")
+local dev_gui_util = require("scripts.dev_gui_util")
+require("scripts.exe")
+
 
 -- 定义常量表，映射GUI元素类型和样式类型
 local GUI_TYPE_TO_STYLE_MAP = {
@@ -83,7 +87,7 @@ local ELEMENT_PROPERTIES = {
 local ELEMENT_TYPES = {
     "button", "sprite-button", "textfield", "text-box", "checkbox",
     "radiobutton", "progressbar", "slider", "table", "camera",
-    "switch",  "tabbed-pane", "sprite", "customize"
+    "switch", "tabbed-pane", "sprite", "customize"
 }
 
 --  根据给定的GUI元素类型筛选所有样式的名称
@@ -454,39 +458,88 @@ local function create_main_window(player)
     local tab1 = main_tab.add { type = "tab", caption = "GUI Demos" }
     local tab2 = main_tab.add { type = "tab", caption = "GUI Edit Preview" }
     local tab3 = main_tab.add { type = "tab", caption = "Search" }
-    local tab4 = main_tab.add { type = "tab", caption = "Info Tab" }
+    local tab4 = main_tab.add { type = "tab", caption = "Code" }
+    local tab5 = main_tab.add { type = "tab", caption = "Info Tab" }
     -- 创建滚动窗格
     local content1 = create_scroll_pane(main_tab, "scroll1", 800)
 
     -- 主内容流
-    local flow = content1.add {
+    local flow_demo_gui = content1.add {
         type = "flow",
         name = "main_flow",
         direction = "vertical"
     }
 
     local content2 = create_preview_panel(main_tab)
-    ----------------------------------------------
+    ---------------------搜索search_tab-------------------------
     local search_tab = main_tab.add { type = "tabbed-pane", name = "search_tab" }
 
     create_search_tab(search_tab)
 
-    ----------------------------------------------
+    --------------------代码Code--------------------------
+    local code_tab_content = create_scroll_pane(main_tab, "code_tab", 800)
+
+    local code_main_flow = code_tab_content.add { type = "flow", direction = "vertical", name = "code_flow" }
+    local dev_code_action_list_flow = code_main_flow.add { type = "flow", name = "dev_code_action_list" }
+    local code_input = code_main_flow.add { type = 'text-box', name = 'code_input', style = 'textbox_dev_code' }
+    code_input.word_wrap = true
+    code_input.style.maximal_height = (player.display_resolution.height / player.display_scale * 0.7)
+    code_input.text = ""
+
+
+    -- 添加 "Run" 按钮
+    local dev_run_code_button = dev_code_action_list_flow.add {
+        type = "button",
+        name = "dev_run_code_button",
+        caption = "Run", style = "confirm_button"
+    }
+
+    -- 添加 "Select Area" 按钮
+    local select_area_button = dev_code_action_list_flow.add { type = "button", name = "select_area_button", caption = "Select Area" }
+
+    -- 添加示例代码下拉框
+    local example_code_dropdown = dev_code_action_list_flow.add {
+        type = "drop-down",
+        name = "example_code_dropdown",
+        items = {}  -- 初始化为空表，稍后填充
+    }
+
+    -- 添加插入示例代码按钮
+    local dev_insert_example_code_button = dev_code_action_list_flow.add {
+        type = "button",
+        name = "dev_insert_example_code_button",
+        caption = "Insert Example Code"
+    }
+
+    -- 填充下拉框选项
+    for item, _ in pairs(example_codes) do
+        example_code_dropdown.add_item(item)
+    end
+
+    ---------------------info-------------------------
     local content4 = main_tab.add { type = "flow" }
     local scroll4 = create_scroll_pane(content4, "scroll1")
 
-    scroll4.add { type = "label", caption = "Use the shortcut selection-tool entity-selector in the lower right corner of the screen to view entity information" }
-    scroll4.add { type = "label", caption = "TODO flat all style/sprite" }
+    local blog = scroll4.add { type = "flow", direction = "vertical" }
+
+    -- It is possible to use [rich text](https://wiki.factorio.com/Rich_text)
+    blog.add { type = "label", caption = "[img=tooltip-category-electricity] Use the shortcut selection-tool entity-selector in the lower right corner of the screen to view entity information" }
+    blog.add { type = "label", caption = "[img=tooltip-category-electricity] CTRL + SHIFT + E is very useful" }
+    blog.add { type = "label", caption = "[img=tooltip-category-electricity] by hovering the mouse over something and pressing CTRL + SHIFT + F to open the super info page" }
+    blog.add { type = "label", caption = "[img=tooltip-category-electricity] right clicking to copy one item" }
+    blog.add { type = "label", caption = "[img=info] 动态添加GUI设计窗口， 生成代码， 插入示例代码" }
 
     main_tab.add_tab(tab1, content1)
     main_tab.add_tab(tab2, content2)
     main_tab.add_tab(tab3, search_tab)
-    main_tab.add_tab(tab4, content4)
+    main_tab.add_tab(tab4, code_tab_content)
+    main_tab.add_tab(tab5, content4)
 
+    ---------------------"GUI Demos"-------------------------
 
     -- 基础按钮类型
-    flow.add { type = "label", caption = "Button Types:" }
-    local button_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "label", caption = "Button Types:" }
+    local button_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     button_flow.add { type = "label", caption = "button" }
     button_flow.add { type = "button", caption = "Regular Button" }
 
@@ -494,9 +547,9 @@ local function create_main_window(player)
     button_flow.add { type = "sprite-button", sprite = "item/iron-plate" }
 
     -- 文本输入
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "Text Input:" }
-    local text_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "Text Input:" }
+    local text_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     text_flow.add { type = "label", caption = "textfield" }
     text_flow.add { type = "textfield", text = "Single line text" }
     text_flow.add { type = "label", caption = "text-box" }
@@ -504,9 +557,9 @@ local function create_main_window(player)
 
 
     -- 选择器
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "Selectors:" }
-    local select_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "Selectors:" }
+    local select_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     select_flow.add { type = "label", caption = "drop-down" }
     local dropdown = select_flow.add { type = "drop-down" }
     dropdown.items = { "Option 1", "Option 2", "Option 3" }
@@ -517,70 +570,70 @@ local function create_main_window(player)
 
 
     -- 复选框和单选按钮
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "checkbox and radiobutton:" }
-    local check_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "checkbox and radiobutton:" }
+    local check_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     check_flow.add { type = "checkbox", caption = "Checkbox 1", state = false }
     check_flow.add { type = "checkbox", caption = "Checkbox 2", state = true }
-    local radio_flow = flow.add { type = "flow", direction = "horizontal" }
+    local radio_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     radio_flow.add { type = "radiobutton", caption = "Radio 1", state = true }
     radio_flow.add { type = "radiobutton", caption = "Radio 2", state = false }
 
     -- 进度条和滑块
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "progressbar and slider:" }
-    local progress_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "progressbar and slider:" }
+    local progress_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     local progress = progress_flow.add { type = "progressbar", value = 0.7 }
     progress.style.width = 200
     local slider = progress_flow.add { type = "slider", value = 50, minimum_value = 0, maximum_value = 100 }
     slider.style.width = 200
 
     -- 表格示例
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "table Example:" }
-    local table = flow.add { type = "table", column_count = 3, draw_vertical_lines = true, draw_horizontal_lines = true, draw_horizontal_line_after_headers = true }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "table Example:" }
+    local table = flow_demo_gui.add { type = "table", column_count = 3, draw_vertical_lines = true, draw_horizontal_lines = true, draw_horizontal_line_after_headers = true }
     for i = 1, 9 do
         table.add { type = "label", caption = "label Cell " .. i }
     end
 
     -- 精灵和图像
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "Sprites and Images:" }
-    local sprite_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "Sprites and Images:" }
+    local sprite_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     sprite_flow.add { type = "sprite", sprite = "item/iron-plate" }
     sprite_flow.add { type = "sprite", sprite = "item/copper-plate" }
 
     -- 工具提示示例
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "Tooltip Example:" }
-    flow.add {
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "Tooltip Example:" }
+    flow_demo_gui.add {
         type = "button",
         caption = "Hover me",
         tooltip = { "", "This is a tooltip\n", "With multiple lines" }
     }
 
     -- switch
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "switch:" }
-    local switch_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "switch:" }
+    local switch_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     switch_flow.add { type = "switch", left_label_caption = "left_label_caption", right_label_caption = "right_label_caption" }
 
     -- minimap
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "minimap:" }
-    local minimap_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "minimap:" }
+    local minimap_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     minimap_flow.add { type = "minimap", position = { 0, 0 }, right_label_caption = "right_label_caption" }
 
     -- camera
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "camera:" }
-    local camera_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "camera:" }
+    local camera_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     camera_flow.add { type = "camera", position = { 0, 0 } }
 
     -- choose-elem-button
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "choose-elem-button:" }
-    local elem_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "choose-elem-button:" }
+    local elem_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     elem_flow.add { type = "label", caption = "item" }
     elem_flow.add { type = "choose-elem-button", elem_type = "item", }
     elem_flow.add { type = "label", caption = "entity" }
@@ -596,16 +649,16 @@ local function create_main_window(player)
     elem_flow.add { type = "label", caption = "technology" }
     elem_flow.add { type = "choose-elem-button", elem_type = "technology", }
 
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "entity-preview:" }
-    local preview_flow = flow.add { type = "flow", direction = "horizontal" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "entity-preview:" }
+    local preview_flow = flow_demo_gui.add { type = "flow", direction = "horizontal" }
     preview_flow.add { type = "entity-preview" }
 
     -- 选项卡示例
-    flow.add { type = "line" }
-    flow.add { type = "label", caption = "Layout:" }
-    flow.add { type = "label", caption = "tabbed-pane:" }
-    local tabbed_pane = flow.add { type = "tabbed-pane" }
+    flow_demo_gui.add { type = "line" }
+    flow_demo_gui.add { type = "label", caption = "Layout:" }
+    flow_demo_gui.add { type = "label", caption = "tabbed-pane:" }
+    local tabbed_pane = flow_demo_gui.add { type = "tabbed-pane" }
     local tab1 = tabbed_pane.add { type = "tab", caption = "Tab 1" }
     local tab2 = tabbed_pane.add { type = "tab", caption = "Tab 2" }
     local tab3 = tabbed_pane.add { type = "tab", caption = "Tab 3" }
@@ -666,19 +719,82 @@ MyEvent.on_event(defines.events.on_gui_click, function(event)
         local player = game.players[event.player_index]
         if event.element.name == "dev_button" then
             safe_call(player, create_main_window, player)
-        end
-        if event.element.name == "dev_add_button" then
-
+        elseif event.element.name == "dev_add_button" then
             safe_call(player, add_element, player)
+        elseif event.element.name == "close_element" then
+            safe_call(player, function()
+                if event.element.parent then
+                    event.element.parent.destroy()
+                end
+            end)
+        elseif event.element.tags and event.element.tags.close_button then
+            safe_call(player, function()
+                if event.element.parent then
+                    event.element.parent.parent.destroy()
+                end
+            end)
+        end
 
-        end
-        -- 处理销毁按钮点击事件
-        if event.element.name == "close_element" then
-            if event.element.parent then
-                event.element.parent.destroy()
-            end
-        end
+
     end
+end)
+
+MyEvent.on_gui_click("dev_insert_example_code_button", function(event, player)
+
+    local dev_main_window = player.gui.screen.dev_main_window
+
+    if not dev_main_window then
+        return
+    end
+    local panel = dev_main_window.dev_tab.code_tab
+
+    if not (panel and panel.code_flow) then
+        return
+    end
+
+    local dropdown = panel.code_flow.dev_code_action_list.example_code_dropdown
+    local code_input = panel.code_flow.code_input
+    if not dropdown then
+        return
+    end
+
+    local selected_item = dropdown.items[dropdown.selected_index]
+
+
+    -- 为插入示例代码按钮添加事件处理程序
+    local example_code = example_codes[selected_item]
+
+    if example_code then
+        -- 获取当前代码框内容
+        local current_code = code_input.text
+
+        -- 追加示例代码到最后一行
+        code_input.text = current_code .. "\n" .. example_code
+    end
+end)
+
+MyEvent.on_gui_click("dev_run_code_button", function(event, player)
+
+    local dev_main_window = player.gui.screen.dev_main_window
+
+    if not dev_main_window then
+        return
+    end
+    local panel = dev_main_window.dev_tab.code_tab
+
+    if not (panel and panel.code_flow) then
+        return
+    end
+    local code_input = panel.code_flow.code_input
+    local result = dev_exec_command(code_input.text, player)
+    if result then
+        local inner_flow = dev_gui_util.create_window_with_close(player, "Code Result", nil)
+        inner_flow.add({
+            type = "text-box",
+            text = result
+        })
+    end
+
 end)
 
 MyEvent.on_gui_click("dev_add_all_style_button", function(event, player)

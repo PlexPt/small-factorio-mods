@@ -155,6 +155,9 @@ local function update_entity_details_gui(player, entities)
         --}
 
         local prototype = bigunpack("dev_" .. entity.type .. "_" .. entity.name)
+        if not prototype then
+            return
+        end
 
         -- Add entity properties
         local properties = {
