@@ -2,8 +2,6 @@ local util = require("util")
 local result = {}
 
 function getAnimationWithHr(s)
-    local hr = util.table.deepcopy(s)
-    s.hr_version = hr
     return s
 end
 
@@ -24,7 +22,7 @@ function getSeqPicsRange(prefix, min, max)
 end
 
 local function getHr(s)
-    return getAnimationWithHr(s)
+    return s
 end
 
 local function getIdlePics(min, max, IMG_PATH)

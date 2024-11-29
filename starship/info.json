@@ -1,0 +1,12 @@
+{
+    "name": "starship",
+    "version": "0.1.2",
+    "title": "Starship",
+    "author": "plexpt",
+    "contact": "your.email@example.com",
+    "homepage": "https://github.com/starship-mod",
+    "factorio_version": "2.0",
+    "dependencies": [
+        "space-age"
+    ]
+}

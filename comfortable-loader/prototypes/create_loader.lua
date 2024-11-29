@@ -12,19 +12,7 @@ local function create_loader_belt_component(source)
         priority = "extra-high",
         flags = { "no-crop", "low-object" },
     }
-    if source.hr_version then
-        component.hr_version = {
-            filename = source.hr_version.filename,
-            width = source.hr_version.width,
-            height = source.hr_version.height,
-            line_length = source.hr_version.line_length,
-            frame_count = source.hr_version.frame_count,
-            y = source.hr_version.y,
-            scale = source.hr_version.scale,
-            priority = "extra-high",
-            flags = { "no-crop", "low-object" },
-        }
-    end
+
     return component
 end
 

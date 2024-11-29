@@ -1,9 +1,9 @@
 {
   "name": "nine-tile-world",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "title": "9-Tile Wide World",
   "author": "FactorioModder",
-  "description": "9 tiles wide world is all you need. Constrains all surfaces to exactly 9 tiles wide while maintaining balanced gameplay. ",
+  "description": "9 tiles wide world is all you need. Constrains all surfaces to exactly 9 tiles wide while maintaining balanced gameplay. And the starting resource is mixed ore. ",
   "factorio_version": "2.0",
   "dependencies": []
 }

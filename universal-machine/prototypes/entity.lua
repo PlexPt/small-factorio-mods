@@ -195,6 +195,7 @@ data:extend({
         heating_energy = feature_flags["freezing"] and "100kW" or nil,
         open_sound = { filename = "__base__/sound/machine-open.ogg", volume = 0.85 },
         close_sound = { filename = "__base__/sound/machine-close.ogg", volume = 0.75 },
+        squeak_behaviour = false,
         working_sound = {
             audible_distance_modifier = 0.5,
             fade_in_ticks = 4,

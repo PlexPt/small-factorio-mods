@@ -72,7 +72,7 @@ local function getDead(IMG_PATH)
                 height_in_frames = 1,
             }, }
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunning(IMG_PATH)
@@ -89,7 +89,7 @@ local function getRunning(IMG_PATH)
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunningGun(IMG_PATH)
@@ -106,7 +106,7 @@ local function getRunningGun(IMG_PATH)
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 
 end
 
@@ -124,7 +124,7 @@ local function getIdle(IMG_PATH)
         animation_speed = 0.5,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining(imgPath)

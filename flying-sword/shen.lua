@@ -22,7 +22,6 @@ local jian = {
     max_health = 600,
     alert_when_damaged = false,
     collision_box = { { 0, 0 }, { 0, 0 } },
-    --selection_box = { { -0.5, -1.5 }, { 0.5,  -0.5 } },
     selection_box = { { -1, -3 }, { 1, 3 } },
     hit_visualization_box = { { -0.1, -1.1 }, { 0.1, -1.0 } },
     damaged_trigger_effect = {
@@ -38,11 +37,6 @@ local jian = {
     friction = 0.01,
     range_from_player = 10,
     speed = 0.1,
-    --working_sound = {
-    --    sound = { filename = "__base__/sound/fight/jianshen.ogg", volume = 0.7 },
-    --    apparent_volume = 1,
-    --    persistent = true
-    --},
     destroy_action = {
         type = "direct",
         action_delivery = {

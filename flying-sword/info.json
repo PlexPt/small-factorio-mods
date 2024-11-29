@@ -1,9 +1,9 @@
 {
-  "name": "flying-sword",
-  "version": "1.0.0",
-  "title": "The Celestial Flying Sword",
-  "author": "plexpt",
-  "description": "The Celestial Flying Sword is a legendary weapon forged in the ancient flames of the immortal realm, imbued with the essence of the heavens. With its sleek, radiant blade and intricate runes etched along its surface, this sword possesses the extraordinary ability to soar through the skies, slicing through enemies with unparalleled speed and precision. Controlled by the wielder's spiritual energy, it can execute devastating strikes from a distance or shield its master in battle. Revered as a symbol of power and transcendence, the Celestial Flying Sword is not just a weapon—it is a testament to the wielder's mastery of the immortal arts.",
-  "factorio_version": "2.0",
-  "dependencies": []
+    "name": "flying-sword",
+    "version": "1.0.1",
+    "title": "The Celestial Flying Sword",
+    "author": "plexpt",
+    "description": "The Celestial Flying Sword is a legendary weapon forged in the ancient flames of the immortal realm, imbued with the essence of the heavens. With its sleek, radiant blade and intricate runes etched along its surface, this sword possesses the extraordinary ability to soar through the skies, slicing through enemies with unparalleled speed and precision. Controlled by the wielder's spiritual energy, it can execute devastating strikes from a distance or shield its master in battle. Revered as a symbol of power and transcendence, the Celestial Flying Sword is not just a weapon—it is a testament to the wielder's mastery of the immortal arts.",
+    "factorio_version": "2.0",
+    "dependencies": []
 }

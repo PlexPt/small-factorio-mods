@@ -13,14 +13,6 @@ local function getDead()
         --shift = util.by_pixel(0.0, -0.0),
         frame_count = 2,
         scale = 0.3,
-        hr_version = {
-            filename = imgpath .. "dead.png",
-            width = 200,
-            height = 200,
-            --shift = util.by_pixel(0.0, -0.0),
-            frame_count = 2,
-            scale = 0.3,
-        }
     }
 end
 local function getRunning()
@@ -86,6 +78,7 @@ characteranimations["level1"]["dead_shadow"] = nil,
     shift = util.by_pixel(0.0, -21.0),
     frame_count = 2,
     DRAWASSHADOW = true,
+
     hr_version = {
         filename = imgpath .. "level1_dead_shadow.png",
         width = 100,

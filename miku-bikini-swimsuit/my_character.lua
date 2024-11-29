@@ -7,7 +7,7 @@ require("lib.animation_util")
 --~ local char_name = "miku-bikini-swimsuit-skin"
 
 local function getHr(s)
-    return getAnimationWithHr(s)
+    return s
 end
 
 local function getIdlePics(max)
@@ -64,7 +64,7 @@ local function getDead()
         frame_count = 2,
         scale = 0.5,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunning()
@@ -81,7 +81,7 @@ local function getRunning()
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getRunningGun()
@@ -98,7 +98,7 @@ local function getRunningGun()
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 
 end
 
@@ -116,7 +116,7 @@ local function getIdle()
         animation_speed = 0.3,
         scale = 0.3,
     }
-    return getHr(s)
+    return s
 end
 
 local function getMining()

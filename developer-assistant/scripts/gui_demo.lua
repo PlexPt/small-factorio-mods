@@ -313,45 +313,45 @@ local function add_element(player, style_type)
     local element = nil
     -- 根据选择的元素类型创建相应的GUI元素
     if selected_type == "customize" then
-        local code = loadstring("return " .. properties_flow.children[2].text)()
+        local code = load("return " .. properties_flow.children[2].text)()
         element = panel_flow.add(code)
     elseif selected_type == "button" then
         element = panel_flow.add {
             type = "button",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].text  .. style_text
+            caption = properties_flow.children[2].text .. style_text
         }
     elseif selected_type == "sprite-button" then
         element = panel_flow.add {
             type = "sprite-button",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].text  .. style_text,
+            caption = properties_flow.children[2].text .. style_text,
             sprite = properties_flow.children[4].text
         }
     elseif selected_type == "textfield" then
         element = panel_flow.add {
             type = "textfield",
             name = "preview_" .. selected_type,
-            text = properties_flow.children[2].text  .. style_text
+            text = properties_flow.children[2].text .. style_text
         }
     elseif selected_type == "text-box" then
         element = panel_flow.add {
             type = "text-box",
             name = "preview_" .. selected_type,
-            text = properties_flow.children[2].text  .. style_text
+            text = properties_flow.children[2].text .. style_text
         }
     elseif selected_type == "checkbox" then
         element = panel_flow.add {
             type = "checkbox",
             name = "preview_" .. selected_type,
-            caption = "checkbox caption"  .. style_text,
+            caption = "checkbox caption" .. style_text,
             state = true
         }
     elseif selected_type == "switch" then
         element = panel_flow.add {
             type = "switch",
             name = "preview_" .. selected_type,
-            caption = "switch caption"  .. style_text,
+            caption = "switch caption" .. style_text,
             left_label_caption = "left_label_caption",
             right_label_caption = "right_label_caption"
             --state = true
@@ -360,7 +360,7 @@ local function add_element(player, style_type)
         element = panel_flow.add {
             type = "radiobutton",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].caption  .. style_text,
+            caption = properties_flow.children[2].caption .. style_text,
             state = true
         }
     elseif selected_type == "progressbar" then
@@ -771,6 +771,15 @@ local on_player_selected_area = function(event)
     end
 
     if area then
+
+        -- 格式化 left_top 的 x 和 y
+        area.left_top.x = string.format("%.2f", area.left_top.x)
+        area.left_top.y = string.format("%.2f", area.left_top.y)
+
+        -- 格式化 right_bottom 的 x 和 y
+        area.right_bottom.x = string.format("%.2f", area.right_bottom.x)
+        area.right_bottom.y = string.format("%.2f", area.right_bottom.y)
+
         -- 获取当前代码框内容
         local current_code = code_input.text
 
@@ -778,8 +787,24 @@ local on_player_selected_area = function(event)
         code_input.text = current_code .. "\n" .. "local area = " .. serpent.block(area)
 
         code_input.focus()
-
     end
+
+    if tiles and table_size(tiles) > 0 then
+        -- 获取当前代码框内容
+        local current_code = code_input.text
+        -- 追加示例代码到最后一行
+        code_input.text = current_code .. "\n" .. "local tiles = " .. serpent.block(tiles)
+        code_input.focus()
+    end
+
+    if entities and table_size(entities) > 0 then
+        -- 获取当前代码框内容
+        local current_code = code_input.text
+        -- 追加示例代码到最后一行
+        code_input.text = current_code .. "\n" .. "local entities = " .. serpent.block(entities)
+        code_input.focus()
+    end
+
 end
 
 MyEvent.on_gui_click("dev_run_code_button", function(event, player)

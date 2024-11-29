@@ -1,11 +1,11 @@
 {
-  "name": "beaver",
-  "factorio_version": "2.0",
-  "version": "2.1.0",
-  "title": "Beaver Biters",
-  "author": "plexpt",
-  "description": "Adds Beaver to the game with custom sprites and animations. \n\n浣熊兽.",
-  "dependencies": [
-    "(?) alien-biomes"
-  ]
+    "name": "beaver",
+    "factorio_version": "2.0",
+    "version": "2.2.1",
+    "title": "Raccoon Biters",
+    "author": "plexpt",
+    "description": "Adds Beaver to the game with custom sprites and animations. \n\n浣熊兽.",
+    "dependencies": [
+        "(?) alien-biomes"
+    ]
 }
