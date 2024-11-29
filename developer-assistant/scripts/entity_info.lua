@@ -257,9 +257,9 @@ local function update_entity_details_gui2(player, entities)
     end
 end
 
-local function on_player_selected_area(event, destroy_all)
-    local item = event.item
+local function on_player_selected_area(event)
     local player = game.players[event.player_index]
+    local item = event.item
     local surface = event.surface or player.surface
     local area = event.area
     local entities = event.entities
@@ -286,14 +286,14 @@ end
 MyEvent.on_event(
         defines.events.on_player_selected_area,
         function(event)
-            on_player_selected_area(event, false)
+            on_player_selected_area(event)
         end
 )
 
 MyEvent.on_event(
         defines.events.on_player_alt_selected_area,
         function(event)
-            on_player_selected_area(event, true)
+            on_player_selected_area(event)
         end
 )
 

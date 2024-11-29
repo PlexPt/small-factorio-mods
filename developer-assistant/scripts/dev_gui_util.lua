@@ -42,4 +42,19 @@ gui_util.create_window_with_close = function(player, title, frame_name)
     return inner_flow, frame
 end
 
+function gui_util.safe_access(obj, ...)
+    if not obj then
+        return nil
+    end
+
+    for _, key in ipairs({...}) do
+        if obj then
+            obj = obj[key]
+        else
+            return nil
+        end
+    end
+    return obj
+end
+
 return gui_util

@@ -219,12 +219,8 @@ end
 
 -- 当下拉框选择改变时更新属性编辑区
 local function update_properties_flow(player)
-    local dev_main_window = player.gui.screen.dev_main_window
 
-    if not dev_main_window then
-        return
-    end
-    local panel = player.gui.screen.dev_main_window.dev_tab.preview_panel
+    local panel = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "preview_panel")
 
     if not (panel and panel.element_type_flow and panel.properties_flow) then
         return
@@ -291,12 +287,7 @@ end
 
 -- 处理"添加元素"按钮点击
 local function add_element(player, style_type)
-    local dev_main_window = player.gui.screen.dev_main_window
-
-    if not dev_main_window then
-        return
-    end
-    local panel = dev_main_window.dev_tab.preview_panel
+    local panel = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "preview_panel")
 
     if not (panel and panel.element_type_flow) then
         return
@@ -310,6 +301,8 @@ local function add_element(player, style_type)
     local selected_type = dev_element_type_dropdown.items[dev_element_type_dropdown.selected_index]
 
     local properties_flow = panel.properties_flow
+    local style_text = " style=" .. style_type or ""
+
     style_type = style_type or properties_flow.dev_style_dropdown.items[properties_flow.dev_style_dropdown.selected_index]
 
     local panel_flow = panel.add { type = "flow", direction = "horizontal" }
@@ -326,39 +319,39 @@ local function add_element(player, style_type)
         element = panel_flow.add {
             type = "button",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].text
+            caption = properties_flow.children[2].text  .. style_text
         }
     elseif selected_type == "sprite-button" then
         element = panel_flow.add {
             type = "sprite-button",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].text,
+            caption = properties_flow.children[2].text  .. style_text,
             sprite = properties_flow.children[4].text
         }
     elseif selected_type == "textfield" then
         element = panel_flow.add {
             type = "textfield",
             name = "preview_" .. selected_type,
-            text = properties_flow.children[2].text
+            text = properties_flow.children[2].text  .. style_text
         }
     elseif selected_type == "text-box" then
         element = panel_flow.add {
             type = "text-box",
             name = "preview_" .. selected_type,
-            text = properties_flow.children[2].text
+            text = properties_flow.children[2].text  .. style_text
         }
     elseif selected_type == "checkbox" then
         element = panel_flow.add {
             type = "checkbox",
             name = "preview_" .. selected_type,
-            caption = "checkbox caption",
+            caption = "checkbox caption"  .. style_text,
             state = true
         }
     elseif selected_type == "switch" then
         element = panel_flow.add {
             type = "switch",
             name = "preview_" .. selected_type,
-            caption = "switch caption",
+            caption = "switch caption"  .. style_text,
             left_label_caption = "left_label_caption",
             right_label_caption = "right_label_caption"
             --state = true
@@ -367,7 +360,7 @@ local function add_element(player, style_type)
         element = panel_flow.add {
             type = "radiobutton",
             name = "preview_" .. selected_type,
-            caption = properties_flow.children[2].caption,
+            caption = properties_flow.children[2].caption  .. style_text,
             state = true
         }
     elseif selected_type == "progressbar" then
@@ -396,7 +389,7 @@ local function add_element(player, style_type)
         end
 
     elseif selected_type == "camera" then
-        local position = loadstring("return " .. properties_flow.children[2].text)()
+        local position = load("return " .. properties_flow.children[2].text)()
 
         element = panel_flow.add {
             type = "camera",
@@ -508,12 +501,12 @@ local function create_main_window(player)
     local dev_insert_example_code_button = dev_code_action_list_flow.add {
         type = "button",
         name = "dev_insert_example_code_button",
-        caption = "Insert Example Code"
+        caption = "GUI Code Tool"
     }
 
     -- 填充下拉框选项
-    for item, _ in pairs(example_codes) do
-        example_code_dropdown.add_item(item)
+    for index, _ in ipairs(example_codes) do
+        example_code_dropdown.add_item({ "example_code." .. index })
     end
 
     ---------------------info-------------------------
@@ -739,30 +732,17 @@ MyEvent.on_event(defines.events.on_gui_click, function(event)
     end
 end)
 
-MyEvent.on_gui_click("dev_insert_example_code_button", function(event, player)
+local insert_example_code = function(event, player)
 
-    local dev_main_window = player.gui.screen.dev_main_window
+    local dropdown = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "code_tab", "code_flow", "dev_code_action_list", "example_code_dropdown")
+    local code_input = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "code_tab", "code_flow", "code_input")
 
-    if not dev_main_window then
+    if not dropdown or not code_input then
         return
     end
-    local panel = dev_main_window.dev_tab.code_tab
-
-    if not (panel and panel.code_flow) then
-        return
-    end
-
-    local dropdown = panel.code_flow.dev_code_action_list.example_code_dropdown
-    local code_input = panel.code_flow.code_input
-    if not dropdown then
-        return
-    end
-
-    local selected_item = dropdown.items[dropdown.selected_index]
-
 
     -- 为插入示例代码按钮添加事件处理程序
-    local example_code = example_codes[selected_item]
+    local example_code = example_codes[dropdown.selected_index]
 
     if example_code then
         -- 获取当前代码框内容
@@ -770,42 +750,69 @@ MyEvent.on_gui_click("dev_insert_example_code_button", function(event, player)
 
         -- 追加示例代码到最后一行
         code_input.text = current_code .. "\n" .. example_code
+
+        code_input.focus()
+
     end
-end)
+end
+
+local on_player_selected_area = function(event)
+    local player = game.players[event.player_index]
+    local item = event.item
+    local surface = event.surface or player.surface
+    local area = event.area
+    local entities = event.entities
+    local tiles = event.tiles
+
+    local code_input = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "code_tab", "code_flow", "code_input")
+
+    if not code_input then
+        return
+    end
+
+    if area then
+        -- 获取当前代码框内容
+        local current_code = code_input.text
+
+        -- 追加示例代码到最后一行
+        code_input.text = current_code .. "\n" .. "local area = " .. serpent.block(area)
+
+        code_input.focus()
+
+    end
+end
 
 MyEvent.on_gui_click("dev_run_code_button", function(event, player)
 
-    local dev_main_window = player.gui.screen.dev_main_window
-
-    if not dev_main_window then
-        return
-    end
-    local panel = dev_main_window.dev_tab.code_tab
+    local panel = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "code_tab")
 
     if not (panel and panel.code_flow) then
         return
     end
+
     local code_input = panel.code_flow.code_input
     local result = dev_exec_command(code_input.text, player)
     if result then
         local inner_flow = dev_gui_util.create_window_with_close(player, "Code Result", nil)
-        inner_flow.add({
+        local box = inner_flow.add({
             type = "text-box",
             style = "editor_lua_textbox",
             text = result
         })
+        box.focus()
     end
+
+end)
+
+MyEvent.on_gui_click("select_area_button", function(event, player)
+
+    player.cursor_stack.set_stack({ name = "dev-area-selector" })
 
 end)
 
 MyEvent.on_gui_click("dev_add_all_style_button", function(event, player)
 
-    local dev_main_window = player.gui.screen.dev_main_window
-
-    if not dev_main_window then
-        return
-    end
-    local panel = dev_main_window.dev_tab.preview_panel
+    local panel = dev_gui_util.safe_access(player.gui.screen, "dev_main_window", "dev_tab", "preview_panel")
 
     if not (panel and panel.element_type_flow) then
         return
@@ -828,9 +835,11 @@ end)
 MyEvent.on_event(defines.events.on_gui_selection_state_changed, function(event)
     if event.element and event.element.valid then
         local player = game.players[event.player_index]
-
-        if event.element.name == "dev_element_type_dropdown" then
+        local name = event.element.name
+        if name == "dev_element_type_dropdown" then
             update_properties_flow(player)
+        elseif name == "example_code_dropdown" then
+            insert_example_code(event, player)
         end
     end
 end)
@@ -872,3 +881,16 @@ commands.add_command("deva", "open dev a gui", function(command)
     end
 end)
 
+MyEvent.on_event(
+        defines.events.on_player_selected_area,
+        function(event)
+            on_player_selected_area(event)
+        end
+)
+
+MyEvent.on_event(
+        defines.events.on_player_alt_selected_area,
+        function(event)
+            on_player_selected_area(event)
+        end
+)
