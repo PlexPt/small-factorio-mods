@@ -7,8 +7,8 @@ data:extend(
             {
                 type = "item-group",
                 name = "fruit",
-                icon =   "thumbnail.png",
-                icon_size = 1024,
+                icon =   "__fruit__/graphics/group.png",
+                icon_size = 512,
 
             }
         }
