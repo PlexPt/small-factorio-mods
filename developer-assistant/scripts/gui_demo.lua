@@ -301,7 +301,7 @@ local function add_element(player, style_type)
     local selected_type = dev_element_type_dropdown.items[dev_element_type_dropdown.selected_index]
 
     local properties_flow = panel.properties_flow
-    local style_text = " style=" .. style_type or ""
+    local style_text = style_type and " style=" .. style_type or ""
 
     style_type = style_type or properties_flow.dev_style_dropdown.items[properties_flow.dev_style_dropdown.selected_index]
 

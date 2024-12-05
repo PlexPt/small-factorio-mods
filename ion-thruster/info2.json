@@ -1,0 +1,11 @@
+{
+    "name": "ion-thruster",
+    "version": "1.0.0",
+    "factorio_version": "2.0",
+    "title": "Ion Thruster",
+    "author": "plexpt",
+    "description": "The Ion Thruster is a revolutionary space propulsion technology that utilizes electric fields to accelerate ions, generating thrust. Compared to traditional chemical rockets, they provide higher specific impulse, meaning less fuel consumption and greater range.",
+    "dependencies": [
+        "space-age"
+    ]
+}

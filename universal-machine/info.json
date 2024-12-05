@@ -1,13 +1,11 @@
 {
     "name": "universal-machine",
-    "version": "8.4.1",
+    "version": "8.6.1",
     "factorio_version": "2.0",
     "title": "Universal Machine",
     "author": "plexpt",
     "contact": "plexpt",
     "homepage": "",
     "description": "A Universal Machine. Can be used for all recipes.",
-    "dependencies": [
-        "base >= 1.1"
-    ]
+    "dependencies": []
 }

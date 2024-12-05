@@ -1,0 +1,14 @@
+{
+  "name": "nailong-enemy",
+  "factorio_version": "2.0",
+  "version": "1.2.0",
+  "title": "小奶龙敌人 （nailong enemy）",
+  "author": "plexpt",
+  "contact": "1125094786",
+  "homepage": "",
+  "dependencies": [
+    "? minime",
+    "? CharacterModHelper"
+  ],
+  "description": "小奶龙敌人"
+}

@@ -130,33 +130,72 @@ data:extend({
             animation = {
                 layers = {
                     {
-                        filename = "__universal-machine__/graphics/hr-assembling-machine-3.png",
+                        filename = "__universal-machine__/graphics/gravity-assembler-hr-shadow.png",
                         priority = "high",
-                        animation_speed = 0.02,
-                        width = 214,
-                        height = 237,
-                        frame_count = 32,
-                        line_length = 8,
-                        shift = util.by_pixel(0, -0.75),
-                        scale = 1,
-
+                        width = 520,
+                        height = 500,
+                        frame_count = 1,
+                        line_length = 1,
+                        repeat_count = 99,
+                        animation_speed = 0.03,
+                        shift = util.by_pixel_hr(0, -16),
+                        draw_as_shadow = true,
+                        scale = 0.5,
                     },
                     {
-                        filename = "__base__/graphics/entity/assembling-machine-3/assembling-machine-3-shadow.png",
                         priority = "high",
-                        width = 260,
-                        height = 162,
-                        frame_count = 32,
-                        line_length = 8,
-                        draw_as_shadow = true,
-                        shift = util.by_pixel(28, 4),
-                        scale = 1
+                        width = 320,
+                        height = 320,
+                        frame_count = 99,
+                        shift = util.by_pixel_hr(0, -16),
+                        animation_speed = 0.03,
+                        scale = 0.5,
+                        stripes = {
+                            {
+                                filename = "__universal-machine__/graphics/gravity-assembler-hr-animation-1.png",
+                                width_in_frames = 8,
+                                height_in_frames = 8,
+                            },
+                            {
+                                filename = "__universal-machine__/graphics/gravity-assembler-hr-animation-2.png",
+                                width_in_frames = 8,
+                                height_in_frames = 8,
+                            },
+                        },
                     },
                 },
             },
-            animation_progress = 0.5,
+            working_visualisations = {
+                {
+                    fadeout = true,
+                    secondary_draw_order = 1,
+                    animation = {
+                        priority = "high",
+                        size = { 320, 320 },
+                        shift = util.by_pixel_hr(0, -16),
+                        frame_count = 99,
+                        draw_as_glow = true,
+                        scale = 0.5,
+                        animation_speed = 0.03,
+                        blend_mode = "additive",
+                        stripes = {
+                            {
+                                filename = "__universal-machine__/graphics/gravity-assembler-hr-animation-emission-1.png",
+                                width_in_frames = 8,
+                                height_in_frames = 8,
+                            },
+                            {
+                                filename = "__universal-machine__/graphics/gravity-assembler-hr-animation-emission-2.png",
+                                width_in_frames = 8,
+                                height_in_frames = 8,
+                            },
+                        },
+                    },
+                }
+            },
             reset_animation_when_frozen = true
-        },
+        }
+    ,
         crafting_categories = { "advanced-crafting",
                                 "basic-crafting",
                                 "centrifuging",

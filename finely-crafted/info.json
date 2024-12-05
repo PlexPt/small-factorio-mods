@@ -1,0 +1,12 @@
+{
+    "name": "finely-crafted",
+    "version": "1.1.1",
+    "title": "Finely Crafted Machine",
+    "author": "plexpt",
+    "contact": "plexpt",
+    "description": "A high-quality texture mod designed for players who crave the ultimate visual experience. Each texture is meticulously crafted and optimized to deliver unparalleled clarity and realism, elevating your gaming experience to new heights.",
+    "dependencies": [
+        "finely-crafted-graphics"
+    ],
+    "factorio_version": "2.0"
+}

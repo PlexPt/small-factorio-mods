@@ -18,7 +18,7 @@ data:extend({
         type = "recipe",
         name = "double-iron-plate",
         icon = "__universal-machine__/graphics/double-iron-plate.png",
-        icon_size = 32,
+        icon_size = 512,
         ingredients = { { type = "item", name = "iron-ore", amount = 10 } },
         results = { { type = "item", name = "iron-plate", amount = 5 } }
     },
@@ -26,7 +26,7 @@ data:extend({
         type = "recipe",
         name = "double-copper-plate",
         icon = "__universal-machine__/graphics/double-copper-plate.png",
-        icon_size = 32,
+        icon_size = 512,
         ingredients = { { type = "item", name = "copper-ore", amount = 10 } },
         results = { { type = "item", name = "copper-plate", amount = 5 } }
     },

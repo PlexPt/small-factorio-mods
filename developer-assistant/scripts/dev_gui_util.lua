@@ -33,7 +33,6 @@ gui_util.create_window_with_close = function(player, title, frame_name)
     drag_space.style.height = 24
     drag_space.style.horizontally_stretchable = true
 
-
     -- 创建关闭按钮 https://lua-api.factorio.com/latest/concepts/Tags.html
     local close_button = header.add { type = 'sprite-button', name = 'close_button', sprite = 'utility/close', tags = { close_button = true }, style = 'frame_action_button', mouse_button_filter = { 'left' } }
     -- 创建内部垂直流布局

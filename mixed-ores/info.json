@@ -1,0 +1,9 @@
+{
+    "name": "mixed-ores",
+    "version": "1.0.1",
+    "title": "Mixed Ores",
+    "author": "plexpt ",
+    "factorio_version": "2.0",
+    "dependencies": [],
+    "description": "Adds mixed ores to resource patches."
+}
