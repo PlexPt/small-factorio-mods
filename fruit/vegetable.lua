@@ -1,3 +1,4 @@
+local enable_recipe = settings.startup["fruit-recipe-enable"].value
 
 data:extend({
     {
@@ -12,7 +13,7 @@ data:extend({
     {
         type = "recipe",
         name = "carrot",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="carrot", amount=1}},
         results = {{type="item", name="carrot", amount=2}},
@@ -33,7 +34,7 @@ data:extend({
     {
         type = "recipe",
         name = "cucumber",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="cucumber", amount=1}},
         results = {{type="item", name="cucumber", amount=2}},
@@ -54,7 +55,7 @@ data:extend({
     {
         type = "recipe",
         name = "spinach",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="spinach", amount=1}},
         results = {{type="item", name="spinach", amount=2}},
@@ -75,7 +76,7 @@ data:extend({
     {
         type = "recipe",
         name = "tomato",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="tomato", amount=1}},
         results = {{type="item", name="tomato", amount=2}},
@@ -96,7 +97,7 @@ data:extend({
     {
         type = "recipe",
         name = "broccoli",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="broccoli", amount=1}},
         results = {{type="item", name="broccoli", amount=2}},
@@ -117,7 +118,7 @@ data:extend({
     {
         type = "recipe",
         name = "lettuce",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="lettuce", amount=1}},
         results = {{type="item", name="lettuce", amount=2}},
@@ -138,7 +139,7 @@ data:extend({
     {
         type = "recipe",
         name = "bell_pepper",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="bell_pepper", amount=1}},
         results = {{type="item", name="bell_pepper", amount=2}},
@@ -159,7 +160,7 @@ data:extend({
     {
         type = "recipe",
         name = "zucchini",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="zucchini", amount=1}},
         results = {{type="item", name="zucchini", amount=2}},
@@ -180,7 +181,7 @@ data:extend({
     {
         type = "recipe",
         name = "onion",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="onion", amount=1}},
         results = {{type="item", name="onion", amount=2}},
@@ -201,7 +202,7 @@ data:extend({
     {
         type = "recipe",
         name = "garlic",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="garlic", amount=1}},
         results = {{type="item", name="garlic", amount=2}},
@@ -222,7 +223,7 @@ data:extend({
     {
         type = "recipe",
         name = "pumpkin",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="pumpkin", amount=1}},
         results = {{type="item", name="pumpkin", amount=2}},
@@ -243,7 +244,7 @@ data:extend({
     {
         type = "recipe",
         name = "cabbage",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="cabbage", amount=1}},
         results = {{type="item", name="cabbage", amount=2}},
@@ -264,7 +265,7 @@ data:extend({
     {
         type = "recipe",
         name = "eggplant",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="eggplant", amount=1}},
         results = {{type="item", name="eggplant", amount=2}},
@@ -285,7 +286,7 @@ data:extend({
     {
         type = "recipe",
         name = "potato",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="potato", amount=1}},
         results = {{type="item", name="potato", amount=2}},
@@ -306,7 +307,7 @@ data:extend({
     {
         type = "recipe",
         name = "sweet_potato",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="sweet_potato", amount=1}},
         results = {{type="item", name="sweet_potato", amount=2}},
@@ -327,7 +328,7 @@ data:extend({
     {
         type = "recipe",
         name = "beetroot",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="beetroot", amount=1}},
         results = {{type="item", name="beetroot", amount=2}},
@@ -348,7 +349,7 @@ data:extend({
     {
         type = "recipe",
         name = "asparagus",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="asparagus", amount=1}},
         results = {{type="item", name="asparagus", amount=2}},
@@ -369,7 +370,7 @@ data:extend({
     {
         type = "recipe",
         name = "pea",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="pea", amount=1}},
         results = {{type="item", name="pea", amount=2}},
@@ -390,7 +391,7 @@ data:extend({
     {
         type = "recipe",
         name = "celery",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="celery", amount=1}},
         results = {{type="item", name="celery", amount=2}},
@@ -411,7 +412,7 @@ data:extend({
     {
         type = "recipe",
         name = "artichoke",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="artichoke", amount=1}},
         results = {{type="item", name="artichoke", amount=2}},
@@ -432,7 +433,7 @@ data:extend({
     {
         type = "recipe",
         name = "brussels_sprout",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="brussels_sprout", amount=1}},
         results = {{type="item", name="brussels_sprout", amount=2}},
@@ -453,7 +454,7 @@ data:extend({
     {
         type = "recipe",
         name = "parsnip",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="parsnip", amount=1}},
         results = {{type="item", name="parsnip", amount=2}},
@@ -474,7 +475,7 @@ data:extend({
     {
         type = "recipe",
         name = "leek",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="leek", amount=1}},
         results = {{type="item", name="leek", amount=2}},
@@ -495,7 +496,7 @@ data:extend({
     {
         type = "recipe",
         name = "turnip",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="turnip", amount=1}},
         results = {{type="item", name="turnip", amount=2}},
@@ -516,7 +517,7 @@ data:extend({
     {
         type = "recipe",
         name = "cauliflower",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="cauliflower", amount=1}},
         results = {{type="item", name="cauliflower", amount=2}},
@@ -537,7 +538,7 @@ data:extend({
     {
         type = "recipe",
         name = "okra",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="okra", amount=1}},
         results = {{type="item", name="okra", amount=2}},
@@ -558,7 +559,7 @@ data:extend({
     {
         type = "recipe",
         name = "chicory",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="chicory", amount=1}},
         results = {{type="item", name="chicory", amount=2}},
@@ -579,7 +580,7 @@ data:extend({
     {
         type = "recipe",
         name = "snow_pea",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="snow_pea", amount=1}},
         results = {{type="item", name="snow_pea", amount=2}},
@@ -600,7 +601,7 @@ data:extend({
     {
         type = "recipe",
         name = "collard_greens",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="collard_greens", amount=1}},
         results = {{type="item", name="collard_greens", amount=2}},
@@ -621,7 +622,7 @@ data:extend({
     {
         type = "recipe",
         name = "watercress",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="watercress", amount=1}},
         results = {{type="item", name="watercress", amount=2}},
@@ -642,7 +643,7 @@ data:extend({
     {
         type = "recipe",
         name = "daikon",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="daikon", amount=1}},
         results = {{type="item", name="daikon", amount=2}},
@@ -663,7 +664,7 @@ data:extend({
     {
         type = "recipe",
         name = "mallow",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="mallow", amount=1}},
         results = {{type="item", name="mallow", amount=2}},
@@ -684,7 +685,7 @@ data:extend({
     {
         type = "recipe",
         name = "jicama",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="jicama", amount=1}},
         results = {{type="item", name="jicama", amount=2}},
@@ -705,7 +706,7 @@ data:extend({
     {
         type = "recipe",
         name = "chayote",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="chayote", amount=1}},
         results = {{type="item", name="chayote", amount=2}},
@@ -726,7 +727,7 @@ data:extend({
     {
         type = "recipe",
         name = "kale",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="kale", amount=1}},
         results = {{type="item", name="kale", amount=2}},

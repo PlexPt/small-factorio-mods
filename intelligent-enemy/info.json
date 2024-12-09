@@ -1,0 +1,14 @@
+{
+  "name": "intelligent-enemy",
+  "version": "1.0.0",
+  "title": "Intelligent Enemy",
+  "factorio_version": "2.0",
+  "author": "plexpt",
+  "contact": "youremail@example.com",
+  "homepage": "https://yourwebsite.com",
+  "description": "Enhance the enemy AI with smarter and more challenging adversaries, similar to Rampant. This mod does not introduce new enemy types or increase enemy attributes; it solely focuses on improving the intelligence of existing enemies.",
+
+  "dependencies": [
+    "? space-age"
+  ]
+}

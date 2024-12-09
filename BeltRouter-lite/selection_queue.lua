@@ -142,8 +142,8 @@ end
 
 function SelectionQueue:__updateLabelNumbers()
     for i, otherSelection in ipairs(self.queue) do
-        if otherSelection and otherSelection.textId and otherSelection.valid then
-            otherSelection.text = i
+        if otherSelection and otherSelection.textId and otherSelection.textId.valid then
+            otherSelection.textId.text = i
         else
             rendering.draw_text {
                 surface = game.players[self.playerIndex].surface,

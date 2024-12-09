@@ -1,3 +1,4 @@
+local enable_recipe = settings.startup["fruit-recipe-enable"].value
 
 data:extend({
     {
@@ -12,7 +13,7 @@ data:extend({
     {
         type = "recipe",
         name = "milk",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="milk", amount=1}},
         results = {{type="item", name="milk", amount=2}},
@@ -33,7 +34,7 @@ data:extend({
     {
         type = "recipe",
         name = "egg",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="egg", amount=1}},
         results = {{type="item", name="egg", amount=2}},
@@ -54,7 +55,7 @@ data:extend({
     {
         type = "recipe",
         name = "pork",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="pork", amount=1}},
         results = {{type="item", name="pork", amount=2}},
@@ -75,7 +76,7 @@ data:extend({
     {
         type = "recipe",
         name = "wool",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="wool", amount=1}},
         results = {{type="item", name="wool", amount=2}},
@@ -96,7 +97,7 @@ data:extend({
     {
         type = "recipe",
         name = "honey",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="honey", amount=1}},
         results = {{type="item", name="honey", amount=2}},
@@ -117,7 +118,7 @@ data:extend({
     {
         type = "recipe",
         name = "feather",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="feather", amount=1}},
         results = {{type="item", name="feather", amount=2}},
@@ -138,7 +139,7 @@ data:extend({
     {
         type = "recipe",
         name = "leather",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="leather", amount=1}},
         results = {{type="item", name="leather", amount=2}},
@@ -159,7 +160,7 @@ data:extend({
     {
         type = "recipe",
         name = "cheese",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="cheese", amount=1}},
         results = {{type="item", name="cheese", amount=2}},
@@ -180,7 +181,7 @@ data:extend({
     {
         type = "recipe",
         name = "yarn",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="yarn", amount=1}},
         results = {{type="item", name="yarn", amount=2}},
@@ -201,7 +202,7 @@ data:extend({
     {
         type = "recipe",
         name = "beef",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="beef", amount=1}},
         results = {{type="item", name="beef", amount=2}},
@@ -222,7 +223,7 @@ data:extend({
     {
         type = "recipe",
         name = "chicken_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="chicken_meat", amount=1}},
         results = {{type="item", name="chicken_meat", amount=2}},
@@ -243,7 +244,7 @@ data:extend({
     {
         type = "recipe",
         name = "goat_milk",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="goat_milk", amount=1}},
         results = {{type="item", name="goat_milk", amount=2}},
@@ -264,7 +265,7 @@ data:extend({
     {
         type = "recipe",
         name = "duck_egg",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="duck_egg", amount=1}},
         results = {{type="item", name="duck_egg", amount=2}},
@@ -285,7 +286,7 @@ data:extend({
     {
         type = "recipe",
         name = "rabbit_pelt",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="rabbit_pelt", amount=1}},
         results = {{type="item", name="rabbit_pelt", amount=2}},
@@ -306,7 +307,7 @@ data:extend({
     {
         type = "recipe",
         name = "turkey_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="turkey_meat", amount=1}},
         results = {{type="item", name="turkey_meat", amount=2}},
@@ -327,7 +328,7 @@ data:extend({
     {
         type = "recipe",
         name = "bison_leather",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="bison_leather", amount=1}},
         results = {{type="item", name="bison_leather", amount=2}},
@@ -348,7 +349,7 @@ data:extend({
     {
         type = "recipe",
         name = "goose_feather",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="goose_feather", amount=1}},
         results = {{type="item", name="goose_feather", amount=2}},
@@ -369,7 +370,7 @@ data:extend({
     {
         type = "recipe",
         name = "ostrich_egg",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="ostrich_egg", amount=1}},
         results = {{type="item", name="ostrich_egg", amount=2}},
@@ -390,7 +391,7 @@ data:extend({
     {
         type = "recipe",
         name = "alpaca_fleece",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="alpaca_fleece", amount=1}},
         results = {{type="item", name="alpaca_fleece", amount=2}},
@@ -411,7 +412,7 @@ data:extend({
     {
         type = "recipe",
         name = "quail_egg",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="quail_egg", amount=1}},
         results = {{type="item", name="quail_egg", amount=2}},
@@ -432,7 +433,7 @@ data:extend({
     {
         type = "recipe",
         name = "sheep_milk",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="sheep_milk", amount=1}},
         results = {{type="item", name="sheep_milk", amount=2}},
@@ -453,7 +454,7 @@ data:extend({
     {
         type = "recipe",
         name = "lamb_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="lamb_meat", amount=1}},
         results = {{type="item", name="lamb_meat", amount=2}},
@@ -474,7 +475,7 @@ data:extend({
     {
         type = "recipe",
         name = "goat_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="goat_meat", amount=1}},
         results = {{type="item", name="goat_meat", amount=2}},
@@ -495,7 +496,7 @@ data:extend({
     {
         type = "recipe",
         name = "alpaca_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="alpaca_meat", amount=1}},
         results = {{type="item", name="alpaca_meat", amount=2}},
@@ -516,7 +517,7 @@ data:extend({
     {
         type = "recipe",
         name = "duck_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="duck_meat", amount=1}},
         results = {{type="item", name="duck_meat", amount=2}},
@@ -537,7 +538,7 @@ data:extend({
     {
         type = "recipe",
         name = "turkey_feather",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="turkey_feather", amount=1}},
         results = {{type="item", name="turkey_feather", amount=2}},
@@ -558,7 +559,7 @@ data:extend({
     {
         type = "recipe",
         name = "ostrich_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="ostrich_meat", amount=1}},
         results = {{type="item", name="ostrich_meat", amount=2}},
@@ -579,7 +580,7 @@ data:extend({
     {
         type = "recipe",
         name = "bison_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="bison_meat", amount=1}},
         results = {{type="item", name="bison_meat", amount=2}},
@@ -600,7 +601,7 @@ data:extend({
     {
         type = "recipe",
         name = "goose_meat",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="goose_meat", amount=1}},
         results = {{type="item", name="goose_meat", amount=2}},
@@ -621,7 +622,7 @@ data:extend({
     {
         type = "recipe",
         name = "llama_fleece",
-        enabled = true,
+        enabled = enable_recipe,
         energy_required = 600,
         ingredients = { {type="item", name="llama_fleece", amount=1}},
         results = {{type="item", name="llama_fleece", amount=2}},

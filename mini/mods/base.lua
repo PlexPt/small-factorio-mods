@@ -246,8 +246,7 @@ if data.raw["assembling-machine"]["cryogenic-plant"] then
 
 end
 ----------------------------
-
-if data.raw["lightning-attractor"]["lightning-collector"] then
+if data.raw["lightning-attractor"] and data.raw["lightning-attractor"]["lightning-collector"] then
     local collector = data.raw["lightning-attractor"]["lightning-collector"]
     rescale_entity(collector, 1 / 2)
 end

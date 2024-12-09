@@ -86,7 +86,8 @@ function PathSegment:toEntitySpecs()
     else
         if type.lineType == TransportLineType.fluidLine then
             local out = {}
-            out[1] = { name = self.name, direction = Vector2D.fromDirection(self.direction):reverse():toDirection(), position = self.position }
+            -- Fixed: Use DirectionHelper.reverseOf() instead of reversing the vector
+            out[1] = { name = self.name, direction = DirectionHelper.reverseOf(self.direction), position = self.position }
             if self.distance > 1 then
                 out[2] = { name = self.name, direction = self.direction, position = self.position + Vector2D.fromDirection(self.direction):scale(self.distance - 1) }
             end
