@@ -2,7 +2,7 @@
 --https://lua-api.factorio.com/latest/classes/LuaGuiElement.html
 
 --https://wiki.factorio.com/Rich_text
-
+local mod_gui = require("mod-gui")
 local bigunpack = require("lib.unpack")
 local example_codes = require("scripts.example_codes")
 local dev_gui_util = require("scripts.dev_gui_util")
@@ -685,14 +685,18 @@ end
 local function create_demo_button()
     for _, player in pairs(game.players) do
         if player then
-            if player.gui.left.dev_button then
-                player.gui.left.dev_button.destroy()
+            local gui = mod_gui.get_button_flow(player)
+            if (gui and gui.valid) then
+                if not gui.dev_button then
+                    gui.add {
+                        type = "sprite-button",
+                        name = "dev_button",
+                        sprite = "developer_assistant_button",
+                        style = mod_gui.button_style,
+                        tooltip = "Dev GUI Demo"
+                    }
+                end
             end
-            player.gui.left.add {
-                type = "button",
-                name = "dev_button",
-                caption = "Dev GUI Demo"
-            }
         end
     end
 end

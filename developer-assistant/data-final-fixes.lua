@@ -1,13 +1,24 @@
 local bigpack = require("lib.pack")
 
+local ignore = {
+    ["noise-expression"] = true,
+    ["virtual-signal"] = true,
+    ["optimized-particle"] = true,
+    ["explosion"] = true,
+    ["noise-function"] = true,
+    ["noise-expression"] = true,
+}
+
 for typeName, typeData in pairs(table.deepcopy(data.raw)) do
-    for name, one in pairs(typeData) do
-        local k = "dev_" .. typeName .. "_" .. name
-        --local dump = serpent.dump(one)
-        --print("adding " .. k)
 
-        data:extend { bigpack(k, serpent.block(one)) }
+    if not ignore[typeName] then
+        for name, one in pairs(typeData) do
+            local k = "dev_" .. typeName .. "_" .. name
+            --local dump = serpent.dump(one)
+            --print("adding " .. k)
 
+            data:extend { bigpack(k, serpent.block(one)) }
+        end
     end
 end
 

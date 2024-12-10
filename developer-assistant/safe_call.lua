@@ -11,7 +11,7 @@ function safe_call(player, func, ...)
         if player then
             player.print(error_message)
         else
-            game.print("Error: " .. error_message)
+            game.print(error_message)
         end
 
         return nil

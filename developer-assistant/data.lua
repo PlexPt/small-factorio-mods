@@ -63,6 +63,17 @@ data:extend {
     }
 }
 
+data:extend({
+    {
+        type = "sprite",
+        name = "developer_assistant_button",
+        filename = "__developer-assistant__/graphics/button.png",
+        priority = "extra-high-no-scale",
+        width = 512,
+        height = 512
+    },
+})
+
 
 --cursor_box_type = "pair",  https://lua-api.factorio.com/latest/types/CursorBoxType.html
 --mode = "nothing" }, https://lua-api.factorio.com/latest/types/SelectionModeFlags.html
