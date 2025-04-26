@@ -58,7 +58,7 @@ end
 -- else if there's an inventory ahead but not behind, turn around and switch mode
 -- else if no inventories and a belt ahead, turn around; also switch mode if belt is facing towards
 local function on_built_entity(event)
-    local built = event.created_entity
+    local built = event.entity
     -- invalid build? don't bother with faked "revived" property from pre-1.0 Nanobots/Bluebuild, those shenanigans can only be passed in script_raised_* events now
     -- also no need to check entity type since we can filter for it on the event handler
     if not built or not built.valid then
