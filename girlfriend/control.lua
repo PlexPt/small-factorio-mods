@@ -91,8 +91,7 @@ function drawName(player, girlfriend)
         rendering.draw_text {
             text = text,
             surface = player.surface,
-            target = girlfriend,
-            target_offset = { 0, -2 },
+            target = { entity = girlfriend, offset = { 0, -2 } },
             color = pink2,
             scale = 1,
             alignment = "center"
@@ -334,6 +333,7 @@ local function on_entity_died(event)
     local corpses = event.corpses
     local position = event.position
     local surface_index = event.surface_index
+    position.y = position.y - 4
 
     --@see getAllGirl()
     if storage.girl_list then
@@ -348,7 +348,7 @@ local function on_entity_died(event)
                         text = GetRandomMsg("msg.die-", 30),
                         surface = game.surfaces[surface_index],
                         target = position,
-                        target_offset = { 0, -4 },
+                        --target_offset = { 0, -4 },
                         color = pink2,
                         scale = 1,
                         time_to_live = 60 * 60,
@@ -486,7 +486,7 @@ script.on_configuration_changed(function()
 end)
 
 local function on_built_entity(event)
-    local entity = event.created_entity
+    local entity = event.entity
     local tick = event.tick
     local player = game.players[event.player_index]
     if not (player and player.valid
