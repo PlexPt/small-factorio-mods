@@ -26,12 +26,12 @@ local compilatron_animations =
         stripes =
         {
             {
-                filename = "__base__/graphics/entity/compilatron/compilatron-walk-1.png",
+                filename = "__girlfriend__/graphics/compilatron/compilatron-walk-1.png",
                 width_in_frames = 2,
                 height_in_frames = 16
             },
             {
-                filename = "__base__/graphics/entity/compilatron/compilatron-walk-2.png",
+                filename = "__girlfriend__/graphics/compilatron/compilatron-walk-2.png",
                 width_in_frames = 2,
                 height_in_frames = 16
             }
@@ -39,8 +39,8 @@ local compilatron_animations =
     },
     walk_shadow =
     {
-        width = 142,
-        height = 56,
+        width = 142,--72,
+        height = 56,--30,
         frame_count = 2,
         axially_symmetrical = false,
         direction_count = 32,
@@ -50,7 +50,7 @@ local compilatron_animations =
         stripes = util.multiplystripes(2,
                 {
                     {
-                        filename = "__base__/graphics/entity/compilatron/compilatron-walk-shadow.png",
+                        filename = "__girlfriend__/graphics/compilatron/compilatron-walk-shadow.png",
                         width_in_frames = 1,
                         height_in_frames = 32
                     }
@@ -61,7 +61,7 @@ local compilatron_animations =
 local girlfriend = {
     type = "unit",
     name = "compilatron",
-    icon = "__base__/graphics/icons/compilatron.png",
+    icon = "__girlfriend__/graphics/compilatron-icon.png",
     icon_size = 64,
     flags = { "placeable-player", "placeable-enemy", "placeable-off-grid", "not-repairable", "breaths-air" },
     map_color = { r = 0, g = 0.365, b = 0.58, a = 1 },
@@ -118,7 +118,7 @@ local girlfriend = {
     },
     water_reflection = {
         pictures = {
-            filename = "__base__/graphics/entity/compilatron/compilatron-reflection.png",
+            filename = "__girlfriend__/graphics/compilatron/compilatron-reflection.png",
             priority = "extra-high",
             width = 20,
             height = 20,

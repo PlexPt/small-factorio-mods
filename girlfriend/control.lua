@@ -486,7 +486,7 @@ script.on_configuration_changed(function()
 end)
 
 local function on_built_entity(event)
-    local entity = event.created_entity
+    local entity = event.entity
     local tick = event.tick
     local player = game.players[event.player_index]
     if not (player and player.valid
