@@ -41,6 +41,65 @@ local function create_loader_entity(tier_table)
     entity.container_distance = 1
     entity.belt_length = 0.5
     entity.filter_count = 5
+   entity.circuit_wire_max_distance = transport_belt_circuit_wire_max_distance or 0
+   entity.circuit_connector = circuit_connector_definitions.create_vector
+    (
+      universal_connector_template,
+      {
+        -- Output
+        { -- North
+          variation = 0,
+          main_offset = util.by_pixel(11, -1),
+          shadow_offset = util.by_pixel(10, -0.5),
+          show_shadow = false
+        },
+        { -- East
+          variation = 6,
+          main_offset = util.by_pixel(-5, 3),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- South
+          variation = 4,
+          main_offset = util.by_pixel(-11, -8),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- West
+          variation = 2,
+          main_offset = util.by_pixel(5, -17),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+
+        -- Input
+        { -- North
+          variation = 4,
+          main_offset = util.by_pixel(-11, -8),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- East
+          variation = 2,
+          main_offset = util.by_pixel(5, -17),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- South
+          variation = 0,
+          main_offset = util.by_pixel(11, -1),
+          shadow_offset = util.by_pixel(10, -0.5),
+          show_shadow = false
+        },
+        { -- West
+          variation = 6,
+          main_offset = util.by_pixel(-5, 3),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+      }
+    )
+
     entity.animation_speed_coefficient = 32
     if settings.startup["comfortable-strict-fast-replace-loaders"].value then
         entity.fast_replaceable_group = "deadlock-loader"
