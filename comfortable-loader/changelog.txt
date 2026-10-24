@@ -1,5 +1,13 @@
 
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.1
+Date: 2026-10-24
+  Changes:
+    - Changed 'category' to 'categories' with crafting fallback in create_loader.lua
+    - 'crafting-with-fluids' specified for express and turbo loaders
+    - Updated mod info and changelog accordingly
+
+---------------------------------------------------------------------------------------------------
 Version: 1.4.0
 Date: 2024-11-30
   Changes:

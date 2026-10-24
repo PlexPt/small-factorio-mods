@@ -223,7 +223,7 @@ local function create_loader_recipe(tier_table)
         type = "recipe",
         name = tier_table.loader_recipe or tier_table.loader,
         localised_description = { "entity-description.comfortable-loader" },
-        category = tier_table.loader_category,
+        categories = {tier_table.loader_category or 'crafting'},
         group = "logistics",
         subgroup = "loaders",
         order = string.format("a%s%s", (tier_table.order or tier_table.loader), "-loader"),
