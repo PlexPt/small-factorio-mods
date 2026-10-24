@@ -34,13 +34,72 @@ local function create_loader_entity(tier_table)
     entity.collision_box = { { -0.26, -0.26 }, { 0.26, 0.26 } }  -- 1.1 requires min of 0.5 width
     --entity.collision_mask = {"item-layer", "object-layer", "player-layer", "water-tile", "transport-belt-layer" }  -- 1.1 requires "transport-belt-layer"
     entity.selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } }
-    entity.minable = { mining_time = 0.5, result = tier_table.loader_item or tier_table.loader }
+    entity.minable = { hardness = 0.2, mining_time = 0.5, result = tier_table.loader_item or tier_table.loader }
     entity.max_health = 170
     entity.resistances = { { type = "fire", percent = 60 } }
     entity.belt_distance = 0.5
     entity.container_distance = 1
     entity.belt_length = 0.5
     entity.filter_count = 5
+   entity.circuit_wire_max_distance = transport_belt_circuit_wire_max_distance or 0
+   entity.circuit_connector = circuit_connector_definitions.create_vector
+    (
+      universal_connector_template,
+      {
+        -- Output
+        { -- North
+          variation = 0,
+          main_offset = util.by_pixel(11, -1),
+          shadow_offset = util.by_pixel(10, -0.5),
+          show_shadow = false
+        },
+        { -- East
+          variation = 6,
+          main_offset = util.by_pixel(-5, 3),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- South
+          variation = 4,
+          main_offset = util.by_pixel(-11, -8),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- West
+          variation = 2,
+          main_offset = util.by_pixel(5, -17),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+
+        -- Input
+        { -- North
+          variation = 4,
+          main_offset = util.by_pixel(-11, -8),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- East
+          variation = 2,
+          main_offset = util.by_pixel(5, -17),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+        { -- South
+          variation = 0,
+          main_offset = util.by_pixel(11, -1),
+          shadow_offset = util.by_pixel(10, -0.5),
+          show_shadow = false
+        },
+        { -- West
+          variation = 6,
+          main_offset = util.by_pixel(-5, 3),
+          shadow_offset = util.by_pixel(7.5, 7.5),
+          show_shadow = false
+        },
+      }
+    )
+
     entity.animation_speed_coefficient = 32
     if settings.startup["comfortable-strict-fast-replace-loaders"].value then
         entity.fast_replaceable_group = "deadlock-loader"
@@ -164,7 +223,7 @@ local function create_loader_recipe(tier_table)
         type = "recipe",
         name = tier_table.loader_recipe or tier_table.loader,
         localised_description = { "entity-description.comfortable-loader" },
-        categories = {tier_table.loader_category or "crafting"},
+        categories = {tier_table.loader_category or 'crafting'},
         group = "logistics",
         subgroup = "loaders",
         order = string.format("a%s%s", (tier_table.order or tier_table.loader), "-loader"),
