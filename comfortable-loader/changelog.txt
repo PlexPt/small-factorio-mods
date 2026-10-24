@@ -3,6 +3,14 @@
 Version: 1.4.0
 Date: 2024-11-30
   Changes:
+    - Changed 'category' to 'categories' with crafting fallback in create_loader.lua
+    - Specified express and turbo loaders are 'crafting-with-fluids' in vanilla_ties.lua
+    - Updated mod info and changelog accordingly
+
+---------------------------------------------------------------------------------------------------
+Version: 1.4.0
+Date: 2024-11-30
+  Changes:
     - turbo update
 
 
